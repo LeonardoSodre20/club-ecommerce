@@ -1,6 +1,8 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Header from "../../components/Header";
 import InputBase from "../../components/InputBase";
+import schema from "../../components/validations/UseValidation";
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   ButtonLogin,
   ContainerMainInfo,
@@ -17,12 +19,23 @@ interface IPropsFormsLogin {
   password: string;
 }
 
-const Login = () => {
-  const { register, handleSubmit, watch } = useForm<IPropsFormsLogin>();
-  const onSubmit: SubmitHandler<IPropsFormsLogin> = (data) => console.log(data);
-  const values = watch();
+const valuesDefault = {
+  email: "",
+  password: "",
+};
 
-  console.log(values.email);
+const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IPropsFormsLogin>({
+    defaultValues: valuesDefault,
+    mode: "onSubmit",
+    shouldFocusError: true,
+    resolver: yupResolver(schema),
+  });
+  const onSubmit: SubmitHandler<IPropsFormsLogin> = (data) => console.log(data);
 
   return (
     <>
@@ -42,6 +55,7 @@ const Login = () => {
             label="E-mail"
             width="500px"
             placeholder="Digite seu e-mail..."
+            error={errors.email}
             {...register("email")}
           />
           <InputBase
@@ -49,10 +63,11 @@ const Login = () => {
             label="Senha"
             width="500px"
             placeholder="Digite sua senha..."
+            error={errors.password}
             {...register("password")}
           />
 
-          <ButtonLogin>Entrar</ButtonLogin>
+          <ButtonLogin type="submit">Entrar</ButtonLogin>
         </FormControlLogin>
       </ContainerMainLogin>
     </>

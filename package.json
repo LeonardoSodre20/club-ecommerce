@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.10",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.49.0",
     "@typescript-eslint/parser": "^5.49.0",
@@ -17,7 +18,8 @@
     "react-hook-form": "^7.42.1",
     "react-icons": "^4.7.1",
     "react-router-dom": "6.8.0",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",

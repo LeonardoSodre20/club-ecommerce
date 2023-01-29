@@ -1,4 +1,10 @@
-import { InputHTMLAttributes, useState } from "react";
+import {
+  forwardRef,
+  ForwardRefRenderFunction,
+  InputHTMLAttributes,
+  useState,
+} from "react";
+import { FieldError } from "react-hook-form";
 
 import {
   ContainerInput,
@@ -11,20 +17,23 @@ import {
 } from "./styles";
 
 interface IPropsInput extends InputHTMLAttributes<HTMLInputElement> {
-  error?: string;
+  error?: FieldError;
   label: string;
   type?: string;
   width?: string;
 }
 
-const InputBase = ({ error, label, type, width, ...rest }: IPropsInput) => {
+const InputBase: ForwardRefRenderFunction<HTMLInputElement, IPropsInput> = (
+  { error, label, type, width, ...rest },
+  ref
+) => {
   const [typeInput, setTypeInput] = useState<string>("password");
   return (
     <ContainerInput>
       <Label>{label}</Label>
       {type === "password" ? (
         <ContainerInputWithType>
-          <Input type={typeInput} {...rest} width={width} />
+          <Input type={typeInput} {...rest} width={width} ref={ref} />
           {typeInput === "password" ? (
             <IconEyeInvisible onClick={() => setTypeInput("text")} />
           ) : (
@@ -32,11 +41,15 @@ const InputBase = ({ error, label, type, width, ...rest }: IPropsInput) => {
           )}
         </ContainerInputWithType>
       ) : (
-        <Input type={type} {...rest} width={width} />
+        <Input type={type} {...rest} width={width} ref={ref} />
       )}
-      <MessageError>{error}</MessageError>
+      {error && error.message ? (
+        <MessageError>{error.message}</MessageError>
+      ) : (
+        ""
+      )}
     </ContainerInput>
   );
 };
 
-export default InputBase;
+export default forwardRef(InputBase);
