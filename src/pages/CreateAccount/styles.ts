@@ -35,7 +35,7 @@ export const TitleFormMain = styled.h1`
   color: ${colors.black};
   font-weight: ${weightFonts.w700};
   text-align: center;
-  width: 100%;
+  width: 90%;
   font-size: 1.2em;
 
   padding: 0.5rem;
