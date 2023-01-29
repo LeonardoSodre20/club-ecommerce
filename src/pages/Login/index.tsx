@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Header from "../../components/Header";
 import InputBase from "../../components/InputBase";
-import schema from "../../components/validations/UseValidation";
+import schema from "../../validations/UseValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   ButtonLogin,

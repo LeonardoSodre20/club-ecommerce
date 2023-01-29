@@ -5,6 +5,7 @@ import {
   useState,
 } from "react";
 import { FieldError } from "react-hook-form";
+import TooltipError from "../Tooltips/ErrorTooltip";
 
 import {
   ContainerInput,
@@ -13,7 +14,6 @@ import {
   IconEyeVisible,
   Input,
   Label,
-  MessageError,
 } from "./styles";
 
 interface IPropsInput extends InputHTMLAttributes<HTMLInputElement> {
@@ -44,7 +44,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IPropsInput> = (
         <Input type={type} {...rest} width={width} ref={ref} />
       )}
       {error && error.message ? (
-        <MessageError>{error.message}</MessageError>
+        <TooltipError>{error.message}</TooltipError>
       ) : (
         ""
       )}
