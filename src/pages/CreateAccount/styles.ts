@@ -6,7 +6,6 @@ export const ContainerMainAccount = styled.section`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1em;
 
   height: calc(100vh - 70px);
   width: 100%;
@@ -17,8 +16,19 @@ export const FormControl = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 3rem;
   width: 550px;
+  animation: fadeForms 1s normal;
+
+  @keyframes fadeForms {
+    0% {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 `;
 
 export const TitleFormMain = styled.h1`
@@ -30,4 +40,27 @@ export const TitleFormMain = styled.h1`
 
   padding: 0.5rem;
   border-bottom: 1px solid ${colors.darkGrey};
+`;
+
+export const ContainerInputsForms = styled.div`
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 3rem;
+`;
+
+export const ButtonCreateAccount = styled.button`
+  margin-top: 30px;
+  color: ${colors.white};
+  font-weight: ${weightFonts.w600};
+  font-size: 1.1em;
+  background-color: ${colors.buttonDefault};
+
+  border-radius: 0.5rem;
+  width: 500px;
+  padding: 12px 8px;
+  border: none;
+  cursor: pointer;
 `;

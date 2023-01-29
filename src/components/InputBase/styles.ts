@@ -20,14 +20,19 @@ export const Input = styled.input`
   border-radius: 10px;
   border: none;
   width: ${({ width }: IPropsInput) => width};
+  transition: all 0.5s;
 
-  font-size: 1.1em;
+  font-size: 1em;
   text-indent: 1rem;
 
   ::placeholder {
     color: ${colors.darkGrey};
     font-weight: ${weightFonts.w500};
     font-size: 1em;
+  }
+
+  :focus {
+    background-color: ${colors.focusColor};
   }
 `;
 

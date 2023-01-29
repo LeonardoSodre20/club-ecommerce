@@ -5,4 +5,6 @@ export const colors = {
   ligthGray: "#E9ECEF",
   matteBlack: "#343A40",
   red: "#f10000",
+  focusColor: "#d8d8d8",
+  buttonDefault: "#212529",
 };

@@ -18,7 +18,7 @@ const Header = () => {
 
       <ContainerLinksHeader>
         <LinkItem onClick={() => navigate("/")}>Explorar</LinkItem>
-        <LinkItem onClick={() => navigate("/")}>Login</LinkItem>
+        <LinkItem onClick={() => navigate("/login")}>Login</LinkItem>
         <LinkItem onClick={() => navigate("/createAccount")}>
           Criar Conta
         </LinkItem>
