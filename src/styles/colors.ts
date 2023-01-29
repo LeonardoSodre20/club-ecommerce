@@ -7,4 +7,5 @@ export const colors = {
   red: "#f10000",
   focusColor: "#d8d8d8",
   buttonDefault: "#212529",
+  successColor: "#4bb543",
 };

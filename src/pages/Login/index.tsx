@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import Header from "../../components/Header";
 import InputBase from "../../components/InputBase";
-import schema from "../../validations/UseValidation";
+import schema from "../../validations/LoginValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   ButtonLogin,
@@ -19,7 +19,7 @@ interface IPropsFormsLogin {
   password: string;
 }
 
-const valuesDefault = {
+const valuesDefault: IPropsFormsLogin = {
   email: "",
   password: "",
 };
@@ -28,7 +28,7 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IPropsFormsLogin>({
     defaultValues: valuesDefault,
     mode: "onSubmit",
@@ -67,7 +67,13 @@ const Login = () => {
             {...register("password")}
           />
 
-          <ButtonLogin type="submit">Entrar</ButtonLogin>
+          {isSubmitting ? (
+            <ButtonLogin type="submit" bgColorButton="#4bb543">
+              Entrando...
+            </ButtonLogin>
+          ) : (
+            <ButtonLogin type="submit">Entrar</ButtonLogin>
+          )}
         </FormControlLogin>
       </ContainerMainLogin>
     </>

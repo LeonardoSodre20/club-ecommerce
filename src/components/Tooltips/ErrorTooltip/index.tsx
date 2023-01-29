@@ -1,7 +1,12 @@
-import { ContainerTooltipError } from "./styles";
+import { ArrowTooltip, ContainerTooltipError } from "./styles";
 
 const TooltipError = ({ children }: any) => {
-  return <ContainerTooltipError>{children}</ContainerTooltipError>;
+  return (
+    <ContainerTooltipError>
+      <ArrowTooltip />
+      {children}
+    </ContainerTooltipError>
+  );
 };
 
 export default TooltipError;

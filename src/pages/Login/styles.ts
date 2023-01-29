@@ -3,6 +3,10 @@ import { colors } from "../../styles/colors";
 import { weightFonts } from "../../styles/weight";
 import { BsGoogle } from "react-icons/bs";
 
+interface IPropsLoginStyles {
+  bgColorButton?: string;
+}
+
 export const ContainerMainLogin = styled.div`
   display: flex;
   align-items: center;
@@ -11,6 +15,19 @@ export const ContainerMainLogin = styled.div`
 
   height: calc(100vh - 70px);
   width: 100%;
+
+  animation: fadeFormsLogin 1s normal;
+
+  @keyframes fadeFormsLogin {
+    0% {
+      opacity: 0;
+      transform: translateX(-200px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 `;
 
 export const ContainerMainInfo = styled.div`
@@ -42,7 +59,8 @@ export const ButtonLogin = styled.button`
   color: ${colors.white};
   font-weight: ${weightFonts.w600};
   font-size: 1.1em;
-  background-color: ${colors.buttonDefault};
+  background-color: ${({ bgColorButton }: IPropsLoginStyles) =>
+    bgColorButton || `${colors.buttonDefault}`};
 
   border-radius: 0.5rem;
   width: 500px;
@@ -84,7 +102,7 @@ export const FormControlLogin = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 2.5em;
+  gap: 2.8em;
 `;
 
 export const IconGoogle = styled(BsGoogle)`
