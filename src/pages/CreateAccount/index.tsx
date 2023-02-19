@@ -1,9 +1,11 @@
+import { useEffect, useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FormEvent } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
 import Header from "../../components/Header";
 import InputBase from "../../components/InputBase";
 import schemaCreateAccount from "../../validations/CreateUserValidation";
+import { toast } from "react-toastify";
 import {
   ButtonCreateAccount,
   ContainerInputsForms,
@@ -11,6 +13,7 @@ import {
   FormControl,
   TitleFormMain,
 } from "./styles";
+import { useNavigate } from "react-router-dom";
 
 interface IPropsInputsCreateAccount {
   name: string;
@@ -29,18 +32,32 @@ const valuesDefault: IPropsInputsCreateAccount = {
 };
 
 const CreateAccount = () => {
+  const navigate = useNavigate();
+  const [redirect, setRedirect] = useState<boolean>(false);
+
+  setTimeout(() => {
+    redirect ? navigate("/login") : false;
+  }, 2500);
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<IPropsInputsCreateAccount>({
-    mode: "onSubmit",
+    mode: "onChange",
     defaultValues: valuesDefault,
     resolver: yupResolver(schemaCreateAccount),
     shouldFocusError: true,
   });
-  const onSubmit: SubmitHandler<IPropsInputsCreateAccount> = (data) =>
-    console.log(data);
+
+  const onSubmit: SubmitHandler<IPropsInputsCreateAccount> = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:3333/users", data);
+      return setRedirect(true), toast.success(response.data.message);
+    } catch (err: any) {
+      return toast.error(err.response.data.message);
+    }
+  };
 
   return (
     <>
@@ -87,13 +104,19 @@ const CreateAccount = () => {
               type="password"
               label="Confirmação de senha"
               width="500px"
-              placeholder="Confirme ssua senha..."
+              placeholder="Confirme sua senha..."
               error={errors.confirmPassword}
               {...register("confirmPassword")}
             />
           </ContainerInputsForms>
 
-          <ButtonCreateAccount type="submit">Criar conta</ButtonCreateAccount>
+          {isSubmitting ? (
+            <ButtonCreateAccount type="submit" bgColor="#4bb543">
+              Criando...
+            </ButtonCreateAccount>
+          ) : (
+            <ButtonCreateAccount type="submit">Criar conta</ButtonCreateAccount>
+          )}
         </FormControl>
       </ContainerMainAccount>
     </>

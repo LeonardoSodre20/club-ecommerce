@@ -7,8 +7,9 @@ export const ContainerHeader = styled.section`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${colors.black};
+  background-color: ${colors.buttonDefault};
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  z-index: 100;
 
   width: 100%;
   height: 70px;

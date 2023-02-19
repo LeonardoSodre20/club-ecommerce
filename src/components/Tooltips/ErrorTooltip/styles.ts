@@ -8,7 +8,7 @@ export const ContainerTooltipError = styled.div`
   padding: 6px 5px;
   border-radius: 0.5rem;
   color: ${colors.white};
-  font-size: 0.6em;
+  font-size: 0.5em;
   font-weight: ${weightFonts.w700};
   width: 260px;
   position: absolute;

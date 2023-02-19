@@ -65,7 +65,6 @@ export const ButtonLogin = styled.button`
   border-radius: 0.5rem;
   width: 500px;
   padding: 12px 8px;
-  border: none;
   cursor: pointer;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 

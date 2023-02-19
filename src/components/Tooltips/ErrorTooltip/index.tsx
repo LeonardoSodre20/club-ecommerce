@@ -1,6 +1,11 @@
+import { ReactNode } from "react";
 import { ArrowTooltip, ContainerTooltipError } from "./styles";
 
-const TooltipError = ({ children }: any) => {
+interface IPropsTooltip {
+  children: ReactNode;
+}
+
+const TooltipError = ({ children }: IPropsTooltip) => {
   return (
     <ContainerTooltipError>
       <ArrowTooltip />

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ContainerHeader,
@@ -11,23 +12,26 @@ import {
 
 const Header = () => {
   const navigate = useNavigate();
+  const [showSideBar, setShowSideBar] = useState<boolean>(false);
 
   return (
-    <ContainerHeader>
-      <LogoDescription>CLUB CLOTHING</LogoDescription>
+    <>
+      <ContainerHeader>
+        <LogoDescription>CLUB CLOTHING</LogoDescription>
 
-      <ContainerLinksHeader>
-        <LinkItem onClick={() => navigate("/")}>Explorar</LinkItem>
-        <LinkItem onClick={() => navigate("/login")}>Login</LinkItem>
-        <LinkItem onClick={() => navigate("/createAccount")}>
-          Criar Conta
-        </LinkItem>
-        <ContainerShop>
-          <IconCart />
-          <CounterShop>0</CounterShop>
-        </ContainerShop>
-      </ContainerLinksHeader>
-    </ContainerHeader>
+        <ContainerLinksHeader>
+          <LinkItem onClick={() => navigate("/")}>Explorar</LinkItem>
+          <LinkItem onClick={() => navigate("/login")}>Login</LinkItem>
+          <LinkItem onClick={() => navigate("/createAccount")}>
+            Criar Conta
+          </LinkItem>
+          <ContainerShop onClick={() => setShowSideBar(!showSideBar)}>
+            <IconCart />
+            <CounterShop>0</CounterShop>
+          </ContainerShop>
+        </ContainerLinksHeader>
+      </ContainerHeader>
+    </>
   );
 };
 

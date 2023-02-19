@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { weightFonts } from "../../styles/weight";
 
+interface IPropsButtonCreateAccount {
+  bgColor?: string;
+}
+
 export const ContainerMainAccount = styled.section`
   display: flex;
   align-items: center;
@@ -56,11 +60,19 @@ export const ButtonCreateAccount = styled.button`
   color: ${colors.white};
   font-weight: ${weightFonts.w600};
   font-size: 1.1em;
-  background-color: ${colors.buttonDefault};
+  background-color: ${({ bgColor }: IPropsButtonCreateAccount) =>
+    bgColor || `${colors.buttonDefault}`};
 
   border-radius: 0.5rem;
   width: 500px;
   padding: 12px 8px;
-  border: none;
+  transition: all 0.5s;
+  border: 1px solid transparent;
   cursor: pointer;
+
+  :hover {
+    background-color: ${colors.focusColor};
+    border: 1px solid ${colors.black};
+    color: ${colors.black};
+  }
 `;

@@ -14,7 +14,20 @@ const schemaCreateAccount = Yup.object({
     .min(8, "A confirmação de senha deve conter no mínimo 8 caracteres")
     .max(16, "A confirmação de senha deve conter no máximo 16 caracteres")
     .required("A senha é obrigatória !")
-    .oneOf([Yup.ref("password")], "As senhas devem ser iguais !"),
+    .oneOf([Yup.ref("password")], "As senhas devem ser iguais !")
+    .test(
+      "password",
+      "A senha deve possuir no mínimo 8 caracteres, uma letra minúscula e uma letra maiúscula.",
+      (value) => {
+        if (value) {
+          return (
+            value.length >= 8 &&
+            /^(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d@$!%*#-_?&]{8,}$/.test(value)
+          );
+        }
+        return true;
+      }
+    ),
 });
 
 export default schemaCreateAccount;
