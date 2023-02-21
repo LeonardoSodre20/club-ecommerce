@@ -61,7 +61,7 @@ export const ButtonNewProduct = styled.button`
   font-size: 1.1em;
   font-weight: ${weightFonts.w700};
   padding: 0.8rem;
-  width: 180px;
+  width: 230px;
   cursor: pointer;
 `;
 
@@ -81,6 +81,21 @@ export const FormControl = styled.form`
   gap: 3em;
 `;
 
+export const ContainerSelect = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+`;
+
+export const LabelSelect = styled.label`
+  color: ${colors.matteBlack};
+  font-size: 1rem;
+  font-weight: ${weightFonts.w600};
+  position: absolute;
+  left: 12px;
+  top: -27px;
+`;
+
 export const SelectProducts = styled.select`
   background-color: ${colors.ligthGray};
   padding: 12px 8px;
@@ -89,15 +104,10 @@ export const SelectProducts = styled.select`
   border: none;
   width: 600px;
   transition: all 0.5s;
+  color: ${colors.darkGrey};
 
   font-size: 1em;
   text-indent: 1rem;
-
-  ::placeholder {
-    color: ${colors.darkGrey};
-    font-weight: ${weightFonts.w500};
-    font-size: 1em;
-  }
 
   :focus {
     background-color: ${colors.focusColor};

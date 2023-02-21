@@ -1,6 +1,5 @@
 import axios from "axios";
-import "dotenv";
 
 export const api = axios.create({
-  baseURL: process.env.API_URL,
+  baseURL: import.meta.env.VITE_API_URL,
 });

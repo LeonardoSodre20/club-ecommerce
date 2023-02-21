@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import SideBar from "../../../components/SideBar";
 import { IProducts } from "./types";
@@ -6,6 +5,11 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
 import { toast } from "react-toastify";
+import { api } from "../../../services/api";
+
+// ICONS
+import { FaEdit } from "react-icons/fa";
+import { RiDeleteBin6Line } from "react-icons/ri";
 
 // STYLE
 import {
@@ -21,12 +25,12 @@ const Dashboard = () => {
   const [products, setProducts] = useState<IProducts[]>();
 
   const getAllProducts = async () => {
-    const response = await axios.get("http://localhost:3333/product");
+    const response = await api.get("/product");
     setProducts(response?.data?.products);
   };
 
   const deleteProductById = async (id: string) => {
-    const response = await axios.delete(`http://localhost:3333/product/${id}`);
+    const response = await api.delete(`/product/${id}`);
     setProducts(products?.filter((prod) => prod._id !== id));
     toast.success(response.data.message);
     return response.data;
@@ -41,7 +45,10 @@ const Dashboard = () => {
       <SideBar />
       <ContainerInputAndButtonNewProduct>
         <InputSearch type="search" placeholder="Buscar algum produto..." />
-        <ModalNewProduct textButton="Novo Produto" />
+        <ModalNewProduct
+          textButton="Novo Produto"
+          getAllProductsRefresh={getAllProducts}
+        />
       </ContainerInputAndButtonNewProduct>
 
       <div
@@ -74,7 +81,7 @@ const Dashboard = () => {
                 >
                   <Td>{prod?.name}</Td>
                   <Td>{prod.weight}</Td>
-                  {prod?.status === "Disponível " ? (
+                  {prod?.status === "Disponível" ? (
                     <Td color="#4BB543" weight="bolder">
                       {prod.status}
                     </Td>
@@ -94,7 +101,24 @@ const Dashboard = () => {
                       locale: ptBR,
                     })}
                   </Td>
-                  <Td onClick={() => deleteProductById(prod._id)}>Deletar</Td>
+                  <Td onClick={() => deleteProductById(prod._id)}>
+                    <FaEdit
+                      style={{
+                        color: "#000",
+                        fontSize: "1.8em",
+                        cursor: "pointer",
+                      }}
+                    />
+                    <RiDeleteBin6Line
+                      style={{
+                        color: "#000",
+                        fontSize: "1.8em",
+                        cursor: "pointer",
+                        marginLeft: "10px",
+                      }}
+                      onClick={() => deleteProductById(prod._id)}
+                    />
+                  </Td>
                 </tr>
               );
             })}

@@ -30,7 +30,8 @@ export const InputSearch = styled.input`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border: none;
-  width: 700px;
+  width: 800px;
+  margin-left: 50px;
   transition: all 0.5s;
 
   font-size: 1em;
@@ -67,4 +68,3 @@ export const Td = styled.td`
   width: 180px;
   font-weight: ${({ weight }: IPropsTable) => weight || "200"};
 `;
-

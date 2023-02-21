@@ -4,18 +4,20 @@ import InputBase from "../../InputBase";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schemaProduct from "../../../validations/Products";
+import { toast } from "react-toastify";
+import { api } from "../../../services/api";
 import {
   BtnCloseModal,
   ButtonNewProduct,
   ButtonSubmitProducts,
+  ContainerSelect,
   FormControl,
+  LabelSelect,
   ModalComponent,
   ModalForegroundComponent,
   SelectProducts,
   TitleDescriptionModal,
 } from "./styles";
-import axios from "axios";
-import { toast } from "react-toastify";
 
 const defaultValues: IPropsProduct = {
   name: "",
@@ -24,7 +26,10 @@ const defaultValues: IPropsProduct = {
   price: null,
 };
 
-const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
+const ModalNewProduct = ({
+  textButton,
+  getAllProductsRefresh,
+}: IPropsModalComponent) => {
   const [open, setOpen] = useState<boolean>(false);
   const {
     register,
@@ -39,8 +44,9 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
 
   const onSubmit: SubmitHandler<IPropsProduct> = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3333/product", data);
+      const response = await api.post("/product", data);
       setOpen(false);
+      getAllProductsRefresh();
       return toast.success(response?.data.message);
     } catch (err: any) {
       return toast.error(err.response?.data?.message);
@@ -81,12 +87,14 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
                 error={errors.weight}
               />
 
-              <SelectProducts {...register("status")}>
-                <option value="">Selecione...</option>
-                <option value="Disponível">Disponível</option>
-                <option value="Indisponível">Indisponível</option>
-              </SelectProducts>
-
+              <ContainerSelect>
+                <LabelSelect>Status do Produto</LabelSelect>
+                <SelectProducts {...register("status")}>
+                  <option value="">Selecione...</option>
+                  <option value="Disponível">Disponível</option>
+                  <option value="Indisponível">Indisponível</option>
+                </SelectProducts>
+              </ContainerSelect>
               <InputBase
                 type="number"
                 width="600px"

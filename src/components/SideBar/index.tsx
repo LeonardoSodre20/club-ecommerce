@@ -1,4 +1,10 @@
-import { ContainerSideBar, IconCloseSideBar, IconOpenSideBar } from "./styles";
+import {
+  ContainerIconsAndLinks,
+  ContainerSideBar,
+  IconCloseSideBar,
+  IconOpenSideBar,
+  IconUsers,
+} from "./styles";
 import { useState } from "react";
 
 const SideBar = () => {
@@ -17,6 +23,10 @@ const SideBar = () => {
       ) : (
         <IconCloseSideBar onClick={() => changeWidthSideBar()} />
       )}
+
+      <ContainerIconsAndLinks>
+        <IconUsers />
+      </ContainerIconsAndLinks>
     </ContainerSideBar>
   );
 };

@@ -1,5 +1,6 @@
 export interface IPropsModalComponent {
   textButton: string;
+  getAllProductsRefresh(): Promise<void>;
 }
 
 export interface IPropsProduct {

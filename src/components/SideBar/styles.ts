@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import { IoMdMenu } from "react-icons/io";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { ImUsers } from "react-icons/im";
+import { colors } from "../../styles/colors";
 
 interface IPropsSideBar {
   width?: string;
@@ -14,23 +16,45 @@ export const ContainerSideBar = styled.div`
   transition: all 0.7s;
 
   display: flex;
-  align-items: flex-start;
-  justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
 
   position: fixed;
   left: 15px;
 `;
 
 export const IconOpenSideBar = styled(IoMdMenu)`
-  margin-top: 10px;
+  margin: 10px 0 25px 0;
   cursor: pointer;
   font-size: 2em;
   color: #fff;
 `;
 
 export const IconCloseSideBar = styled(AiFillCloseCircle)`
-  margin-top: 10px;
+  margin: 10px 0 25px 0;
   cursor: pointer;
   font-size: 2em;
   color: #fff;
+`;
+
+export const ContainerIconsAndLinks = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1.1em;
+`;
+
+export const IconUsers = styled(ImUsers)`
+  color: ${colors.white};
+  font-size: 2em;
+  cursor: pointer;
+  transition: all 0.7s;
+  padding: 0.2rem;
+
+  :hover {
+    background-color: ${colors.white};
+    color: ${colors.black};
+  }
 `;
