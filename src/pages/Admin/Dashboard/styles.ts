@@ -2,6 +2,11 @@ import styled from "styled-components";
 import { colors } from "../../../styles/colors";
 import { weightFonts } from "../../../styles/weight";
 
+interface IPropsTable {
+  color?: string;
+  weight?: string;
+}
+
 export const MainContainerDashboard = styled.div`
   display: flex;
   align-items: center;
@@ -42,19 +47,6 @@ export const InputSearch = styled.input`
   }
 `;
 
-export const ButtonNewProduct = styled.button`
-  color: ${colors.white};
-  border-radius: 0.5rem;
-  border: none;
-  outline: none;
-  background-color: ${colors.black};
-  font-size: 1.1em;
-  font-weight: ${weightFonts.w700};
-  padding: 0.8rem;
-  width: 180px;
-  cursor: pointer;
-`;
-
 export const Table = styled.table`
   background-color: ${colors.black};
 `;
@@ -68,9 +60,11 @@ export const Th = styled.th`
 `;
 
 export const Td = styled.td`
-  color: ${colors.black};
+  color: ${({ color }: IPropsTable) => color || `${colors.black}`};
   font-size: 0.8em;
   text-align: center;
   padding: 0.6rem;
   width: 180px;
+  font-weight: ${({ weight }: IPropsTable) => weight || "200"};
 `;
+

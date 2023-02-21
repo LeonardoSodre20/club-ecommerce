@@ -3,8 +3,12 @@ import { useEffect, useState } from "react";
 import SideBar from "../../../components/SideBar";
 import { IProducts } from "./types";
 import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
+import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
+import { toast } from "react-toastify";
+
+// STYLE
 import {
-  ButtonNewProduct,
   ContainerInputAndButtonNewProduct,
   InputSearch,
   MainContainerDashboard,
@@ -12,14 +16,20 @@ import {
   Td,
   Th,
 } from "./styles";
-import { ptBR } from "date-fns/locale";
 
 const Dashboard = () => {
-  const [products, setProduts] = useState<IProducts[]>();
+  const [products, setProducts] = useState<IProducts[]>();
 
   const getAllProducts = async () => {
     const response = await axios.get("http://localhost:3333/product");
-    setProduts(response?.data?.products);
+    setProducts(response?.data?.products);
+  };
+
+  const deleteProductById = async (id: string) => {
+    const response = await axios.delete(`http://localhost:3333/product/${id}`);
+    setProducts(products?.filter((prod) => prod._id !== id));
+    toast.success(response.data.message);
+    return response.data;
   };
 
   useEffect(() => {
@@ -31,13 +41,14 @@ const Dashboard = () => {
       <SideBar />
       <ContainerInputAndButtonNewProduct>
         <InputSearch type="search" placeholder="Buscar algum produto..." />
-        <ButtonNewProduct>Novo Produto</ButtonNewProduct>
+        <ModalNewProduct textButton="Novo Produto" />
       </ContainerInputAndButtonNewProduct>
 
       <div
         style={{
           marginTop: "50px",
           marginBottom: "50px",
+          marginLeft: "60px",
         }}
       >
         <Table>
@@ -48,6 +59,7 @@ const Dashboard = () => {
               <Th>Status</Th>
               <Th>Preço</Th>
               <Th>Data de Cadastro</Th>
+              <Th>Ações</Th>
             </tr>
           </thead>
 
@@ -62,7 +74,15 @@ const Dashboard = () => {
                 >
                   <Td>{prod?.name}</Td>
                   <Td>{prod.weight}</Td>
-                  <Td>{prod.status}</Td>
+                  {prod?.status === "Disponível " ? (
+                    <Td color="#4BB543" weight="bolder">
+                      {prod.status}
+                    </Td>
+                  ) : (
+                    <Td color="#f10000" weight="bolder">
+                      {prod.status}
+                    </Td>
+                  )}
                   <Td>
                     {new Intl.NumberFormat("pt-BR", {
                       style: "currency",
@@ -74,6 +94,7 @@ const Dashboard = () => {
                       locale: ptBR,
                     })}
                   </Td>
+                  <Td onClick={() => deleteProductById(prod._id)}>Deletar</Td>
                 </tr>
               );
             })}
