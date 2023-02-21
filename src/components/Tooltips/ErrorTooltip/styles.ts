@@ -8,7 +8,7 @@ export const ContainerTooltipError = styled.div`
   padding: 6px 5px;
   border-radius: 0.5rem;
   color: ${colors.white};
-  font-size: 0.5em;
+  font-size: 0.7em;
   font-weight: ${weightFonts.w700};
   width: 260px;
   position: absolute;
@@ -31,6 +31,6 @@ export const ArrowTooltip = styled(IoMdArrowDropdown)`
   color: ${colors.red};
   font-size: 3.5em;
   position: absolute;
-  bottom: -20px;
+  bottom: -25px;
   right: 10px;
 `;
