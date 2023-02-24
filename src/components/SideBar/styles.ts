@@ -22,6 +22,7 @@ export const ContainerSideBar = styled.div`
 
   position: fixed;
   left: 15px;
+  z-index: 100;
 `;
 
 export const IconOpenSideBar = styled(IoMdMenu)`
@@ -39,6 +40,7 @@ export const IconCloseSideBar = styled(AiFillCloseCircle)`
 `;
 
 export const ContainerIconsAndLinks = styled.div`
+  margin-top: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

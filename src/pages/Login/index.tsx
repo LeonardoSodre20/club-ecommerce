@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import InputBase from "../../components/InputBase";
 import schema from "../../validations/LoginValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useAuth } from "../../contexts/auth/auth";
 import {
   ButtonLogin,
   ContainerMainInfo,
@@ -25,6 +26,8 @@ const valuesDefault: IPropsFormsLogin = {
 };
 
 const Login = () => {
+  const { Login } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -35,7 +38,8 @@ const Login = () => {
     shouldFocusError: true,
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<IPropsFormsLogin> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<IPropsFormsLogin> = (data) =>
+    Login(data.email, data.password);
 
   return (
     <>

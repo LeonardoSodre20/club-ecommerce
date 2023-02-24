@@ -2,6 +2,11 @@ import styled from "styled-components";
 import { colors } from "../../../styles/colors";
 import { weightFonts } from "../../../styles/weight";
 
+// ICONS
+
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FaEdit } from "react-icons/fa";
+
 interface IPropsTable {
   color?: string;
   weight?: string;
@@ -30,8 +35,8 @@ export const InputSearch = styled.input`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
   border: none;
-  width: 800px;
-  margin-left: 50px;
+  width: 770px;
+  margin-left: 55px;
   transition: all 0.5s;
 
   font-size: 1em;
@@ -49,7 +54,9 @@ export const InputSearch = styled.input`
 `;
 
 export const Table = styled.table`
+  width: 100%;
   background-color: ${colors.black};
+  position: absolute;
 `;
 
 export const Th = styled.th`
@@ -67,4 +74,31 @@ export const Td = styled.td`
   padding: 0.6rem;
   width: 180px;
   font-weight: ${({ weight }: IPropsTable) => weight || "200"};
+`;
+
+// ICONS
+
+export const IconEdit = styled(FaEdit)`
+  color: ${colors.black};
+  font-size: 2.5em;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 0.2rem;
+
+  :hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+`;
+
+export const IconDelete = styled(RiDeleteBin6Line)`
+  color: ${colors.black};
+  font-size: 2.5em;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 0.2rem;
+
+  :hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 `;

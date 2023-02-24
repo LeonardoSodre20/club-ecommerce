@@ -1,11 +1,11 @@
 export interface IPropsModalComponent {
   textButton: string;
-  getAllProductsRefresh(): Promise<void>;
+  getAllProductsRefresh: () => Promise<void>;
 }
 
 export interface IPropsProduct {
   name: string;
-  weight: number | null;
+  amount: number | null;
   status: string;
   price: number | null;
 }

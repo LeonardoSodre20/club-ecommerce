@@ -21,7 +21,7 @@ import {
 
 const defaultValues: IPropsProduct = {
   name: "",
-  weight: null,
+  amount: null,
   status: "",
   price: null,
 };
@@ -81,10 +81,10 @@ const ModalNewProduct = ({
               <InputBase
                 type="number"
                 width="600px"
-                label="Peso do Produto"
+                label="Quantidade do Produto"
                 placeholder="Digite o peso do produto..."
-                {...register("weight")}
-                error={errors.weight}
+                {...register("amount")}
+                error={errors.amount}
               />
 
               <ContainerSelect>

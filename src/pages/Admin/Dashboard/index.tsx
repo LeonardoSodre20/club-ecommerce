@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "../../../components/SideBar";
 import { IProducts } from "./types";
 import { format } from "date-fns";
@@ -14,15 +14,28 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 // STYLE
 import {
   ContainerInputAndButtonNewProduct,
+  IconDelete,
+  IconEdit,
   InputSearch,
   MainContainerDashboard,
   Table,
   Td,
   Th,
 } from "./styles";
+import AccountButton from "../../../components/AccountLogout";
 
 const Dashboard = () => {
   const [products, setProducts] = useState<IProducts[]>();
+  const [search, setSearch] = useState<string>("");
+
+  // PRODUTOS FILTRADOS POR STATUS , NOME e DATA DE CADASTRO
+  const filteredProducts = products?.filter((attr) => {
+    return (
+      attr.status.includes(search) ||
+      attr.name.includes(search) ||
+      attr.created_at.includes(search)
+    );
+  });
 
   const getAllProducts = async () => {
     const response = await api.get("/product");
@@ -43,8 +56,15 @@ const Dashboard = () => {
   return (
     <MainContainerDashboard>
       <SideBar />
+      <AccountButton />
       <ContainerInputAndButtonNewProduct>
-        <InputSearch type="search" placeholder="Buscar algum produto..." />
+        <InputSearch
+          type="search"
+          placeholder="Buscar algum produto..."
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSearch(e.target.value)
+          }
+        />
         <ModalNewProduct
           textButton="Novo Produto"
           getAllProductsRefresh={getAllProducts}
@@ -54,15 +74,17 @@ const Dashboard = () => {
       <div
         style={{
           marginTop: "50px",
-          marginBottom: "50px",
+          marginBottom: "250px",
           marginLeft: "60px",
+          position: "relative",
+          width: "80%",
         }}
       >
         <Table>
           <thead>
             <tr>
               <Th>Nome</Th>
-              <Th>Peso</Th>
+              <Th>Quantidade</Th>
               <Th>Status</Th>
               <Th>Preço</Th>
               <Th>Data de Cadastro</Th>
@@ -71,7 +93,7 @@ const Dashboard = () => {
           </thead>
 
           <tbody>
-            {products?.map((prod) => {
+            {filteredProducts?.map((prod) => {
               return (
                 <tr
                   key={prod._id}
@@ -80,7 +102,7 @@ const Dashboard = () => {
                   }}
                 >
                   <Td>{prod?.name}</Td>
-                  <Td>{prod.weight}</Td>
+                  <Td>{prod.amount}</Td>
                   {prod?.status === "Disponível" ? (
                     <Td color="#4BB543" weight="bolder">
                       {prod.status}
@@ -101,23 +123,9 @@ const Dashboard = () => {
                       locale: ptBR,
                     })}
                   </Td>
-                  <Td onClick={() => deleteProductById(prod._id)}>
-                    <FaEdit
-                      style={{
-                        color: "#000",
-                        fontSize: "1.8em",
-                        cursor: "pointer",
-                      }}
-                    />
-                    <RiDeleteBin6Line
-                      style={{
-                        color: "#000",
-                        fontSize: "1.8em",
-                        cursor: "pointer",
-                        marginLeft: "10px",
-                      }}
-                      onClick={() => deleteProductById(prod._id)}
-                    />
+                  <Td>
+                    <IconEdit />
+                    <IconDelete onClick={() => deleteProductById(prod._id)} />
                   </Td>
                 </tr>
               );
