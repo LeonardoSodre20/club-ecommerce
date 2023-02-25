@@ -7,10 +7,6 @@ import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
 
-// ICONS
-import { FaEdit } from "react-icons/fa";
-import { RiDeleteBin6Line } from "react-icons/ri";
-
 // STYLE
 import {
   ContainerInputAndButtonNewProduct,
