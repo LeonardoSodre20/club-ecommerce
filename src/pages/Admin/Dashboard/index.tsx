@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import SideBar from "../../../components/SideBar";
 import { IProducts } from "./types";
 import { format } from "date-fns";
@@ -6,6 +6,7 @@ import { ptBR } from "date-fns/locale";
 import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
+import AccountButton from "../../../components/AccountLogout";
 
 // STYLE
 import {
@@ -17,18 +18,26 @@ import {
   Table,
   Td,
   Th,
+  SelectItemsByPage,
+  ContainerInputItemsByPage,
+  LabelInputItems,
 } from "./styles";
-import AccountButton from "../../../components/AccountLogout";
 
 const Dashboard = () => {
-  const [products, setProducts] = useState<IProducts[]>();
+  const [products, setProducts] = useState<IProducts[]>([]);
   const [search, setSearch] = useState<string>("");
 
-  // PRODUTOS FILTRADOS POR STATUS , NOME e DATA DE CADASTRO
-  const filteredProducts = products?.filter((attr) => {
+  //PAGINAÇÃO
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [itemsByPage, setItemsByPage] = useState<number>(6);
+  const pages: number = Math.ceil(products?.length / itemsByPage);
+  const startIndex = currentPage * itemsByPage;
+  const endIndex = startIndex + itemsByPage;
+  const currentItems = products?.slice(startIndex, endIndex).filter((attr) => {
     return (
       attr.status.includes(search) ||
       attr.name.includes(search) ||
+      attr.amount.toString().includes(search) ||
       attr.created_at.includes(search)
     );
   });
@@ -70,7 +79,7 @@ const Dashboard = () => {
       <div
         style={{
           marginTop: "50px",
-          marginBottom: "250px",
+          marginBottom: "350px",
           marginLeft: "60px",
           position: "relative",
           width: "80%",
@@ -89,7 +98,7 @@ const Dashboard = () => {
           </thead>
 
           <tbody>
-            {filteredProducts?.map((prod) => {
+            {currentItems?.map((prod) => {
               return (
                 <tr
                   key={prod._id}
@@ -128,6 +137,58 @@ const Dashboard = () => {
             })}
           </tbody>
         </Table>
+      </div>
+
+      <ContainerInputItemsByPage>
+        <LabelInputItems>Itens por página : </LabelInputItems>
+        <SelectItemsByPage
+          onChange={(ev: ChangeEvent<HTMLSelectElement>) => {
+            setItemsByPage(Number(ev.target.value));
+          }}
+        >
+          <option value={8}>2</option>
+          <option value={3}>3</option>
+          <option value={6}>6</option>
+        </SelectItemsByPage>
+      </ContainerInputItemsByPage>
+
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          position: "absolute",
+          bottom: "3px",
+          gap: "0.7em",
+        }}
+      >
+        {Array.from(Array(pages), (item: any, index: number) => {
+          return (
+            <button
+              type="button"
+              style={{
+                position: "absolute",
+                fontSize: "0.8em",
+                bottom: "15px",
+                color: "#fff",
+                padding: "0.2rem",
+                borderRadius: "30%",
+                width: "25px",
+                height: "30px",
+                border: "none",
+                outline: "none",
+                fontWeight: "bold",
+                backgroundColor: "#000",
+                cursor: "pointer",
+              }}
+              value={index}
+              onClick={(ev: any) => {
+                setCurrentPage(Number(ev.target.value));
+              }}
+            >
+              {index + 1}
+            </button>
+          );
+        })}
       </div>
     </MainContainerDashboard>
   );

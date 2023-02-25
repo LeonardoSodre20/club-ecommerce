@@ -6,13 +6,11 @@ import { AuthenticatedRoutes } from "./routes/Authenticated.routes";
 import { UnauthenticatedRoutes } from "./routes/Unauthenticated.routes";
 
 function App() {
-  const { signed } = useAuth();
-
-  console.log(signed);
+  const { user } = useAuth();
 
   return (
     <AuthProvider>
-      {signed ? <AuthenticatedRoutes /> : <UnauthenticatedRoutes />}
+      {user ? <UnauthenticatedRoutes /> : <AuthenticatedRoutes />}
     </AuthProvider>
   );
 }

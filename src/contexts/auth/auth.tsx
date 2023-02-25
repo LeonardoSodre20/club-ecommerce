@@ -49,9 +49,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   }
 
   return (
-    <AuthContext.Provider
-      value={{ signed: Boolean(user), user, Login, Logout }}
-    >
+    <AuthContext.Provider value={{ user, Login, Logout }}>
       {children}
     </AuthContext.Provider>
   );
