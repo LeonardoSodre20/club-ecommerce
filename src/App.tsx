@@ -1,4 +1,5 @@
 // PROVIDER
+import SideBar from "./components/SideBar";
 import { AuthProvider, useAuth } from "./contexts/auth/auth";
 
 // ROTAS
@@ -10,7 +11,14 @@ function App() {
 
   return (
     <AuthProvider>
-      {user ? <UnauthenticatedRoutes /> : <AuthenticatedRoutes />}
+      {user ? (
+        <UnauthenticatedRoutes />
+      ) : (
+        <>
+          <SideBar />
+          <AuthenticatedRoutes />
+        </>
+      )}
     </AuthProvider>
   );
 }

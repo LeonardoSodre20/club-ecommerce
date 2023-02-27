@@ -1,12 +1,12 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import SideBar from "../../../components/SideBar";
 import { IProducts } from "./types";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
+import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
 import AccountButton from "../../../components/AccountLogout";
+import SideBar from "../../../components/SideBar";
 
 // STYLE
 import {
@@ -60,7 +60,6 @@ const Dashboard = () => {
 
   return (
     <MainContainerDashboard>
-      <SideBar />
       <AccountButton />
       <ContainerInputAndButtonNewProduct>
         <InputSearch

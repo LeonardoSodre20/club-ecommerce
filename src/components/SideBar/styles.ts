@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { IoMdMenu } from "react-icons/io";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { MdList } from "react-icons/md";
 import { ImUsers } from "react-icons/im";
 import { colors } from "../../styles/colors";
 
@@ -21,6 +22,7 @@ export const ContainerSideBar = styled.div`
   flex-direction: column;
 
   position: fixed;
+  top: 15px;
   left: 15px;
   z-index: 100;
 `;
@@ -51,6 +53,19 @@ export const ContainerIconsAndLinks = styled.div`
 export const IconUsers = styled(ImUsers)`
   color: ${colors.white};
   font-size: 2em;
+  cursor: pointer;
+  transition: all 0.7s;
+  padding: 0.2rem;
+
+  :hover {
+    background-color: ${colors.white};
+    color: ${colors.black};
+  }
+`;
+
+export const IconProducts = styled(MdList)`
+  color: ${colors.white};
+  font-size: 2.5em;
   cursor: pointer;
   transition: all 0.7s;
   padding: 0.2rem;
