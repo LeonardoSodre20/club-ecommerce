@@ -145,7 +145,7 @@ const Dashboard = () => {
             setItemsByPage(Number(ev.target.value));
           }}
         >
-          <option value={8}>2</option>
+          <option value={8}>8</option>
           <option value={3}>3</option>
           <option value={6}>6</option>
         </SelectItemsByPage>
