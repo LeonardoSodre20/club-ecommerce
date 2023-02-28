@@ -1,16 +1,25 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { api } from "../../../services/api";
+import { IconDelete, IconEdit } from "../Dashboard/styles";
 import { MainContainerUsers } from "./styles";
 import { IUser } from "./types";
 
 const Users = () => {
-  const [users, setUsers] = useState<IUser[] | null>([]);
+  const [users, setUsers] = useState<IUser[]>([]);
 
   const getAllUsers = async () => {
     const { data } = await api.get("/users");
     setUsers(data.users);
+  };
+
+  const deleteUsersById = async (id: string) => {
+    const response = await api.delete(`/users/${id}`);
+    setUsers(users?.filter((info) => info._id !== id));
+    toast.success(response.data.message);
+    return response.data;
   };
 
   useEffect(() => {
@@ -72,6 +81,16 @@ const Users = () => {
             >
               Data de Cadastro
             </th>
+
+            <th
+              style={{
+                width: "200px",
+                padding: "8px",
+                color: "#fff",
+              }}
+            >
+              Ações
+            </th>
           </tr>
         </thead>
 
@@ -89,7 +108,7 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "1.1rem",
+                    padding: "0.8rem",
                   }}
                 >
                   {info.name}
@@ -99,7 +118,7 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "1.1rem",
+                    padding: "0.8rem",
                   }}
                 >
                   {info.lastname}
@@ -109,7 +128,7 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "1.1rem",
+                    padding: "0.8rem",
                   }}
                 >
                   {info.email}
@@ -120,7 +139,7 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "1.1rem",
+                    padding: "0.8rem",
                   }}
                 >
                   {info.role}
@@ -131,12 +150,24 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "1.1rem",
+                    padding: "0.8rem",
                   }}
                 >
                   {format(new Date(info.created_at), "dd/MM/yyy", {
                     locale: ptBR,
                   })}
+                </td>
+
+                <td
+                  style={{
+                    color: "#000",
+                    textAlign: "center",
+                    fontSize: "0.8em",
+                    padding: "0.8rem",
+                  }}
+                >
+                  <IconEdit />
+                  <IconDelete onClick={() => deleteUsersById(info._id)} />
                 </td>
               </tr>
             );

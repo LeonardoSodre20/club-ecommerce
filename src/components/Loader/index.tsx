@@ -2,9 +2,6 @@ const LoaderAuth = () => {
   return (
     <div
       style={{
-        height: "100vh",
-        width: "100%",
-        backgroundColor: "#000",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
