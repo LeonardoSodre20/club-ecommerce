@@ -3,6 +3,6 @@ export interface IProducts {
   name: string;
   amount: number;
   status: string;
-  price: number;
+  price: string;
   created_at: string;
 }

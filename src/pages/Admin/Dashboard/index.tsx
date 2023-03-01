@@ -54,6 +54,14 @@ const Dashboard = () => {
     return response.data;
   };
 
+  const formatCurrecyForBrl = (value: number) => {
+    const formatedValue = value.toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+    return formatedValue;
+  };
+
   useEffect(() => {
     getAllProducts();
   }, []);
@@ -116,12 +124,7 @@ const Dashboard = () => {
                       {prod.status}
                     </Td>
                   )}
-                  <Td>
-                    {new Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(prod.price)}
-                  </Td>
+                  <Td>{formatCurrecyForBrl(parseFloat(prod.price))}</Td>
                   <Td>
                     {format(new Date(prod.created_at), "dd/MM/yyyy", {
                       locale: ptBR,
@@ -151,17 +154,9 @@ const Dashboard = () => {
         </SelectItemsByPage>
       </ContainerInputItemsByPage>
 
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          position: "absolute",
-          bottom: "3px",
-          gap: "0.7em",
-        }}
-      >
-        {Array.from(Array(pages), (item: any, index: number) => {
-          return (
+      {Array.from(Array(pages), (item: any, index: number) => {
+        return (
+          <div>
             <button
               type="button"
               style={{
@@ -178,6 +173,7 @@ const Dashboard = () => {
                 fontWeight: "bold",
                 backgroundColor: "#000",
                 cursor: "pointer",
+                marginRight: "15px",
               }}
               value={index}
               onClick={(ev: any) => {
@@ -186,9 +182,9 @@ const Dashboard = () => {
             >
               {index + 1}
             </button>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })}
     </MainContainerDashboard>
   );
 };

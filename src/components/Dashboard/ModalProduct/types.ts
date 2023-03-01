@@ -7,5 +7,5 @@ export interface IPropsProduct {
   name: string;
   amount: number | null;
   status: string;
-  price: number | null;
+  price: string;
 }

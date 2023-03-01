@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import schemaProduct from "../../../validations/Products";
 import { toast } from "react-toastify";
 import { api } from "../../../services/api";
+import { formatCurrency } from "../../../utils/currencyMask";
 import {
   BtnCloseModal,
   ButtonNewProduct,
@@ -23,7 +24,7 @@ const defaultValues: IPropsProduct = {
   name: "",
   amount: null,
   status: "",
-  price: null,
+  price: "",
 };
 
 const ModalNewProduct = ({
@@ -34,6 +35,7 @@ const ModalNewProduct = ({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<IPropsProduct>({
     mode: "onSubmit",
@@ -96,12 +98,15 @@ const ModalNewProduct = ({
                 </SelectProducts>
               </ContainerSelect>
               <InputBase
-                type="number"
+                type="text"
                 width="600px"
                 label="Preço do Produto"
                 placeholder="Digite o preço do produto..."
                 {...register("price")}
                 error={errors.price}
+                onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+                  setValue("price", formatCurrency(ev.target.value));
+                }}
               />
 
               {isSubmitting ? (

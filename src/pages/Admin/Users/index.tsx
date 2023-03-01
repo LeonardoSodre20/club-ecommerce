@@ -32,6 +32,8 @@ const Users = () => {
         style={{
           backgroundColor: "#000",
           color: "#fff",
+          width: "80%",
+          marginLeft: "60px",
         }}
       >
         <thead>
