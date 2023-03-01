@@ -3,10 +3,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { IAuthContextData, IAuthProvider, IUser } from "./types";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext({} as IAuthContextData);
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
+  const navigate = useNavigate();
   const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
@@ -28,10 +30,14 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
       localStorage.setItem("@App:User", JSON.stringify(response.data));
       localStorage.setItem("@App:token", response.data.token);
-
       setUser(response.data);
 
       api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+      navigate("/dashboard");
+
+      if (user?.role !== "Admin" && !user) {
+        navigate("/login");
+      }
       toast.success(response.data.message);
     } catch (error: any) {
       console.log(error);

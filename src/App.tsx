@@ -12,12 +12,12 @@ function App() {
   return (
     <AuthProvider>
       {user ? (
-        <UnauthenticatedRoutes />
-      ) : (
         <>
           <SideBar />
           <AuthenticatedRoutes />
         </>
+      ) : (
+        <UnauthenticatedRoutes />
       )}
     </AuthProvider>
   );
