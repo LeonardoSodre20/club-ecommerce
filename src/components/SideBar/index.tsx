@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/auth/auth";
 
 import {
   ContainerIconsAndLinks,
@@ -7,6 +8,7 @@ import {
   ContainerSideBackground,
   ContainerSideBar,
   IconCloseSideBar,
+  IconLogout,
   IconOpenSideBar,
   IconProducts,
   IconUsers,
@@ -14,6 +16,7 @@ import {
 } from "./styles";
 
 const SideBar = () => {
+  const { Logout } = useAuth();
   const navigate = useNavigate();
   const [widthSideBar, setWidthSideBar] = useState<string>("70px");
   const [isVisible, setIsVisible] = useState<string>("visible");
@@ -40,6 +43,7 @@ const SideBar = () => {
         <ContainerIconsAndLinks>
           <IconProducts onClick={() => navigate("/")} />
           <IconUsers onClick={() => navigate("/users")} />
+          <IconLogout onClick={() => Logout()} />
         </ContainerIconsAndLinks>
       </ContainerSideBar>
 

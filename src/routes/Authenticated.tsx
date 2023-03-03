@@ -7,7 +7,7 @@ import Users from "../pages/Admin/Users";
 export const AuthenticatedRoutes = () => {
   return (
     <Routes>
-      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/" element={<Dashboard />} />
       <Route path="/users" element={<Users />} />
     </Routes>
   );

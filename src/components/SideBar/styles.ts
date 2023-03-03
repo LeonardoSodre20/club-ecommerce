@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { IoMdMenu } from "react-icons/io";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { MdList } from "react-icons/md";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 import { ImUsers } from "react-icons/im";
 import { colors } from "../../styles/colors";
 import { weightFonts } from "../../styles/weight";
@@ -116,6 +117,21 @@ export const LinksNav = styled.span`
   font-weight: ${weightFonts.w700};
   cursor: pointer;
   transition: all 0.5s;
+
+  :hover {
+    background-color: ${colors.white};
+    color: ${colors.black};
+  }
+`;
+
+export const IconLogout = styled(RiLogoutCircleRLine)`
+  color: ${colors.white};
+  font-size: 2.2em;
+  cursor: pointer;
+  transition: all 0.7s;
+  padding: 0.2rem;
+  position: absolute;
+  bottom: 15px;
 
   :hover {
     background-color: ${colors.white};

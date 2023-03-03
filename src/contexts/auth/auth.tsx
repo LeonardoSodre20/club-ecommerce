@@ -5,7 +5,9 @@ import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
-export const AuthContext = createContext({} as IAuthContextData);
+export const AuthContext = createContext<IAuthContextData>(
+  {} as IAuthContextData
+);
 
 export const AuthProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
@@ -18,6 +20,9 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     if (storagedToken && storagedUser) {
       setUser(JSON.parse(storagedUser));
       api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
+      navigate("/");
+    } else {
+      navigate("/login");
     }
   }, []);
 
@@ -33,7 +38,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       setUser(response.data);
 
       api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-      navigate("/dashboard");
+      navigate("/users");
 
       if (user?.role !== "Admin" && !user) {
         navigate("/login");
