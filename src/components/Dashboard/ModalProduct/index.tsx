@@ -4,7 +4,7 @@ import InputBase from "../../InputBase";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schemaProduct from "../../../validations/Products";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { api } from "../../../services/api";
 import { formatCurrency } from "../../../utils/currencyMask";
 import {

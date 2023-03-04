@@ -57,6 +57,16 @@ export const Table = styled.table`
   width: 100%;
   background-color: ${colors.black};
   position: absolute;
+  animation: fadeInTable 1s;
+
+  @keyframes fadeInTable {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 export const Th = styled.th`

@@ -11,7 +11,7 @@ function App() {
 
   return (
     <AuthProvider>
-      {user?.emailUser ? (
+      {!user?.emailUser ? (
         <div>
           <SideBar />
           <AuthenticatedRoutes />

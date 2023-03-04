@@ -12,6 +12,7 @@ import {
   IconOpenSideBar,
   IconProducts,
   IconUsers,
+  IconGraphic,
   LinksNav,
 } from "./styles";
 
@@ -41,16 +42,18 @@ const SideBar = () => {
         )}
 
         <ContainerIconsAndLinks>
-          <IconProducts onClick={() => navigate("/")} />
+          <IconProducts onClick={() => navigate("/dashboard")} />
           <IconUsers onClick={() => navigate("/users")} />
+          <IconGraphic onClick={() => navigate("/graphics")} />
           <IconLogout onClick={() => Logout()} />
         </ContainerIconsAndLinks>
       </ContainerSideBar>
 
       <ContainerSideBackground width={widthSideBar} display={isVisible}>
         <ContainerLinks>
-          <LinksNav onClick={() => navigate("/")}>Produtos</LinksNav>
+          <LinksNav onClick={() => navigate("/dashboard")}>Produtos</LinksNav>
           <LinksNav onClick={() => navigate("/users")}>Usuários</LinksNav>
+          <LinksNav onClick={() => navigate("/graphics")}>Gráficos</LinksNav>
         </ContainerLinks>
       </ContainerSideBackground>
     </>

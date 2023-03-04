@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { api } from "../../../services/api";
 import { IconDelete, IconEdit } from "../Dashboard/styles";
 import { MainContainerUsers } from "./styles";
@@ -37,7 +37,7 @@ const Users = () => {
         }}
       >
         <thead>
-          <tr>
+          <tr onClick={() => toast.success("Hello World")}>
             <th
               style={{
                 width: "200px",
@@ -110,7 +110,6 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "0.8rem",
                   }}
                 >
                   {info.name}
@@ -120,7 +119,6 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "0.8rem",
                   }}
                 >
                   {info.lastname}
@@ -130,7 +128,6 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "0.8rem",
                   }}
                 >
                   {info.email}
@@ -141,7 +138,6 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "0.8rem",
                   }}
                 >
                   {info.role}
@@ -152,7 +148,6 @@ const Users = () => {
                     color: "#000",
                     textAlign: "center",
                     fontSize: "0.8em",
-                    padding: "0.8rem",
                   }}
                 >
                   {format(new Date(info.created_at), "dd/MM/yyy", {

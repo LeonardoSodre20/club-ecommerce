@@ -5,7 +5,7 @@ import axios from "axios";
 import Header from "../../components/Header";
 import InputBase from "../../components/InputBase";
 import schemaCreateAccount from "../../validations/CreateUserValidation";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import {
   ButtonCreateAccount,
   ContainerInputsForms,

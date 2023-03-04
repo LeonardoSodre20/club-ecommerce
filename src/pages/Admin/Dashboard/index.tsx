@@ -2,11 +2,10 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { IProducts } from "./types";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { api } from "../../../services/api";
 import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
 import AccountButton from "../../../components/AccountLogout";
-import SideBar from "../../../components/SideBar";
 
 // STYLE
 import {
@@ -33,17 +32,12 @@ const Dashboard = () => {
   const pages: number = Math.ceil(products?.length / itemsByPage);
   const startIndex = currentPage * itemsByPage;
   const endIndex = startIndex + itemsByPage;
-  const currentItems = products?.slice(startIndex, endIndex).filter((attr) => {
-    return (
-      attr.status.includes(search) ||
-      attr.name.includes(search) ||
-      attr.amount.toString().includes(search) ||
-      attr.created_at.includes(search)
-    );
-  });
+  const currentItems = products?.slice(startIndex, endIndex);
 
   const getAllProducts = async () => {
-    const response = await api.get("/product");
+    const response = await api.get("/product", {
+      params: { page: currentPage, pageSize: itemsByPage },
+    });
     setProducts(response?.data?.products);
   };
 
@@ -64,7 +58,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     getAllProducts();
-  }, []);
+  }, [search]);
 
   return (
     <MainContainerDashboard>
@@ -89,7 +83,7 @@ const Dashboard = () => {
           marginBottom: "350px",
           marginLeft: "60px",
           position: "relative",
-          width: "80%",
+          width: "85%",
         }}
       >
         <Table>
@@ -153,38 +147,6 @@ const Dashboard = () => {
           <option value={6}>6</option>
         </SelectItemsByPage>
       </ContainerInputItemsByPage>
-
-      {Array.from(Array(pages), (item: any, index: number) => {
-        return (
-          <div>
-            <button
-              type="button"
-              style={{
-                position: "absolute",
-                fontSize: "0.8em",
-                bottom: "15px",
-                color: "#fff",
-                padding: "0.2rem",
-                borderRadius: "30%",
-                width: "25px",
-                height: "30px",
-                border: "none",
-                outline: "none",
-                fontWeight: "bold",
-                backgroundColor: "#000",
-                cursor: "pointer",
-                marginRight: "15px",
-              }}
-              value={index}
-              onClick={(ev: any) => {
-                setCurrentPage(Number(ev.target.value));
-              }}
-            >
-              {index + 1}
-            </button>
-          </div>
-        );
-      })}
     </MainContainerDashboard>
   );
 };

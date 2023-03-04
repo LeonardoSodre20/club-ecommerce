@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { IAuthContextData, IAuthProvider, IUser } from "./types";
 import { api } from "../../services/api";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext<IAuthContextData>(
@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
       navigate("/");
     } else {
-      navigate("/login");
+      navigate("/dashboard");
     }
   }, []);
 

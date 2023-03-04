@@ -9,7 +9,9 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         min-height: 100vh;
+       
         font-family: 'Poppins', cursive;
+        
     }
 `;
 
