@@ -12,17 +12,17 @@ export const AuthContext = createContext<IAuthContextData>(
 export const AuthProvider = ({ children }: IAuthProvider) => {
   const navigate = useNavigate();
   const [user, setUser] = useState<IUser | null>(null);
+  const signed = !!user;
 
   useEffect(() => {
     const storagedUser = localStorage.getItem("@App:user");
     const storagedToken = localStorage.getItem("@App:token");
-
     if (storagedToken && storagedUser) {
       setUser(JSON.parse(storagedUser));
       api.defaults.headers.Authorization = `Bearer ${storagedToken}`;
-      navigate("/");
-    } else {
       navigate("/dashboard");
+    } else {
+      navigate("/login");
     }
   }, []);
 
@@ -38,11 +38,13 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       setUser(response.data);
 
       api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-      navigate("/users");
 
-      if (user?.role !== "Admin" && !user) {
-        navigate("/login");
+      if (user?.role === "Admin") {
+        navigate("/dashboard");
+      } else {
+        toast.error("Você não é o Admistrador !");
       }
+
       toast.success(response.data.message);
     } catch (error: any) {
       console.log(error);
@@ -60,7 +62,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, Login, Logout }}>
+    <AuthContext.Provider value={{ signed, user, Login, Logout }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,30 +1,38 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { IProducts } from "./types";
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import toast from "react-hot-toast";
 import { api } from "../../../services/api";
-import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
-import AccountButton from "../../../components/AccountLogout";
+import { IProducts } from "./types";
 
 // STYLE
+
 import {
   ContainerInputAndButtonNewProduct,
   IconDelete,
   IconEdit,
   InputSearch,
   MainContainerDashboard,
-  Table,
   Td,
-  Th,
   SelectItemsByPage,
   ContainerInputItemsByPage,
   LabelInputItems,
 } from "./styles";
 
+// COMPONENTS
+
+import LoaderAuth from "../../../components/Loader";
+import TableGeneric from "../../../components/Dashboard/Table";
+import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
+import AccountButton from "../../../components/AccountLogout";
+
+// FORMATTERS
+
+import { formatCurrecyForBrl } from "../../../formatters/currencyFomatted";
+import { formatDate } from "../../../formatters/dateFormatted";
+
 const Dashboard = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [search, setSearch] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   //PAGINAÇÃO
   const [currentPage, setCurrentPage] = useState<number>(0);
@@ -44,21 +52,24 @@ const Dashboard = () => {
   const deleteProductById = async (id: string) => {
     const response = await api.delete(`/product/${id}`);
     setProducts(products?.filter((prod) => prod._id !== id));
-    toast.success(response.data.message);
-    return response.data;
-  };
-
-  const formatCurrecyForBrl = (value: number) => {
-    const formatedValue = value.toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
+    toast.success(response.data.message, {
+      style: {
+        backgroundColor: "#000",
+        color: "#fff",
+      },
     });
-    return formatedValue;
+    return response.data;
   };
 
   useEffect(() => {
     getAllProducts();
   }, [search]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 2500);
+  }, []);
 
   return (
     <MainContainerDashboard>
@@ -77,27 +88,17 @@ const Dashboard = () => {
         />
       </ContainerInputAndButtonNewProduct>
 
-      <div
-        style={{
-          marginTop: "50px",
-          marginBottom: "350px",
-          marginLeft: "60px",
-          position: "relative",
-          width: "85%",
-        }}
+      <TableGeneric
+        name="Nome do Produto"
+        amount="Qtd do produto"
+        status="Status"
+        price="Preço"
+        created_at="Data de Cadastro"
+        actions="Ações"
       >
-        <Table>
-          <thead>
-            <tr>
-              <Th>Nome</Th>
-              <Th>Quantidade</Th>
-              <Th>Status</Th>
-              <Th>Preço</Th>
-              <Th>Data de Cadastro</Th>
-              <Th>Ações</Th>
-            </tr>
-          </thead>
-
+        {isLoading ? (
+          <LoaderAuth />
+        ) : (
           <tbody>
             {currentItems?.map((prod) => {
               return (
@@ -119,11 +120,7 @@ const Dashboard = () => {
                     </Td>
                   )}
                   <Td>{formatCurrecyForBrl(parseFloat(prod.price))}</Td>
-                  <Td>
-                    {format(new Date(prod.created_at), "dd/MM/yyyy", {
-                      locale: ptBR,
-                    })}
-                  </Td>
+                  <Td>{formatDate(prod.created_at)}</Td>
                   <Td>
                     <IconEdit />
                     <IconDelete onClick={() => deleteProductById(prod._id)} />
@@ -132,8 +129,8 @@ const Dashboard = () => {
               );
             })}
           </tbody>
-        </Table>
-      </div>
+        )}
+      </TableGeneric>
 
       <ContainerInputItemsByPage>
         <LabelInputItems>Itens por página : </LabelInputItems>

@@ -5,12 +5,16 @@ const LoaderAuth = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        position: "absolute",
+        left: "300px",
       }}
     >
       <h1
         style={{
-          color: "#fff",
-          fontSize: "4em",
+          textAlign: "center",
+          color: "#000",
+          fontSize: "1.5em",
+          marginTop: "10px",
         }}
       >
         Carregando ....

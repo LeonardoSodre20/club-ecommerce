@@ -1,24 +1,30 @@
 // PROVIDER
-import SideBar from "./components/SideBar";
-import { AuthProvider, useAuth } from "./contexts/auth/auth";
+import { Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./contexts/auth/auth";
 
 // ROTAS
-import { AuthenticatedRoutes } from "./routes/Authenticated";
-import { UnauthenticatedRoutes } from "./routes/Unauthenticated";
+import CreateAccount from "./pages/CreateAccount";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+
+// ADMIN
+import Dashboard from "./pages/Admin/Dashboard";
+// import GraphicsData from "./pages/Admin/Graphics";
+// import Users from "./pages/Admin/Users";
+
+import { AuthenticatedRoutes } from "./routes/Authenticated.routes";
 
 function App() {
-  const { user } = useAuth();
-
   return (
     <AuthProvider>
-      {!user?.emailUser ? (
-        <div>
-          <SideBar />
-          <AuthenticatedRoutes />
-        </div>
-      ) : (
-        <UnauthenticatedRoutes />
-      )}
+      <Routes>
+        <Route path="/" index element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/createAccount" element={<CreateAccount />} />
+        <Route path="/dashboard" element={<AuthenticatedRoutes />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+      </Routes>
     </AuthProvider>
   );
 }

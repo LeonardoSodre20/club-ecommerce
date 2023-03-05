@@ -9,7 +9,7 @@ const GlobalStyle = createGlobalStyle`
     }
     body {
         min-height: 100vh;
-       
+        z-index: 10;
         font-family: 'Poppins', cursive;
         
     }

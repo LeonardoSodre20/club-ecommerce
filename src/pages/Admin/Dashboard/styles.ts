@@ -26,6 +26,9 @@ export const MainContainerDashboard = styled.div`
 export const ContainerInputAndButtonNewProduct = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 100px;
   gap: 1.2em;
 `;
 
@@ -54,8 +57,8 @@ export const InputSearch = styled.input`
 `;
 
 export const Table = styled.table`
+  border-collapse: collapse;
   width: 100%;
-  background-color: ${colors.black};
   position: absolute;
   animation: fadeInTable 1s;
 
@@ -84,6 +87,7 @@ export const Td = styled.td`
   padding: 0.6rem;
   width: 180px;
   font-weight: ${({ weight }: IPropsTable) => weight || "200"};
+  border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 // ICONS

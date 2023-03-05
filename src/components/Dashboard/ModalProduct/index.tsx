@@ -49,7 +49,12 @@ const ModalNewProduct = ({
       const response = await api.post("/product", data);
       setOpen(false);
       getAllProductsRefresh();
-      return toast.success(response?.data.message);
+      return toast.success(response?.data.message, {
+        style: {
+          backgroundColor: "#000",
+          color: "#fff",
+        },
+      });
     } catch (err: any) {
       return toast.error(err.response?.data?.message);
     }

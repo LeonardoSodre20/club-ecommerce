@@ -12,6 +12,7 @@ export interface IAuthProvider {
 }
 
 export interface IAuthContextData {
+  signed: boolean;
   user: IUser | null;
   Login: (email: string, password: string) => Promise<void>;
   Logout: () => void;

@@ -12,4 +12,16 @@ export const MainContainerAllGraphics = styled.div`
   position: absolute;
   top: 50px;
   left: 130px;
+  animation: translateContainer 1.4s;
+
+  @keyframes translateContainer {
+    0% {
+      transform: translateX(-250px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 `;

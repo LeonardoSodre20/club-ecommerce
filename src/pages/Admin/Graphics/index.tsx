@@ -2,8 +2,6 @@ import {
   Area,
   AreaChart,
   CartesianGrid,
-  Pie,
-  PieChart,
   Tooltip,
   XAxis,
   YAxis,

@@ -14,10 +14,10 @@ export const ModalForegroundComponent = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.25);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 100000;
   animation: scaleForeground 1s normal;
 
   @keyframes scaleForeground {
