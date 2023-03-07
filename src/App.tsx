@@ -9,8 +9,8 @@ import Login from "./pages/Login";
 
 // ADMIN
 import Dashboard from "./pages/Admin/Dashboard";
+import Users from "./pages/Admin/Users";
 // import GraphicsData from "./pages/Admin/Graphics";
-// import Users from "./pages/Admin/Users";
 
 import { AuthenticatedRoutes } from "./routes/Authenticated.routes";
 

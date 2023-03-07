@@ -1,10 +1,4 @@
-import {
-  forwardRef,
-  ForwardRefRenderFunction,
-  InputHTMLAttributes,
-  useState,
-} from "react";
-import { FieldError } from "react-hook-form";
+import { forwardRef, ForwardRefRenderFunction, useState } from "react";
 import TooltipError from "../Tooltips/ErrorTooltip";
 
 import {
@@ -16,12 +10,8 @@ import {
   Label,
 } from "./styles";
 
-interface IPropsInput extends InputHTMLAttributes<HTMLInputElement> {
-  error?: FieldError;
-  label: string;
-  type?: string;
-  width?: string;
-}
+// TYPES
+import { IPropsInput } from "./types";
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, IPropsInput> = (
   { error, label, type, width, ...rest },

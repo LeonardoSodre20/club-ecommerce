@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { IPropsModalComponent, IPropsProduct } from "./types";
 import InputBase from "../../InputBase";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,6 +6,8 @@ import schemaProduct from "../../../validations/Products";
 import toast from "react-hot-toast";
 import { api } from "../../../services/api";
 import { formatCurrency } from "../../../utils/currencyMask";
+
+// STYLES
 import {
   BtnCloseModal,
   ButtonNewProduct,
@@ -19,6 +20,9 @@ import {
   SelectProducts,
   TitleDescriptionModal,
 } from "./styles";
+
+// TYPES
+import { IPropsModalComponent, IPropsProduct } from "./types";
 
 const defaultValues: IPropsProduct = {
   name: "",
