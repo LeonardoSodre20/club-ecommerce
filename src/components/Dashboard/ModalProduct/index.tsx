@@ -23,6 +23,7 @@ import {
 
 // TYPES
 import { IPropsModalComponent, IPropsProduct } from "./types";
+import { AxiosResponse } from "axios";
 
 const defaultValues: IPropsProduct = {
   name: "",
@@ -50,10 +51,13 @@ const ModalNewProduct = ({
 
   const onSubmit: SubmitHandler<IPropsProduct> = async (data) => {
     try {
-      const response = await api.post("/product", data);
+      const response: AxiosResponse = await api.post<IPropsProduct>(
+        "/product",
+        data
+      );
       setOpen(false);
       getAllProductsRefresh();
-      return toast.success(response?.data.message, {
+      return toast.success(response.data.message, {
         style: {
           backgroundColor: "#000",
           color: "#fff",

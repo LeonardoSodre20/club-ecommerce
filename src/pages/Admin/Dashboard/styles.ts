@@ -21,6 +21,7 @@ export const MainContainerDashboard = styled.div`
 
   min-height: 100vh;
   width: 100%;
+  z-index: 100;
 `;
 
 export const ContainerInputAndButtonNewProduct = styled.div`
@@ -114,39 +115,5 @@ export const IconDelete = styled(RiDeleteBin6Line)`
 
   :hover {
     background-color: rgba(0, 0, 0, 0.2);
-  }
-`;
-
-export const ContainerInputItemsByPage = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  position: absolute;
-  left: 170px;
-  bottom: 15px;
-`;
-
-export const LabelInputItems = styled.span`
-  color: ${colors.black};
-  font-size: 1em;
-  font-weight: ${weightFonts.w600};
-`;
-
-export const SelectItemsByPage = styled.select`
-  background-color: ${colors.ligthGray};
-  padding: 8px 8px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
-  border: none;
-  width: 70px;
-  transition: all 0.5s;
-  color: ${colors.black};
-
-  font-size: 1em;
-  text-indent: 1rem;
-
-  :focus {
-    background-color: ${colors.focusColor};
   }
 `;

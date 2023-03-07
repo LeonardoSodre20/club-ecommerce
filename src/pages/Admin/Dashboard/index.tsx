@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { api } from "../../../services/api";
 import { IProducts } from "./types";
@@ -12,9 +12,6 @@ import {
   InputSearch,
   MainContainerDashboard,
   Td,
-  SelectItemsByPage,
-  ContainerInputItemsByPage,
-  LabelInputItems,
 } from "./styles";
 
 // COMPONENTS
@@ -28,29 +25,20 @@ import AccountButton from "../../../components/AccountLogout";
 
 import { formatCurrecyForBrl } from "../../../formatters/currencyFomatted";
 import { formatDate } from "../../../formatters/dateFormatted";
+import { AxiosResponse } from "axios";
 
 const Dashboard = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  //PAGINAÇÃO
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const [itemsByPage, setItemsByPage] = useState<number>(6);
-  const pages: number = Math.ceil(products?.length / itemsByPage);
-  const startIndex = currentPage * itemsByPage;
-  const endIndex = startIndex + itemsByPage;
-  const currentItems = products?.slice(startIndex, endIndex);
-
-  const getAllProducts = async () => {
-    const response = await api.get("/product", {
-      params: { page: currentPage, pageSize: itemsByPage },
-    });
+  const handleGetAllProducts = async () => {
+    const response: AxiosResponse = await api.get("/product");
     setProducts(response?.data?.products);
   };
 
-  const deleteProductById = async (id: string) => {
-    const response = await api.delete(`/product/${id}`);
+  const handleDeleteProductById = async (id: string) => {
+    const response: AxiosResponse = await api.delete(`/product/${id}`);
     setProducts(products?.filter((prod) => prod._id !== id));
     toast.success(response.data.message, {
       style: {
@@ -62,7 +50,7 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    getAllProducts();
+    handleGetAllProducts();
   }, [search]);
 
   useEffect(() => {
@@ -84,7 +72,7 @@ const Dashboard = () => {
         />
         <ModalNewProduct
           textButton="Novo Produto"
-          getAllProductsRefresh={getAllProducts}
+          getAllProductsRefresh={handleGetAllProducts}
         />
       </ContainerInputAndButtonNewProduct>
 
@@ -100,7 +88,7 @@ const Dashboard = () => {
           <LoaderAuth />
         ) : (
           <tbody>
-            {currentItems?.map((prod) => {
+            {products?.map((prod) => {
               return (
                 <tr
                   key={prod._id}
@@ -123,7 +111,9 @@ const Dashboard = () => {
                   <Td>{formatDate(prod.created_at)}</Td>
                   <Td>
                     <IconEdit />
-                    <IconDelete onClick={() => deleteProductById(prod._id)} />
+                    <IconDelete
+                      onClick={() => handleDeleteProductById(prod._id)}
+                    />
                   </Td>
                 </tr>
               );
@@ -131,19 +121,6 @@ const Dashboard = () => {
           </tbody>
         )}
       </TableGeneric>
-
-      <ContainerInputItemsByPage>
-        <LabelInputItems>Itens por página : </LabelInputItems>
-        <SelectItemsByPage
-          onChange={(ev: ChangeEvent<HTMLSelectElement>) => {
-            setItemsByPage(Number(ev.target.value));
-          }}
-        >
-          <option value={8}>8</option>
-          <option value={3}>3</option>
-          <option value={6}>6</option>
-        </SelectItemsByPage>
-      </ContainerInputItemsByPage>
     </MainContainerDashboard>
   );
 };

@@ -17,7 +17,7 @@ export const ModalForegroundComponent = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100000;
+  z-index: 10000;
   animation: scaleForeground 1s normal;
 
   @keyframes scaleForeground {

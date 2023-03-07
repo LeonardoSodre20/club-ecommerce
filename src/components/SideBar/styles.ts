@@ -31,7 +31,7 @@ export const ContainerSideBar = styled.div`
   position: fixed;
   top: 15px;
   left: 15px;
-  z-index: 100;
+  z-index: 1000;
 `;
 
 export const ContainerSideBackground = styled.div`
@@ -50,7 +50,7 @@ export const ContainerSideBackground = styled.div`
   position: fixed;
   top: 15px;
   left: 15px;
-  z-index: 90;
+  z-index: 900;
 `;
 
 export const IconOpenSideBar = styled(IoMdMenu)`

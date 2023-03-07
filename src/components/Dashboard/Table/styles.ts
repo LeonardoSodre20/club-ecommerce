@@ -10,9 +10,10 @@ export const Table = styled.table`
   margin-left: 40px;
   border-collapse: collapse;
   width: 85%;
-  position: absolute;
+  position: fixed;
   top: 190px;
   animation: fadeInTable 1s;
+  z-index: -100; // PROVISÒRIO
 
   @keyframes fadeInTable {
     0% {

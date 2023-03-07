@@ -15,19 +15,14 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
-    async function getActiveUser() {
-      const storagedUser = localStorage.getItem("@App:user");
-      const storagedToken = localStorage.getItem("@App:token");
-      if (storagedToken && storagedUser) {
-        const activeUser = JSON.parse(storagedUser);
-        setUser(activeUser);
-        api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
-        navigate("/dashboard");
-      } else {
-        navigate("/login");
-      }
+    const storagedUser = localStorage.getItem("@App:user");
+    const storagedToken = localStorage.getItem("@App:token");
+    if (storagedToken && storagedUser) {
+      const activeUser = JSON.parse(storagedUser);
+      console.log(activeUser);
+      setUser(activeUser);
+      api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
     }
-    getActiveUser();
   }, []);
 
   async function Login(email: string, password: string): Promise<void> {
@@ -42,9 +37,9 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       setUser(response.data);
       api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
 
-      if (user?.role !== "Admin") {
+      if (user?.role !== "Admin" && !user) {
         toast.error("Credenciais Inválidas !");
-      } else {
+      } else if (user.role === "Admin" && user) {
         navigate("/dashboard");
         toast.success(response.data.message);
       }
