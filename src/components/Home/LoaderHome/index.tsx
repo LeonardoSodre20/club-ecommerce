@@ -17,6 +17,7 @@ const LoaderProducts = () => {
         style={{
           height: "200px",
           width: "200px",
+          textShadow: "0 10px 10px rgba(0,0,0,0.2)",
         }}
       />
 

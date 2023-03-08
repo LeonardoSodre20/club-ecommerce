@@ -53,7 +53,12 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
   function Logout() {
     setUser(null);
-
+    toast.success("Logout efetuado com sucesso !", {
+      style: {
+        backgroundColor: "#21ce21",
+        color: "#fff",
+      },
+    });
     sessionStorage.removeItem("@App:user");
     sessionStorage.removeItem("App:token");
   }

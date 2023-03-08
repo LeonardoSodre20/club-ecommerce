@@ -11,7 +11,7 @@ export const Table = styled.table`
   border-collapse: collapse;
   width: 85%;
   position: fixed;
-  top: 190px;
+  top: 170px;
   animation: fadeInTable 1s;
   z-index: -100; // PROVISÒRIO
 

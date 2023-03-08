@@ -86,6 +86,7 @@ export const IconUsers = styled(ImUsers)`
   :hover {
     background-color: ${colors.white};
     color: ${colors.black};
+    transform: scale(1.2);
   }
 `;
 
@@ -99,6 +100,7 @@ export const IconProducts = styled(MdList)`
   :hover {
     background-color: ${colors.white};
     color: ${colors.black};
+    transform: scale(1.2);
   }
 `;
 
@@ -140,6 +142,7 @@ export const IconLogout = styled(RiLogoutCircleRLine)`
   :hover {
     background-color: ${colors.white};
     color: ${colors.black};
+    transform: scale(1.2);
   }
 `;
 
@@ -153,5 +156,6 @@ export const IconGraphic = styled(GoGraph)`
   :hover {
     background-color: ${colors.white};
     color: ${colors.black};
+    transform: scale(1.2);
   }
 `;
