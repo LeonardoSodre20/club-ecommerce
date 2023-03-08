@@ -11,11 +11,12 @@ export const ContainerMainAccount = styled.section`
   align-items: center;
   justify-content: center;
 
-  height: 100vh;
+  height: calc(100vh - 70px);
   width: 100%;
 `;
 
 export const FormControl = styled.form`
+  margin-top: 120px;
   display: flex;
   align-items: center;
   justify-content: center;

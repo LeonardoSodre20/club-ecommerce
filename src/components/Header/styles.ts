@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { weightFonts } from "../../styles/weight";
+
+// ICONS
 import { FaCartArrowDown } from "react-icons/fa";
+import { IoMdMenu } from "react-icons/io";
 
 export const ContainerHeader = styled.section`
   display: flex;
@@ -30,6 +33,10 @@ export const ContainerLinksHeader = styled.div`
   justify-content: center;
   gap: 1.2em;
   margin-right: 1.4em;
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 export const LinkItem = styled.span`
@@ -67,4 +74,11 @@ export const CounterShop = styled.span`
   font-weight: ${weightFonts.w600};
   font-size: 1.2em;
   color: ${colors.white};
+`;
+
+// RESPONSIVE
+
+export const ButtonOpenMenuMobile = styled(IoMdMenu)`
+  color: ${colors.white};
+  font-size: 2em;
 `;

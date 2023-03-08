@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-
 import {
   DescriptionDefault,
   MainContainerCard,
@@ -12,10 +10,8 @@ import { formatCurrecyForBrl } from "../../../formatters/currencyFomatted";
 import imgProducts from "../../../../public/assets/imgs/tShirt.jpg";
 
 const CardProduct = ({ name, amount, price, status }: IProductsInfo) => {
-  const navigate = useNavigate();
-
   return (
-    <MainContainerCard onClick={() => navigate("/detailsProduct")}>
+    <MainContainerCard>
       <TitleProduct>Nome: {name}</TitleProduct>
       <SubDescriptionDefault>Quantidade: {amount}</SubDescriptionDefault>
       <DescriptionDefault>
