@@ -33,7 +33,9 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleGetAllProducts = async () => {
-    const response: AxiosResponse = await api.get("/product");
+    const response: AxiosResponse = await api.get("/product", {
+      params: { search: search, pageSize: 10 },
+    });
     setProducts(response?.data?.products);
   };
 

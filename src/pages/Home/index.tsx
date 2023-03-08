@@ -56,6 +56,7 @@ const Home = () => {
           <>
             <ContainerInputSearchProducts>
               <InputSearchProduct
+                type="search"
                 placeholder="Busque por algum produto..."
                 onChange={(event: ChangeEvent<HTMLInputElement>) =>
                   setSearchProduct(event.target.value)
