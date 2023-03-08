@@ -8,6 +8,8 @@ interface IPropsCard {
 }
 
 export const MainContainerCard = styled.div`
+  margin-top: 70px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
   background-color: ${colors.ligthGray};
   height: 300px;
   width: 300px;

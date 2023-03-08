@@ -8,7 +8,6 @@ import { AuthenticatedRoutes } from "./routes/Authenticated.routes";
 import CreateAccount from "./pages/CreateAccount";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import DetailsProduct from "./pages/Home/DetailsProduct";
 
 // ADMIN
 import Dashboard from "./pages/Admin/Dashboard";
@@ -20,7 +19,6 @@ function App() {
         <Route path="/" index element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/createAccount" element={<CreateAccount />} />
-        <Route path="/detailsProduct" element={<DetailsProduct />} />
         <Route path="/dashboard" element={<AuthenticatedRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>

@@ -11,7 +11,7 @@ export const ContainerMainAccount = styled.section`
   align-items: center;
   justify-content: center;
 
-  height: calc(100vh - 70px);
+  height: 100vh;
   width: 100%;
 `;
 

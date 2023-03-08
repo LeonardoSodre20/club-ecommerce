@@ -13,7 +13,7 @@ export const ContainerMainLogin = styled.div`
   justify-content: center;
   flex-direction: column;
 
-  height: calc(100vh - 70px);
+  height: 100vh;
   width: 100%;
 
   animation: fadeFormsLogin 1s normal;

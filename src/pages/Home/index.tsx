@@ -11,7 +11,8 @@ import { MainContainerHome } from "./styles";
 import { AxiosResponse } from "axios";
 import { IProducts } from "../Admin/Dashboard/types";
 import { api } from "../../services/api";
-import { formatDate } from "../../formatters/dateFormatted";
+
+// COMPONENTS
 import LoaderProducts from "../../components/Home/LoaderHome";
 
 const Home = () => {

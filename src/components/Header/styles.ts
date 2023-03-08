@@ -13,6 +13,7 @@ export const ContainerHeader = styled.section`
 
   width: 100%;
   height: 70px;
+  position: fixed;
 `;
 
 export const LogoDescription = styled.h1`
