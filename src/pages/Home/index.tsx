@@ -20,14 +20,20 @@ import { api } from "../../services/api";
 
 // COMPONENTS
 import LoaderProducts from "../../components/Home/LoaderHome";
+import Pagination from "../../components/Pagination";
 
 const Home = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // PAGINATION
-  const [itemsByPage, setItemsByPage] = useState<number>(20);
   const [searchProduct, setSearchProduct] = useState<string>("");
+  const [itemsByPage, setItemsByPage] = useState<number>(5);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const pages = Math.ceil(products.length / itemsByPage);
+  const startIndex = currentPage * itemsByPage;
+  const endIndex = startIndex + itemsByPage;
+  const paginatedProducts = products.slice(startIndex, endIndex);
 
   const handleGetAllProducts = async () => {
     const response: AxiosResponse = await api.get("/product", {
@@ -74,7 +80,7 @@ const Home = () => {
             </ContainerInputSearchProducts>
 
             <ContainerProducts>
-              {products.map((prod, index: number) => {
+              {paginatedProducts.map((prod, index: number) => {
                 return (
                   <>
                     <CardProduct
@@ -90,6 +96,11 @@ const Home = () => {
             </ContainerProducts>
           </>
         )}
+        <Pagination
+          pages={pages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </MainContainerHome>
     </>
   );

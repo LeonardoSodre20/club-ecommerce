@@ -128,3 +128,10 @@ export const ButtonSubmitProducts = styled.button`
   cursor: pointer;
   width: 250px;
 `;
+
+export const InputUploadPicture = styled.div`
+  background-color: ${colors.ligthGray};
+  padding: 10px;
+  border-radius: 15px;
+  width: 250px;
+`;

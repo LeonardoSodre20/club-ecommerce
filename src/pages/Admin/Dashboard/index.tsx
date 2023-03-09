@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { api } from "../../../services/api";
 import { IProducts } from "./types";
@@ -20,6 +20,7 @@ import LoaderAuth from "../../../components/Loader";
 import TableGeneric from "../../../components/Dashboard/Table";
 import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
 import AccountButton from "../../../components/AccountLogout";
+import Pagination from "../../../components/Pagination";
 
 // FORMATTERS
 
@@ -32,9 +33,17 @@ const Dashboard = () => {
   const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // PAGINATION
+  const productsByPage: number = 7;
+  const pages = Math.ceil(products.length / productsByPage);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const startIndex = currentPage * productsByPage;
+  const endIndex = startIndex + productsByPage;
+  const paginatedProducts = products.slice(startIndex, endIndex);
+
   const handleGetAllProducts = async () => {
     const response: AxiosResponse = await api.get("/product", {
-      params: { search: search, pageSize: 10 },
+      params: { search: search, pageSize: productsByPage },
     });
     setProducts(response?.data?.products);
   };
@@ -90,7 +99,7 @@ const Dashboard = () => {
           <LoaderAuth />
         ) : (
           <tbody>
-            {products?.map((prod) => {
+            {paginatedProducts?.map((prod) => {
               return (
                 <tr
                   key={prod._id}
@@ -123,6 +132,11 @@ const Dashboard = () => {
           </tbody>
         )}
       </TableGeneric>
+      <Pagination
+        pages={pages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </MainContainerDashboard>
   );
 };

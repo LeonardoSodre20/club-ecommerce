@@ -14,6 +14,7 @@ import {
   ButtonSubmitProducts,
   ContainerSelect,
   FormControl,
+  InputUploadPicture,
   LabelSelect,
   ModalComponent,
   ModalForegroundComponent,
