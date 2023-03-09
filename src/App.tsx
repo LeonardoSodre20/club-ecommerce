@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 
 // ADMIN
 import Dashboard from "./pages/Admin/Dashboard";
+import Users from "./pages/Admin/Users";
+import GraphicsData from "./pages/Admin/Graphics";
 
 function App() {
   return (
@@ -21,6 +23,12 @@ function App() {
         <Route path="/createAccount" element={<CreateAccount />} />
         <Route path="/dashboard" element={<AuthenticatedRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+        <Route path="/users" element={<AuthenticatedRoutes />}>
+          <Route path="/users" element={<Users />} />
+        </Route>
+        <Route path="/graphics" element={<AuthenticatedRoutes />}>
+          <Route path="/graphics" element={<GraphicsData />} />
         </Route>
       </Routes>
     </AuthProvider>
