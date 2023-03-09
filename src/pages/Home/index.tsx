@@ -24,7 +24,7 @@ import Pagination from "../../components/Pagination";
 
 const Home = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading123, setIsLoading123] = useState<boolean>(true);
 
   // PAGINATION
   const [searchProduct, setSearchProduct] = useState<string>("");
@@ -37,26 +37,28 @@ const Home = () => {
 
   const handleGetAllProducts = async () => {
     const response: AxiosResponse = await api.get("/product", {
-      params: { search: searchProduct, pageSize: itemsByPage },
+      params: { search: searchProduct, pageSize: 8 },
     });
     setProducts(response.data.products);
   };
 
   useEffect(() => {
     handleGetAllProducts();
-  }, [searchProduct, itemsByPage]);
+  }, [searchProduct]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
-  }, []);
+    if (products) {
+      console.log(products);
+      setIsLoading123(false);
+    }
+  }, [products]);
+
   return (
     <>
       <Header />
 
       <MainContainerHome>
-        {isLoading ? (
+        {isLoading123 ? (
           <LoaderProducts />
         ) : (
           <>
@@ -80,11 +82,11 @@ const Home = () => {
             </ContainerInputSearchProducts>
 
             <ContainerProducts>
-              {paginatedProducts.map((prod, index: number) => {
+              {products.map((prod) => {
                 return (
                   <>
                     <CardProduct
-                      key={index}
+                      key={prod._id}
                       name={prod.name}
                       amount={prod.amount}
                       price={prod.price}

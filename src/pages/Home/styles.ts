@@ -9,6 +9,7 @@ export const MainContainerHome = styled.div`
   min-height: calc(100vh - 70px);
   width: 100%;
   flex-wrap: wrap;
+  position: relative;
 `;
 
 export const ContainerProducts = styled.div`

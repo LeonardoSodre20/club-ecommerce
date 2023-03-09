@@ -15,12 +15,14 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState<IUser | null>(null);
 
   useEffect(() => {
-    const storagedUser = localStorage.getItem("@App:user");
+    const storagedUser = localStorage.getItem("@App:_user");
     const storagedToken = localStorage.getItem("@App:token");
+
     if (storagedToken && storagedUser) {
       const activeUser = JSON.parse(storagedUser);
       console.log(activeUser);
       setUser(activeUser);
+      navigate("/dashboard");
       api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
     }
   }, []);
@@ -32,7 +34,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         password: password,
       });
 
-      localStorage.setItem("@App:User", JSON.stringify(response.data));
+      localStorage.setItem("@App:_user", JSON.stringify(response.data));
       localStorage.setItem("@App:token", response.data.token);
       setUser(response.data);
       api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
@@ -59,8 +61,8 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         color: "#fff",
       },
     });
-    sessionStorage.removeItem("@App:user");
-    sessionStorage.removeItem("App:token");
+    localStorage.removeItem("@App:_user");
+    localStorage.removeItem("@App:token");
   }
 
   return (
