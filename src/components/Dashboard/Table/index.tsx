@@ -1,9 +1,9 @@
 import { Table, Th, THead, Tr } from "./styles";
 
 // TYPES
-import { IPropsTableComponent } from "./types";
+import { IPropsTableProducts } from "./types";
 
-const TableGeneric = ({
+const TableProducts = ({
   name,
   amount,
   status,
@@ -11,7 +11,7 @@ const TableGeneric = ({
   created_at,
   actions,
   children,
-}: IPropsTableComponent) => {
+}: IPropsTableProducts) => {
   return (
     <>
       <Table>
@@ -31,4 +31,4 @@ const TableGeneric = ({
   );
 };
 
-export default TableGeneric;
+export default TableProducts;

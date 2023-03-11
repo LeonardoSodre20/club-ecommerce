@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
 
     if (storagedToken && storagedUser) {
       const activeUser = JSON.parse(storagedUser);
-      console.log(activeUser);
+
       setUser(activeUser);
       navigate("/dashboard");
       api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
@@ -58,7 +58,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     toast.success("Logout efetuado com sucesso !", {
       style: {
         backgroundColor: "#21ce21",
-        color: "#fff",
+        color: "#000",
       },
     });
     localStorage.removeItem("@App:_user");

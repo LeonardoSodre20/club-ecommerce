@@ -1,26 +1,28 @@
-const LoaderAuth = () => {
+import Lottie from "lottie-react";
+import loaderTable from "../../../public/animations/97071-infinite-scroll-loader.json";
+
+const LoaderItems = () => {
   return (
     <div
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        position: "absolute",
-        left: "300px",
+        position: "relative",
+        left: "450px",
       }}
     >
-      <h1
+      <Lottie
+        animationData={loaderTable}
+        loop={true}
         style={{
-          textAlign: "center",
+          position: "absolute",
+          top: "15px",
           color: "#000",
-          fontSize: "1.5em",
-          marginTop: "10px",
         }}
-      >
-        Carregando ....
-      </h1>
+      />
     </div>
   );
 };
 
-export default LoaderAuth;
+export default LoaderItems;

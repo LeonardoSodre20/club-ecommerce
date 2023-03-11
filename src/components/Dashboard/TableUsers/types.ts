@@ -1,10 +1,10 @@
 import { ReactNode } from "react";
 
-export interface IPropsTableProducts {
+export interface IPropsTableUsers {
   name: string;
-  amount: string;
-  status: string;
-  price: string;
+  lastname: string;
+  email: string;
+  role: string;
   created_at: string;
   actions: string;
   children: ReactNode;

@@ -1,13 +1,17 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 
+// ICONS
+
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+
 export const ContainerPagination = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
   position: absolute;
-  bottom: 5px;
+  bottom: 2px;
 `;
 
 export const ButtonControlPage = styled.button`
@@ -16,6 +20,24 @@ export const ButtonControlPage = styled.button`
   color: ${colors.black};
   border-radius: 30%;
   font-size: 1em;
-  padding: 0.5rem;
+  padding: 0.4rem;
   border: none;
+`;
+
+export const ArrowBack = styled(IoIosArrowBack)`
+  color: ${colors.white};
+  background-color: ${colors.black};
+  border-radius: 50%;
+  font-size: 1.5em;
+  margin-right: 5px;
+  padding: 0.2rem;
+`;
+
+export const ArrowRight = styled(IoIosArrowForward)`
+  color: ${colors.white};
+  background-color: ${colors.black};
+  border-radius: 50%;
+  font-size: 1.5em;
+  margin-left: 5px;
+  padding: 0.2rem;
 `;

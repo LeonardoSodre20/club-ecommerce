@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import { colors } from "../../../styles/colors";
-
-// TYPES
 import { IPropsTableDefault } from "../Types/TablesTypes";
 
 export const Table = styled.table`
@@ -11,7 +9,7 @@ export const Table = styled.table`
   position: fixed;
   top: 170px;
   animation: fadeInTable 1s;
-  z-index: -100; // PROVISÒRIO
+  z-index: 100; // PROVISÒRIO
 
   @keyframes fadeInTable {
     0% {
@@ -33,7 +31,7 @@ export const Tr = styled.tr`
 `;
 
 export const Th = styled.th`
-  color: ${colors.white};
+  color: ${colors.white} !important;
   font-size: 0.9em;
   text-align: center;
   padding: 1rem;

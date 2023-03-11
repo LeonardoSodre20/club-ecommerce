@@ -20,24 +20,24 @@ import { api } from "../../services/api";
 
 // COMPONENTS
 import LoaderProducts from "../../components/Home/LoaderHome";
-import Pagination from "../../components/Pagination";
+// import Pagination from "../../components/Pagination";
 
 const Home = () => {
   const [products, setProducts] = useState<IProducts[]>([]);
-  const [isLoading123, setIsLoading123] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // PAGINATION
   const [searchProduct, setSearchProduct] = useState<string>("");
-  const [itemsByPage, setItemsByPage] = useState<number>(5);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const pages = Math.ceil(products.length / itemsByPage);
-  const startIndex = currentPage * itemsByPage;
-  const endIndex = startIndex + itemsByPage;
-  const paginatedProducts = products.slice(startIndex, endIndex);
+  // const [itemsByPage, setItemsByPage] = useState<number>(5);
+  // const [currentPage, setCurrentPage] = useState<number>(0);
+  // const pages = Math.ceil(products.length / itemsByPage);
+  // const startIndex = currentPage * itemsByPage;
+  // const endIndex = startIndex + itemsByPage;
+  // const paginatedProducts = products.slice(startIndex, endIndex);
 
   const handleGetAllProducts = async () => {
     const response: AxiosResponse = await api.get("/product", {
-      params: { search: searchProduct, pageSize: 8 },
+      params: { search: searchProduct, pageSize: 20 },
     });
     setProducts(response.data.products);
   };
@@ -47,18 +47,19 @@ const Home = () => {
   }, [searchProduct]);
 
   useEffect(() => {
-    if (products) {
-      console.log(products);
-      setIsLoading123(false);
+    {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 2500);
     }
-  }, [products]);
+  }, []);
 
   return (
     <>
       <Header />
 
       <MainContainerHome>
-        {isLoading123 ? (
+        {isLoading ? (
           <LoaderProducts />
         ) : (
           <>
@@ -70,7 +71,7 @@ const Home = () => {
                   setSearchProduct(event.target.value)
                 }
               />
-              <SelectProductsByPage
+              {/* <SelectProductsByPage
                 onChange={(event: ChangeEvent<HTMLSelectElement>) => {
                   setItemsByPage(Number(event.target.value));
                 }}
@@ -78,7 +79,7 @@ const Home = () => {
                 <option value="5">5</option>
                 <option value="10">10</option>
                 <option value="20">20</option>
-              </SelectProductsByPage>
+              </SelectProductsByPage> */}
             </ContainerInputSearchProducts>
 
             <ContainerProducts>
@@ -98,11 +99,11 @@ const Home = () => {
             </ContainerProducts>
           </>
         )}
-        <Pagination
+        {/* <Pagination
           pages={pages}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-        />
+        /> */}
       </MainContainerHome>
     </>
   );

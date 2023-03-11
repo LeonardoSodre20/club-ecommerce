@@ -1,6 +1,12 @@
-import { ButtonControlPage, ContainerPagination } from "./styles";
-// TYPES
 import { ChangeEvent } from "react";
+import {
+  ArrowBack,
+  ArrowRight,
+  ButtonControlPage,
+  ContainerPagination,
+} from "./styles";
+// TYPES
+
 import { IPropsPagination } from "./types";
 
 const Pagination = ({
@@ -10,12 +16,15 @@ const Pagination = ({
 }: IPropsPagination) => {
   return (
     <ContainerPagination>
+      <ButtonControlPage>
+        <ArrowBack />
+      </ButtonControlPage>
       {Array.from({ length: pages }).map((_, index: number) => {
         return (
           <ButtonControlPage
             key={index}
-            onClick={(ev: ChangeEvent<EventTarget>) => {
-              setCurrentPage(Number(ev.target));
+            onChange={(ev: ChangeEvent<HTMLButtonElement>) => {
+              setCurrentPage(Number(ev.target.value));
             }}
             type="button"
             value={index}
@@ -32,6 +41,9 @@ const Pagination = ({
           </ButtonControlPage>
         );
       })}
+      <ButtonControlPage>
+        <ArrowRight />
+      </ButtonControlPage>
     </ContainerPagination>
   );
 };
