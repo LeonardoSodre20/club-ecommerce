@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../../styles/colors";
+
+// TYPES
 import { IPropsTableDefault } from "../Types/TablesTypes";
 
 export const Table = styled.table`
@@ -22,7 +24,7 @@ export const Table = styled.table`
 `;
 
 export const THead = styled.thead`
-  background-color: ${colors.black};
+  background-color: #1a0e45;
   width: 100%;
 `;
 
@@ -31,19 +33,9 @@ export const Tr = styled.tr`
 `;
 
 export const Th = styled.th`
-  color: ${colors.white} !important;
+  color: ${colors.white};
   font-size: 0.9em;
   text-align: center;
   padding: 1rem;
   width: 180px;
-`;
-
-export const Td = styled.td`
-  color: ${({ color }: IPropsTableDefault) => color || `${colors.black}`};
-  font-size: 0.8em;
-  text-align: center;
-  padding: 0.6rem;
-  width: 180px;
-  font-weight: ${({ weight }: IPropsTableDefault) => weight || "200"};
-  border: 1px solid rgba(0, 0, 0, 0.2);
 `;

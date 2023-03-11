@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { api } from "../../../services/api";
+import { api } from "@src/services/api";
 
 // STYLES
 import { IconDelete, IconEdit } from "../Dashboard/styles";
@@ -18,12 +18,12 @@ import { IUser } from "./types";
 const Users = () => {
   const [users, setUsers] = useState<IUser[]>([]);
 
-  const getAllUsers = async () => {
+  const handleGetAllUsers = async () => {
     const { data }: AxiosResponse = await api.get("/users");
     setUsers(data.users);
   };
 
-  const deleteUsersById = async (id: string) => {
+  const handleDeleteUsersById = async (id: string) => {
     const response: AxiosResponse = await api.delete(`/users/${id}`);
     setUsers(users?.filter((info) => info._id !== id));
     toast.success(response.data.message);
@@ -31,7 +31,7 @@ const Users = () => {
   };
 
   useEffect(() => {
-    getAllUsers();
+    handleGetAllUsers();
   }, []);
 
   return (

@@ -1,5 +1,5 @@
 // STYLE
-import { Table, Td, THead, Tr } from "./styles";
+import { Table, Th, THead, Tr } from "./styles";
 
 // TYPES
 import { IPropsTableUsers } from "./types";
@@ -18,12 +18,12 @@ const TableUsers = ({
       <Table>
         <THead>
           <Tr>
-            <Td>{name}</Td>
-            <Td>{lastname}</Td>
-            <Td>{email}</Td>
-            <Td>{role}</Td>
-            <Td>{created_at}</Td>
-            <Td>{actions}</Td>
+            <Th>{name}</Th>
+            <Th>{lastname}</Th>
+            <Th>{email}</Th>
+            <Th>{role}</Th>
+            <Th>{created_at}</Th>
+            <Th>{actions}</Th>
           </Tr>
         </THead>
         {children}
