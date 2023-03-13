@@ -17,10 +17,10 @@ interface IPropsSideBar {
 }
 
 export const ContainerSideBar = styled.div`
-  background-color: #371e87;
-  border-right: 3px solid #1a0e45;
+  background-color: ${colors.black};
+  border-radius: 20px;
   width: ${({ width }: IPropsSideBar) => width || "70px"};
-  height: 100vh;
+  height: 95vh;
   transition: all 0.7s;
 
   display: flex;
@@ -29,14 +29,16 @@ export const ContainerSideBar = styled.div`
   flex-direction: column;
 
   position: fixed;
-  left: 0;
+  left: 15px;
+  top: 15px;
   z-index: 1000;
 `;
 
 export const ContainerSideBackground = styled.div`
-  background-color: #300f74;
+  background-color: rgba(0,0,0,0.7);
+  border-radius: 20px;
   width: ${({ width }: IPropsSideBar) => width || "70px"};
-  height: 100vh;
+  height: 95vh;
   transition: all 0.7s;
 
   display: flex;
@@ -46,7 +48,8 @@ export const ContainerSideBackground = styled.div`
   visibility: ${({ display }: IPropsSideBar) => display || "visible"};
 
   position: fixed;
-  left: 0;
+  left: 15px;
+  top: 15px;
   z-index: 900;
 `;
 

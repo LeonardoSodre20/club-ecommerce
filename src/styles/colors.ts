@@ -8,4 +8,7 @@ export const colors = {
   focusColor: "#d8d8d8",
   buttonDefault: "#212529",
   successColor: "#4bb543",
+  blueBg: '#3E5FC7',
+  darkDetails: '#1d1b27',
+  lightDetails: '#33354d'
 };

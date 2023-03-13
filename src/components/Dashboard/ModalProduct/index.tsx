@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import InputBase from "../../InputBase";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -38,6 +38,7 @@ const ModalNewProduct = ({
   getAllProductsRefresh,
 }: IPropsModalComponent) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [fileImage, setFileImage] = useState<any>();
   const {
     register,
     handleSubmit,
@@ -69,6 +70,28 @@ const ModalNewProduct = ({
     }
   };
 
+  const handleUploadImageProduct = async () => {
+    const formData = new FormData();
+    formData.append("fileImage", fileImage);
+
+    const headers = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const response: AxiosResponse = await api.post(
+        "/product/upload",
+        formData,
+        headers
+      );
+      return response.data;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <ButtonNewProduct
@@ -87,6 +110,15 @@ const ModalNewProduct = ({
                 Cadastro de Produtos
               </TitleDescriptionModal>
 
+              <input
+                type="file"
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setFileImage(e.target.files)
+                }
+              />
+              <button type="button" onClick={() => handleUploadImageProduct()}>
+                Enviar Imagem
+              </button>
               <InputBase
                 width="600px"
                 label="Nome do Produto"

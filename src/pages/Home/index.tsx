@@ -10,7 +10,6 @@ import {
   ContainerProducts,
   InputSearchProduct,
   MainContainerHome,
-  SelectProductsByPage,
 } from "./styles";
 
 // TYPES
@@ -28,12 +27,6 @@ const Home = () => {
 
   // PAGINATION
   const [searchProduct, setSearchProduct] = useState<string>("");
-  // const [itemsByPage, setItemsByPage] = useState<number>(5);
-  // const [currentPage, setCurrentPage] = useState<number>(0);
-  // const pages = Math.ceil(products.length / itemsByPage);
-  // const startIndex = currentPage * itemsByPage;
-  // const endIndex = startIndex + itemsByPage;
-  // const paginatedProducts = products.slice(startIndex, endIndex);
 
   const handleGetAllProducts = async () => {
     const response: AxiosResponse = await api.get("/product", {
@@ -71,15 +64,6 @@ const Home = () => {
                   setSearchProduct(event.target.value)
                 }
               />
-              {/* <SelectProductsByPage
-                onChange={(event: ChangeEvent<HTMLSelectElement>) => {
-                  setItemsByPage(Number(event.target.value));
-                }}
-              >
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-              </SelectProductsByPage> */}
             </ContainerInputSearchProducts>
 
             <ContainerProducts>
@@ -99,11 +83,6 @@ const Home = () => {
             </ContainerProducts>
           </>
         )}
-        {/* <Pagination
-          pages={pages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        /> */}
       </MainContainerHome>
     </>
   );
