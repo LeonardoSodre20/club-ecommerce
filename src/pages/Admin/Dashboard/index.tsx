@@ -36,12 +36,12 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // PAGINATION
-  const productsByPage: number = 7;
-  const pages = Math.ceil(products.length / productsByPage);
-  const [currentPage, setCurrentPage] = useState<number>(0);
-  const startIndex = currentPage * productsByPage;
-  const endIndex = startIndex + productsByPage;
-  const paginatedProducts = products.slice(startIndex, endIndex);
+  const productsByPage: number = 6;
+  // const pages = Math.ceil(products.length / productsByPage);
+  // const [currentPage, setCurrentPage] = useState<number>(0);
+  // const startIndex = currentPage * productsByPage;
+  // const endIndex = startIndex + productsByPage;
+  // const paginatedProducts = products.slice(startIndex, endIndex);
 
   const handleGetAllProducts = async () => {
     const response: AxiosResponse = await api.get("/product", {
@@ -101,7 +101,7 @@ const Dashboard = () => {
           <LoaderItems />
         ) : (
           <tbody>
-            {paginatedProducts?.map((prod) => {
+            {products?.map((prod) => {
               return (
                 <tr
                   key={prod._id}
@@ -134,11 +134,6 @@ const Dashboard = () => {
           </tbody>
         )}
       </TableProducts>
-      <Pagination
-        pages={pages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
     </MainContainerDashboard>
   );
 };

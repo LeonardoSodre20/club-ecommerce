@@ -13,11 +13,11 @@ export const ModalForegroundComponent = styled.div`
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.25);
+  background-color: rgba(0, 0, 0, 0.7);
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 100000;
   animation: scaleForeground 1s normal;
 
   @keyframes scaleForeground {
@@ -112,6 +112,10 @@ export const SelectProducts = styled.select`
 
   :focus {
     background-color: ${colors.focusColor};
+  }
+
+  ::placeholder {
+    color: ${colors.ligthGray};
   }
 `;
 

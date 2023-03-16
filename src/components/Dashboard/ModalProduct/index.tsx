@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import InputBase from "../../InputBase";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -14,7 +14,6 @@ import {
   ButtonSubmitProducts,
   ContainerSelect,
   FormControl,
-  InputUploadPicture,
   LabelSelect,
   ModalComponent,
   ModalForegroundComponent,
@@ -33,17 +32,18 @@ const defaultValues: IPropsProduct = {
   price: "",
 };
 
+let SelectValues = ["Disponível", "Indisponível"];
+
 const ModalNewProduct = ({
   textButton,
   getAllProductsRefresh,
 }: IPropsModalComponent) => {
   const [open, setOpen] = useState<boolean>(false);
-  const [fileImage, setFileImage] = useState<any>();
   const {
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isSubmitSuccessful },
   } = useForm<IPropsProduct>({
     mode: "onSubmit",
     defaultValues: defaultValues,
@@ -59,6 +59,10 @@ const ModalNewProduct = ({
       );
       setOpen(false);
       getAllProductsRefresh();
+      setValue("name", "");
+      setValue("status", "");
+      setValue("price", "");
+      setValue("amount", null);
       return toast.success(response.data.message, {
         style: {
           backgroundColor: "#000",
@@ -67,28 +71,6 @@ const ModalNewProduct = ({
       });
     } catch (err: any) {
       return toast.error(err.response?.data?.message);
-    }
-  };
-
-  const handleUploadImageProduct = async () => {
-    const formData = new FormData();
-    formData.append("fileImage", fileImage);
-
-    const headers = {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
-
-    try {
-      const response: AxiosResponse = await api.post(
-        "/product/upload",
-        formData,
-        headers
-      );
-      return response.data;
-    } catch (err) {
-      console.log(err);
     }
   };
 
@@ -110,15 +92,6 @@ const ModalNewProduct = ({
                 Cadastro de Produtos
               </TitleDescriptionModal>
 
-              <input
-                type="file"
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setFileImage(e.target.files)
-                }
-              />
-              <button type="button" onClick={() => handleUploadImageProduct()}>
-                Enviar Imagem
-              </button>
               <InputBase
                 width="600px"
                 label="Nome do Produto"
@@ -137,10 +110,19 @@ const ModalNewProduct = ({
 
               <ContainerSelect>
                 <LabelSelect>Status do Produto</LabelSelect>
-                <SelectProducts {...register("status")}>
-                  <option value="">Selecione...</option>
-                  <option value="Disponível">Disponível</option>
-                  <option value="Indisponível">Indisponível</option>
+                <SelectProducts
+                  {...register("status")}
+                  placeholder="Selecione..."
+                >
+                  {SelectValues.map((value: string, index: number) => {
+                    return (
+                      <>
+                        <option key={index} value={value}>
+                          {value}
+                        </option>
+                      </>
+                    );
+                  })}
                 </SelectProducts>
               </ContainerSelect>
               <InputBase

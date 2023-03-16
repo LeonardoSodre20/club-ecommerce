@@ -22,20 +22,18 @@ export const ContainerSideBar = styled.div`
   width: ${({ width }: IPropsSideBar) => width || "70px"};
   height: 95vh;
   transition: all 0.7s;
-
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-
   position: fixed;
   left: 15px;
   top: 15px;
-  z-index: 1000;
 `;
 
 export const ContainerSideBackground = styled.div`
-  background-color: rgba(0,0,0,0.7);
+  background-color: rgba(0, 0, 0, 0.86);
   border-radius: 20px;
   width: ${({ width }: IPropsSideBar) => width || "70px"};
   height: 95vh;
@@ -50,7 +48,6 @@ export const ContainerSideBackground = styled.div`
   position: fixed;
   left: 15px;
   top: 15px;
-  z-index: 900;
 `;
 
 export const IconOpenSideBar = styled(IoMdMenu)`
