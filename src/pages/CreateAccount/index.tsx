@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
-import axios from "axios";
-import Header from "../../components/Header";
-import InputBase from "../../components/InputBase";
-import schemaCreateAccount from "../../validations/CreateUserValidation";
-import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import schemaCreateAccount from "@src/validations/CreateUserValidation";
+
+// STYLES
 import {
   ButtonCreateAccount,
   ContainerInputsForms,
@@ -13,15 +12,17 @@ import {
   FormControl,
   TitleFormMain,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
 
-interface IPropsInputsCreateAccount {
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+// COMPONENTS
+import ToastMessage from "@src/components/Dashboard/ToastMessage";
+import Header from "@src/components/Header";
+import InputBase from "@src/components/InputBase";
+
+// TYPES
+import { IPropsInputsCreateAccount } from "./types";
+
+// SERVICES
+import { api } from "@src/services/api";
 
 const valuesDefault: IPropsInputsCreateAccount = {
   name: "",
@@ -52,10 +53,11 @@ const CreateAccount = () => {
 
   const onSubmit: SubmitHandler<IPropsInputsCreateAccount> = async (data) => {
     try {
-      const response = await axios.post("http://localhost:3333/users", data);
-      return setRedirect(true), toast.success(response.data.message);
+      const response = await api.post("/users", data);
+      setRedirect(!redirect);
+      ToastMessage(response.data.message, "success");
     } catch (err: any) {
-      return toast.error(err.response.data.message);
+      ToastMessage(err.response.data.message, "error");
     }
   };
 

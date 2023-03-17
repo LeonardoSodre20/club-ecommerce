@@ -47,9 +47,12 @@ const Users = () => {
         <tbody>
           {users?.map((info) => {
             return (
-              <tr key={info._id} style={{
-                backgroundColor: '#f4f4f5'
-              }}>
+              <tr
+                key={info._id}
+                style={{
+                  backgroundColor: "#f4f4f5",
+                }}
+              >
                 <Td>{info.name}</Td>
                 <Td>{info.lastname}</Td>
                 <Td>{info.email}</Td>
