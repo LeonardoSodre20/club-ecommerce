@@ -4,10 +4,11 @@ import { AuthProvider } from "./contexts/auth/auth";
 
 import { AuthenticatedRoutes } from "./routes/Authenticated.routes";
 
-// ROTAS
+// ROUTES PUBLICS
 import CreateAccount from "./pages/CreateAccount";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import CategoriesProducts from "./pages/Home/CategoriesProducts";
 
 // ADMIN
 import Dashboard from "./pages/Admin/Dashboard";
@@ -18,7 +19,8 @@ function App() {
   return (
     <AuthProvider>
       <Routes>
-        <Route path="/" index element={<Home />} />
+        <Route path="/" index element={<CategoriesProducts />} />
+        <Route path="/products" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/createAccount" element={<CreateAccount />} />
         <Route path="/dashboard" element={<AuthenticatedRoutes />}>
