@@ -29,7 +29,7 @@ export const ContainerInputAndButtonNewProduct = styled.div`
   align-items: center;
   justify-content: center;
   position: fixed;
-  top: 100px;
+  top: 80px;
   gap: 1.2em;
 `;
 
@@ -85,7 +85,7 @@ export const Td = styled.td`
   color: ${({ color }: IPropsTable) => color || `${colors.black}`};
   font-size: 0.8em;
   text-align: center;
-  padding: 0.6rem;
+  padding: 0.3rem;
   width: 180px;
   font-weight: ${({ weight }: IPropsTable) => weight || "200"};
   border: 1px solid rgba(0, 0, 0, 0.2);

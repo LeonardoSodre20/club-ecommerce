@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import { api } from "../../../services/api";
+import { api } from "@src/services/api";
 
 // TYPES
 import { IProducts } from "./types";
 
 // STYLE
-
 import {
   ContainerInputAndButtonNewProduct,
   IconDelete,
@@ -17,17 +15,17 @@ import {
 } from "./styles";
 
 // COMPONENTS
+import ToastMessage from "@src/components/Dashboard/ToastMessage";
 
-import LoaderItems from "../../../components/Loader";
-import TableProducts from "../../../components/Dashboard/Table";
-import ModalNewProduct from "../../../components/Dashboard/ModalProduct";
-import AccountButton from "../../../components/AccountLogout";
-import Pagination from "../../../components/Pagination";
+import LoaderItems from "@src/components/Loader";
+import TableProducts from "@src/components/Dashboard/Table";
+import ModalNewProduct from "@src/components/Dashboard/ModalProduct";
+import AccountButton from "@src/components/AccountLogout";
+import Pagination from "@src/components/Pagination";
 
 // FORMATTERS
-
-import { formatCurrecyForBrl } from "../../../formatters/currencyFomatted";
-import { formatDate } from "../../../formatters/dateFormatted";
+import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
+import { formatDate } from "@src/formatters/dateFormatted";
 import { AxiosResponse } from "axios";
 
 const Dashboard = () => {
@@ -36,29 +34,25 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   // PAGINATION
-  const productsByPage: number = 6;
-  // const pages = Math.ceil(products.length / productsByPage);
-  // const [currentPage, setCurrentPage] = useState<number>(0);
-  // const startIndex = currentPage * productsByPage;
-  // const endIndex = startIndex + productsByPage;
-  // const paginatedProducts = products.slice(startIndex, endIndex);
+  const productsByPage: number = 8;
+  const pages = Math.ceil(products.length / productsByPage);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const startIndex = currentPage * productsByPage;
+  const endIndex = startIndex + productsByPage;
+  const paginatedProducts = products.slice(startIndex, endIndex);
 
   const handleGetAllProducts = async () => {
     const response: AxiosResponse = await api.get("/product", {
       params: { search: search, pageSize: productsByPage },
     });
     setProducts(response?.data?.products);
+    console.log(response.data);
   };
 
   const handleDeleteProductById = async (id: string) => {
     const response: AxiosResponse = await api.delete(`/product/${id}`);
     setProducts(products?.filter((prod) => prod._id !== id));
-    toast.success(response.data.message, {
-      style: {
-        backgroundColor: "#000",
-        color: "#fff",
-      },
-    });
+    ToastMessage("Produto deletado com sucesso ", "success");
     return response.data;
   };
 
@@ -101,7 +95,7 @@ const Dashboard = () => {
           <LoaderItems />
         ) : (
           <tbody>
-            {products?.map((prod) => {
+            {paginatedProducts?.map((prod) => {
               return (
                 <tr
                   key={prod._id}
@@ -134,6 +128,11 @@ const Dashboard = () => {
           </tbody>
         )}
       </TableProducts>
+      <Pagination
+        currentPage={currentPage}
+        pages={pages}
+        setCurrentPage={setCurrentPage}
+      />
     </MainContainerDashboard>
   );
 };

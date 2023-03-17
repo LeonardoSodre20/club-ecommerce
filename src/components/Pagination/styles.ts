@@ -19,8 +19,9 @@ export const ButtonControlPage = styled.button`
   background-color: transparent;
   color: ${colors.black};
   border-radius: 30%;
-  font-size: 1em;
+  font-size: 0.7em;
   padding: 0.4rem;
+  width: 25px;
   border: none;
 `;
 

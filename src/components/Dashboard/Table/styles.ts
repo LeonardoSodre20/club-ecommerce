@@ -9,7 +9,7 @@ export const Table = styled.table`
   border-collapse: collapse;
   width: 85%;
   position: fixed;
-  top: 170px;
+  top: 145px;
   animation: fadeInTable 1s;
   z-index: -100; // PROVISÒRIO
 

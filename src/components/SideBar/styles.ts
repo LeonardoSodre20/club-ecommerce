@@ -18,36 +18,31 @@ interface IPropsSideBar {
 
 export const ContainerSideBar = styled.div`
   background-color: ${colors.black};
-  border-radius: 20px;
   width: ${({ width }: IPropsSideBar) => width || "70px"};
-  height: 95vh;
+  height: 100vh;
   transition: all 0.7s;
-  z-index: 1000;
   display: flex;
+  z-index: 900;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   position: fixed;
-  left: 15px;
-  top: 15px;
+  left: 0;
 `;
 
 export const ContainerSideBackground = styled.div`
-  background-color: rgba(0, 0, 0, 0.86);
-  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.93);
   width: ${({ width }: IPropsSideBar) => width || "70px"};
-  height: 95vh;
+  height: 100vh;
   transition: all 0.7s;
-
+  z-index: 800;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
   visibility: ${({ display }: IPropsSideBar) => display || "visible"};
-
   position: fixed;
-  left: 15px;
-  top: 15px;
+  left: 0;
 `;
 
 export const IconOpenSideBar = styled(IoMdMenu)`

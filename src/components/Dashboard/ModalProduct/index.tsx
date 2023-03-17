@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputBase from "../../InputBase";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schemaProduct from "../../../validations/Products";
 import toast from "react-hot-toast";
-import { api } from "../../../services/api";
-import { formatCurrency } from "../../../utils/currencyMask";
+import { api } from "@src/services/api";
+
+// FORMATTERS
+import { formatCurrency } from "@src/utils/currencyMask";
+import ToastMessage from "../ToastMessage";
 
 // STYLES
 import {
@@ -15,15 +18,13 @@ import {
   ContainerSelect,
   FormControl,
   LabelSelect,
-  ModalComponent,
-  ModalForegroundComponent,
   SelectProducts,
   TitleDescriptionModal,
 } from "./styles";
 
 // TYPES
 import { IPropsModalComponent, IPropsProduct } from "./types";
-import { AxiosResponse } from "axios";
+import ModalBase from "../ModalBase";
 
 const defaultValues: IPropsProduct = {
   name: "",
@@ -31,8 +32,6 @@ const defaultValues: IPropsProduct = {
   status: "",
   price: "",
 };
-
-let SelectValues = ["Disponível", "Indisponível"];
 
 const ModalNewProduct = ({
   textButton,
@@ -43,7 +42,7 @@ const ModalNewProduct = ({
     register,
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitting, isSubmitSuccessful },
+    formState: { errors, isSubmitting },
   } = useForm<IPropsProduct>({
     mode: "onSubmit",
     defaultValues: defaultValues,
@@ -53,22 +52,14 @@ const ModalNewProduct = ({
 
   const onSubmit: SubmitHandler<IPropsProduct> = async (data) => {
     try {
-      const response: AxiosResponse = await api.post<IPropsProduct>(
-        "/product",
-        data
-      );
+      await api.post("/product", data);
       setOpen(false);
       getAllProductsRefresh();
       setValue("name", "");
       setValue("status", "");
       setValue("price", "");
       setValue("amount", null);
-      return toast.success(response.data.message, {
-        style: {
-          backgroundColor: "#000",
-          color: "#fff",
-        },
-      });
+      ToastMessage("Producto criado com sucesso !", "success");
     } catch (err: any) {
       return toast.error(err.response?.data?.message);
     }
@@ -84,71 +75,61 @@ const ModalNewProduct = ({
         {textButton}
       </ButtonNewProduct>
       {open ? (
-        <ModalForegroundComponent>
-          <ModalComponent>
-            <BtnCloseModal onClick={() => setOpen(false)} />
-            <FormControl onSubmit={handleSubmit(onSubmit)}>
-              <TitleDescriptionModal>
-                Cadastro de Produtos
-              </TitleDescriptionModal>
+        <ModalBase>
+          <BtnCloseModal onClick={() => setOpen(false)} />
+          <FormControl onSubmit={handleSubmit(onSubmit)}>
+            <TitleDescriptionModal>Cadastro de Produtos</TitleDescriptionModal>
 
-              <InputBase
-                width="600px"
-                label="Nome do Produto"
-                placeholder="Digite o nome do produto..."
-                {...register("name")}
-                error={errors.name}
-              />
-              <InputBase
-                type="number"
-                width="600px"
-                label="Quantidade do Produto"
-                placeholder="Digite o peso do produto..."
-                {...register("amount")}
-                error={errors.amount}
-              />
+            <InputBase
+              width="600px"
+              label="Nome do Produto"
+              placeholder="Digite o nome do produto..."
+              {...register("name")}
+              error={errors.name}
+            />
+            <InputBase
+              type="number"
+              width="600px"
+              label="Quantidade do Produto"
+              placeholder="Digite o peso do produto..."
+              error={errors.amount}
+              {...register("amount")}
+            />
 
-              <ContainerSelect>
-                <LabelSelect>Status do Produto</LabelSelect>
-                <SelectProducts
-                  {...register("status")}
-                  placeholder="Selecione..."
-                >
-                  {SelectValues.map((value: string, index: number) => {
-                    return (
-                      <>
-                        <option key={index} value={value}>
-                          {value}
-                        </option>
-                      </>
-                    );
-                  })}
-                </SelectProducts>
-              </ContainerSelect>
-              <InputBase
-                type="text"
-                width="600px"
-                label="Preço do Produto"
-                placeholder="Digite o preço do produto..."
-                {...register("price")}
-                error={errors.price}
-                onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                  setValue("price", formatCurrency(ev.target.value));
-                }}
-              />
+            <ContainerSelect>
+              <LabelSelect>Status do Produto</LabelSelect>
+              <SelectProducts
+                {...register("status")}
+                placeholder="Selecione..."
+              >
+                <option value="">Selecione...</option>
+                <option value="Disponível">Disponível</option>
+                <option value="Indisponível">Indisponível</option>
+              </SelectProducts>
+            </ContainerSelect>
+            <InputBase
+              type="text"
+              width="600px"
+              label="Preço do Produto"
+              placeholder="Digite o preço do produto..."
+              {...register("price")}
+              error={errors.price}
+              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
+                setValue("price", formatCurrency(ev.target.value));
+              }}
+            />
 
-              {isSubmitting ? (
-                <ButtonSubmitProducts type="submit" bgColor="#4BB543">
-                  Cadastrando...
-                </ButtonSubmitProducts>
-              ) : (
-                <ButtonSubmitProducts type="submit">
-                  Cadastrar
-                </ButtonSubmitProducts>
-              )}
-            </FormControl>
-          </ModalComponent>
-        </ModalForegroundComponent>
+            {isSubmitting ? (
+              <ButtonSubmitProducts type="submit" bgColor="#4BB543">
+                Cadastrando...
+              </ButtonSubmitProducts>
+            ) : (
+              <ButtonSubmitProducts type="submit">
+                Cadastrar
+              </ButtonSubmitProducts>
+            )}
+          </FormControl>
+        </ModalBase>
       ) : (
         false
       )}
