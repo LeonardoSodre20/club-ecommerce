@@ -5,7 +5,7 @@ export interface IPropsModalComponent {
 
 export interface IPropsProduct {
   name: string;
-  amount: number | null;
+  quantity: number | null;
   status: string;
   price: string;
 }

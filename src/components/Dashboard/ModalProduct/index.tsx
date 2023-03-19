@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import InputBase from "../../InputBase";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -28,7 +28,7 @@ import ModalBase from "../ModalBase";
 
 const defaultValues: IPropsProduct = {
   name: "",
-  amount: null,
+  quantity: null,
   status: "",
   price: "",
 };
@@ -56,13 +56,18 @@ const ModalNewProduct = ({
       setOpen(false);
       getAllProductsRefresh();
       setValue("name", "");
+      setValue("quantity", null);
       setValue("status", "");
       setValue("price", "");
-      setValue("amount", null);
       ToastMessage("Producto criado com sucesso !", "success");
     } catch (err: any) {
-      return toast.error(err.response?.data?.message);
+      ToastMessage(err.response?.data?.message, "error");
     }
+  };
+
+  const handleFormatCurrency = (ev: ChangeEvent<HTMLInputElement>) => {
+    const value = ev.target.value;
+    setValue("price", formatCurrency(value));
   };
 
   return (
@@ -92,8 +97,8 @@ const ModalNewProduct = ({
               width="600px"
               label="Quantidade do Produto"
               placeholder="Digite o peso do produto..."
-              error={errors.amount}
-              {...register("amount")}
+              error={errors.quantity}
+              {...register("quantity")}
             />
 
             <ContainerSelect>
@@ -114,9 +119,7 @@ const ModalNewProduct = ({
               placeholder="Digite o preço do produto..."
               {...register("price")}
               error={errors.price}
-              onChange={(ev: React.ChangeEvent<HTMLInputElement>) => {
-                setValue("price", formatCurrency(ev.target.value));
-              }}
+              onChange={(ev) => handleFormatCurrency(ev)}
             />
 
             {isSubmitting ? (

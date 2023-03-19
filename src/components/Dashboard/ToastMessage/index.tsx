@@ -1,7 +1,7 @@
 import toast from "react-hot-toast";
 
 export default function ToastMessage(message: string, type: string) {
-  if (type === "sucess") {
+  if (type === "success") {
     return toast.success(message, {
       style: {
         backgroundColor: "#000",
