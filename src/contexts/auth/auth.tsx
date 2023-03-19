@@ -34,18 +34,17 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         password: password,
       });
 
-      localStorage.setItem("@App:_user", JSON.stringify(response.data));
+      localStorage.setItem(
+        "@App:_user",
+        JSON.stringify(response.data.checkUserExist)
+      );
       localStorage.setItem("@App:token", response.data.token);
       console.log(user);
-      setUser(response.data);
+      setUser(response.data.checkUserExist);
       api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
-
-      if (user?.role !== "Admin" && !user) {
-        toast.error("Credenciais Inválidas !");
-      } else if (user.role === "Admin" && user) {
-        navigate("/dashboard");
-        toast.success(response.data.message);
-      }
+        
+      navigate("/dashboard");
+      toast.success(response.data.message);
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data.message);

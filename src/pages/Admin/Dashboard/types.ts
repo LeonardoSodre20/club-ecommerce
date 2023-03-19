@@ -1,7 +1,7 @@
 export interface IProducts {
-  _id: string;
+  id: string;
   name: string;
-  amount: number;
+  quantity: number;
   status: string;
   price: string;
   created_at: string;

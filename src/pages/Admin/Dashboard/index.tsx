@@ -51,7 +51,7 @@ const Dashboard = () => {
 
   const handleDeleteProductById = async (id: string) => {
     const response: AxiosResponse = await api.delete(`/product/${id}`);
-    setProducts(products?.filter((prod) => prod._id !== id));
+    setProducts(products?.filter((prod) => prod.id !== id));
     ToastMessage("Produto deletado com sucesso ", "success");
     return response.data;
   };
@@ -98,13 +98,13 @@ const Dashboard = () => {
             {paginatedProducts?.map((prod) => {
               return (
                 <tr
-                  key={prod._id}
+                  key={prod.id}
                   style={{
                     backgroundColor: "#f4f4f5",
                   }}
                 >
                   <Td>{prod?.name}</Td>
-                  <Td>{prod.amount}</Td>
+                  <Td>{prod.quantity}</Td>
                   {prod?.status === "Disponível" ? (
                     <Td color="#4BB543" weight="bolder">
                       {prod.status}
@@ -119,7 +119,7 @@ const Dashboard = () => {
                   <Td>
                     <IconEdit />
                     <IconDelete
-                      onClick={() => handleDeleteProductById(prod._id)}
+                      onClick={() => handleDeleteProductById(prod.id)}
                     />
                   </Td>
                 </tr>
