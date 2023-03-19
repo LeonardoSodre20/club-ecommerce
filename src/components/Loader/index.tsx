@@ -1,4 +1,4 @@
-import Lottie from "lottie-react";
+import Lottie from "react-lottie";
 import loaderTable from "../../../public/animations/97071-infinite-scroll-loader.json";
 
 const LoaderItems = () => {
@@ -13,8 +13,10 @@ const LoaderItems = () => {
       }}
     >
       <Lottie
-        animationData={loaderTable}
-        loop={true}
+        options={{
+          animationData: loaderTable,
+          loop: true,
+        }}
         style={{
           position: "absolute",
           top: "15px",

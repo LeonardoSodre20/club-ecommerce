@@ -1,4 +1,4 @@
-import Lottie from "lottie-react";
+import Lottie from "react-lottie";
 import loaderApp from "../../../../public/animations/lf20_f1dhzsnx.json";
 
 const LoaderProducts = () => {
@@ -12,8 +12,10 @@ const LoaderProducts = () => {
       }}
     >
       <Lottie
-        animationData={loaderApp}
-        loop={false}
+        options={{
+          animationData: loaderApp,
+          loop: false,
+        }}
         style={{
           height: "200px",
           width: "200px",

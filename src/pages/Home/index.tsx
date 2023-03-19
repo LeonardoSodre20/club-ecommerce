@@ -71,9 +71,9 @@ const Home = () => {
                 return (
                   <>
                     <CardProduct
-                      key={prod._id}
+                      key={prod.id}
                       name={prod.name}
-                      amount={prod.amount}
+                      amount={prod.quantity}
                       price={prod.price}
                       status={prod.status}
                     />

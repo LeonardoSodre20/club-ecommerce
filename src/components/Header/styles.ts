@@ -25,6 +25,10 @@ export const LogoDescription = styled.h1`
   text-transform: uppercase;
   color: ${colors.white};
   margin-left: 1.4em;
+
+  @media (max-width: 600px) {
+    font-size: 1.4em;
+  }
 `;
 
 export const ContainerLinksHeader = styled.div`
@@ -79,6 +83,42 @@ export const CounterShop = styled.span`
 // RESPONSIVE
 
 export const ButtonOpenMenuMobile = styled(IoMdMenu)`
-  color: ${colors.white};
-  font-size: 2em;
+  display: none;
+  @media (max-width: 1100px) {
+    display: flex;
+    color: ${colors.white};
+    font-size: 2.5em;
+    margin-right: 20px;
+  }
+`;
+
+export const ContainerLinksResponsive = styled.div`
+  position: absolute;
+  top: 70px;
+  background-color: ${colors.buttonDefault};
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 1.2em;
+  animation: translateMenu 1s;
+
+  @keyframes translateMenu {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+`;
+
+export const SubContainerLinksResponsive = styled.div`
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.2em;
 `;

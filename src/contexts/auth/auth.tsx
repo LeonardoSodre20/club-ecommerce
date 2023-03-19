@@ -5,6 +5,7 @@ import { api } from "../../services/api";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AxiosResponse } from "axios";
+import ToastMessage from "@src/components/Dashboard/ToastMessage";
 
 export const AuthContext = createContext<IAuthContextData>(
   {} as IAuthContextData
@@ -42,9 +43,9 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       console.log(user);
       setUser(response.data.checkUserExist);
       api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
-        
+
       navigate("/dashboard");
-      toast.success(response.data.message);
+      ToastMessage(response.data.message, "success");
     } catch (error: any) {
       console.log(error);
       toast.error(error.response.data.message);
