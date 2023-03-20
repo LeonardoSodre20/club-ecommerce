@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AxiosResponse } from "axios";
 import ToastMessage from "@src/components/Dashboard/ToastMessage";
+import LoaderAuth from "@src/components/LoaderAuth";
 
 export const AuthContext = createContext<IAuthContextData>(
   {} as IAuthContextData
@@ -40,7 +41,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         JSON.stringify(response.data.checkUserExist)
       );
       localStorage.setItem("@App:token", response.data.token);
-      console.log(user);
       setUser(response.data.checkUserExist);
       api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
 
@@ -50,8 +50,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       console.log(error);
       toast.error(error.response.data.message);
     }
-
-    console.log(user);
   }
 
   function Logout() {

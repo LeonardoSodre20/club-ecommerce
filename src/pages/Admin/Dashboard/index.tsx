@@ -16,7 +16,6 @@ import {
 
 // COMPONENTS
 import ToastMessage from "@src/components/Dashboard/ToastMessage";
-
 import LoaderItems from "@src/components/Loader";
 import TableProducts from "@src/components/Dashboard/Table";
 import ModalNewProduct from "@src/components/Dashboard/ModalProduct";
@@ -43,10 +42,9 @@ const Dashboard = () => {
 
   const handleGetAllProducts = async () => {
     const response: AxiosResponse = await api.get("/product", {
-      params: { search: search, pageSize: productsByPage },
+      params: { pages: pages, limit: productsByPage, search: search },
     });
     setProducts(response?.data?.products);
-    console.log(response.data);
   };
 
   const handleDeleteProductById = async (id: string) => {
@@ -129,8 +127,8 @@ const Dashboard = () => {
         )}
       </TableProducts>
       <Pagination
-        currentPage={currentPage}
         pages={pages}
+        currentPage={currentPage}
         setCurrentPage={setCurrentPage}
       />
     </MainContainerDashboard>
