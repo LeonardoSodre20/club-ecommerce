@@ -1,15 +1,21 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import Header from "../../components/Header";
-import InputBase from "../../components/InputBase";
 import schema from "../../validations/LoginValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useAuth } from "../../contexts/auth/auth";
+import { useNavigate } from "react-router-dom";
+
+// COMPONENTS
+import Header from "../../components/Header";
+import InputBase from "../../components/InputBase";
+
+// STYLES
 import {
   ButtonLogin,
   ContainerMainInfo,
   ContainerMainLogin,
   FormControlLogin,
   IconGoogle,
+  RedirectResetPasswordSteps,
   SubDescriptionLogin,
   TextButton,
   TitleMainLogin,
@@ -27,6 +33,7 @@ const valuesDefault: IPropsFormsLogin = {
 
 const Login = () => {
   const { Login } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -70,6 +77,13 @@ const Login = () => {
             error={errors.password}
             {...register("password")}
           />
+
+          <RedirectResetPasswordSteps>
+            Esquesceu sua senha ?
+            <strong onClick={() => navigate("/resetPassword")}>
+              Clique aqui.
+            </strong>
+          </RedirectResetPasswordSteps>
 
           {isSubmitting ? (
             <ButtonLogin type="submit" bgColorButton="#4bb543">

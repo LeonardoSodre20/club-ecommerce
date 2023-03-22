@@ -35,7 +35,7 @@ export const ContainerMainInfo = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 1.1em;
+  gap: 1em;
 
   width: 550px;
 `;
@@ -102,9 +102,23 @@ export const FormControlLogin = styled.form`
   justify-content: center;
   flex-direction: column;
   gap: 2.8em;
+  position: relative;
 `;
 
 export const IconGoogle = styled(BsGoogle)`
   font-size: 1.2em;
   color: ${colors.white};
+`;
+
+export const RedirectResetPasswordSteps = styled.p`
+  color: ${colors.black};
+  font-weight: ${weightFonts.w600};
+  font-size: 0.8em;
+  position: absolute;
+  top: 143px;
+
+  > strong {
+    margin-left: 7px;
+    cursor: pointer;
+  }
 `;

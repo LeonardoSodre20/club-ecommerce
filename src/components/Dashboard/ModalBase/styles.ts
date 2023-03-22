@@ -26,11 +26,12 @@ export const ModalForegroundComponent = styled.div`
 
 export const ModalComponent = styled.div`
   height: 90vh;
-  width: 1220px;
+  width: 800px;
   background-color: ${colors.white} !important;
   border-radius: 1rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;

@@ -9,6 +9,7 @@ import CreateAccount from "./pages/CreateAccount";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import CategoriesProducts from "./pages/Home/CategoriesProducts";
+import ForgotPasswordStepsToSteps from "./pages/Login/ForgotPassword";
 
 // ADMIN
 import Dashboard from "./pages/Admin/Dashboard";
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" index element={<CategoriesProducts />} />
         <Route path="/products" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/resetPassword" element={<ForgotPasswordStepsToSteps />} />
         <Route path="/createAccount" element={<CreateAccount />} />
         <Route path="/dashboard" element={<AuthenticatedRoutes />}>
           <Route path="/dashboard" element={<Dashboard />} />
