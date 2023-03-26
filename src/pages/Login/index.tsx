@@ -1,12 +1,12 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import schema from "../../validations/LoginValidation";
+import schema from "@src/validations/LoginValidation";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useAuth } from "../../contexts/auth/auth";
+import { useAuth } from "@src/contexts/auth/auth";
 import { useNavigate } from "react-router-dom";
 
 // COMPONENTS
-import Header from "../../components/Header";
-import InputBase from "../../components/InputBase";
+import Header from "@src/components/Header";
+import InputBase from "@src/components/InputBase";
 
 // STYLES
 import {
@@ -45,8 +45,10 @@ const Login = () => {
     shouldFocusError: true,
     resolver: yupResolver(schema),
   });
-  const onSubmit: SubmitHandler<IPropsFormsLogin> = (data) =>
-    Login(data.email, data.password);
+  const onSubmit: SubmitHandler<IPropsFormsLogin> = (data) => {
+    const { email, password } = data;
+    Login(email, password);
+  };
 
   return (
     <>

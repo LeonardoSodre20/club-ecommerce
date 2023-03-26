@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import React from "react";
 import {
   ArrowBack,
   ArrowRight,
@@ -33,21 +33,14 @@ const Pagination = ({
       {Array.from({ length: pages }).map((_, index: number) => {
         return (
           <ButtonControlPage
+            bgColor={currentPage === index ? "#000" : ""}
+            colorFont={currentPage === index ? "#fff" : ""}
             key={index}
-            onClick={(ev: any) => {
-              setCurrentPage(Number(ev.target.value));
-            }}
             type="button"
             value={index}
-            style={
-              currentPage === index
-                ? {
-                    backgroundColor: "#000",
-                    color: "#fff",
-                    fontSize: "0.9em",
-                  }
-                : undefined
-            }
+            onClick={(ev: React.MouseEvent<HTMLButtonElement>) => {
+              setCurrentPage(Number(ev.currentTarget.value));
+            }}
           >
             {index + 1}
           </ButtonControlPage>

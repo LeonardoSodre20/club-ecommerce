@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
         min-height: 100vh;
         font-family: 'Poppins', cursive;
         background-color: rgba(0,0,0,0.1);
+        
     }
 `;
 
