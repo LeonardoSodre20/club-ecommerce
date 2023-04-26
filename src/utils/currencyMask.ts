@@ -1,4 +1,4 @@
-export const formatCurrency = (value: any): string => {
+export const formatCurrency = (value: string): string => {
   if (!value) return "";
   let v = value;
   const integer = v.split(",")[0];

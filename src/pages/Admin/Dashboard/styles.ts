@@ -5,7 +5,6 @@ import { weightFonts } from "../../../styles/weight";
 // ICONS
 
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { FaEdit } from "react-icons/fa";
 
 interface IPropsTable {
   color?: string;
@@ -18,10 +17,9 @@ export const MainContainerDashboard = styled.div`
   justify-content: center;
   flex-direction: column;
   position: relative;
-
   min-height: 100vh;
   width: 100%;
-  z-index: 100;
+  z-index: 1000;
 `;
 
 export const ContainerInputAndButtonNewProduct = styled.div`
@@ -89,20 +87,6 @@ export const Td = styled.td`
   width: 180px;
   font-weight: ${({ weight }: IPropsTable) => weight || "200"};
   border: 1px solid rgba(0, 0, 0, 0.2);
-`;
-
-// ICONS
-
-export const IconEdit = styled(FaEdit)`
-  color: ${colors.black};
-  font-size: 2.5em;
-  cursor: pointer;
-  transition: all 0.5s;
-  padding: 0.2rem;
-
-  :hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
 `;
 
 export const IconDelete = styled(RiDeleteBin6Line)`

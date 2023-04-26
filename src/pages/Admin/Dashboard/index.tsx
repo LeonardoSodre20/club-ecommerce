@@ -7,7 +7,6 @@ import { IProducts } from "@src/pages/Admin/Dashboard/types";
 import {
   ContainerInputAndButtonNewProduct,
   IconDelete,
-  IconEdit,
   InputSearch,
   MainContainerDashboard,
   Td,
@@ -18,6 +17,7 @@ import TableProducts from "@src/components/Dashboard/Table";
 import ModalNewProduct from "@src/components/Dashboard/ModalProduct";
 import AccountButton from "@src/components/AccountLogout";
 import ModalCreateCategory from "@src/components/Dashboard/ModalCreateCategory";
+import ModalEditProduct from "@src/components/Dashboard/ModalEditProduct";
 
 // FORMATTERS
 import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
@@ -86,7 +86,7 @@ const Dashboard = () => {
                   <Td>{formatCurrecyForBrl(parseFloat(prod.price))}</Td>
                   <Td>{formatDate(prod.created_at)}</Td>
                   <Td>
-                    <IconEdit />
+                    <ModalEditProduct />
                     <IconDelete
                       onClick={() => deleteProduct.mutate(prod?.id)}
                     />

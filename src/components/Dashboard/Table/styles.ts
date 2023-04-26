@@ -5,13 +5,12 @@ import { colors } from "../../../styles/colors";
 import { IPropsTableDefault } from "../Types/TablesTypes";
 
 export const Table = styled.table`
+  margin-top: 70px;
   margin-left: 40px;
   border-collapse: collapse;
   width: 85%;
-  position: fixed;
   top: 145px;
   animation: fadeInTable 1s;
-  z-index: -100; // PROVISÒRIO
 
   @keyframes fadeInTable {
     0% {

@@ -11,7 +11,7 @@ export const ModalForegroundComponent = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10000;
+  z-index: 100000;
   transition: all 0.5s;
 `;
 
@@ -25,4 +25,5 @@ export const ModalComponent = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 100000;
 `;

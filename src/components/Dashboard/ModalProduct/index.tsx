@@ -1,12 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import schemaProduct from "@src/validations/Products";
-
-// SERVICES
-import { api } from "@src/services/api";
 
 // FORMATTERS
 import { formatCurrency } from "@src/utils/currencyMask";
@@ -17,28 +14,24 @@ import {
   ButtonNewProduct,
   ButtonSubmitProducts,
   ContainerSelect,
-  FormControl,
   LabelSelect,
   SelectProducts,
   TitleDescriptionModal,
 } from "./styles";
 
 // TYPES
-import {
-  ICategoryByProducts,
-  IPropsModalComponent,
-  IPropsProduct,
-} from "./types";
+import { IPropsModalComponent, IPropsProduct } from "./types";
+import { ICategoryTypes } from "@src/types/CategoriesTypes";
 
 // COMPONENTS
 import InputBase from "@src/components/InputBase";
 import ModalBase from "../ModalBase";
 import TooltipError from "@src/components/Tooltips/ErrorTooltip";
+import FormControlGeneric from "../ModalBase/FormControl";
 
 // PROVIDER
 import providerProducts from "@src/providers/Products/provider.products";
 import providerCategories from "@src/providers/Categories/provider.categories";
-import { ICategoryTypes } from "@src/types/CategoriesTypes";
 
 const defaultValues: IPropsProduct = {
   name: "",
@@ -56,6 +49,7 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm<IPropsProduct>({
     mode: "onChange",
@@ -65,6 +59,21 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
   });
 
   const values = watch();
+
+  const handleFormatCurrency = (ev: ChangeEvent<HTMLInputElement>) => {
+    const value = ev.target.value;
+    setValue("price", formatCurrency(value));
+  };
+
+  const handleClearValuesForms = () => {
+    reset({
+      name: "",
+      quantity: null,
+      status: "",
+      price: "",
+      categoryName: "",
+    });
+  };
 
   const createNewProduct: any = useMutation({
     mutationFn: () => {
@@ -79,13 +88,9 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
     onSuccess: () => {
       setOpen(false);
       queryClient.invalidateQueries({ queryKey: ["product"] });
+      handleClearValuesForms();
     },
   });
-
-  const handleFormatCurrency = (ev: ChangeEvent<HTMLInputElement>) => {
-    const value = ev.target.value;
-    setValue("price", formatCurrency(value));
-  };
 
   const { data } = useQuery<ICategoryTypes[]>(["categories"], () => {
     return providerCategories.handleGetAllCategories();
@@ -103,7 +108,7 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
       {open ? (
         <ModalBase isVisible={open}>
           <BtnCloseModal onClick={() => setOpen(false)} />
-          <FormControl onSubmit={handleSubmit(createNewProduct.mutate)}>
+          <FormControlGeneric onSubmit={handleSubmit(createNewProduct.mutate)}>
             <TitleDescriptionModal>Cadastro de Produtos</TitleDescriptionModal>
 
             <InputBase
@@ -177,7 +182,7 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
                 Cadastrar
               </ButtonSubmitProducts>
             )}
-          </FormControl>
+          </FormControlGeneric>
         </ModalBase>
       ) : (
         false

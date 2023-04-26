@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { api } from "@src/services/api";
 
 // STYLES
-import { IconDelete, IconEdit } from "../Dashboard/styles";
+import { IconDelete } from "../Dashboard/styles";
 import { MainContainerUsers, Td } from "./styles";
 
 // COMPONENTS
@@ -75,7 +75,6 @@ const Users = () => {
                   })}
                 </Td>
                 <Td>
-                  <IconEdit />
                   <IconDelete />
                 </Td>
               </tr>
