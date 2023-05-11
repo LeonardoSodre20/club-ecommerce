@@ -5,9 +5,11 @@ import { motion, AnimatePresence } from "framer-motion";
 const ModalBase = ({
   children,
   isVisible,
+  width,
 }: {
   children: ReactNode;
   isVisible: boolean;
+  width?: string;
 }) => {
   return (
     <AnimatePresence>
@@ -20,7 +22,13 @@ const ModalBase = ({
           transition={{ ease: "linear" }}
           exit={{ scale: 0 }}
         >
-          <ModalComponent>{children}</ModalComponent>
+          <ModalComponent
+            style={{
+              width: `${width} || '800px`,
+            }}
+          >
+            {children}
+          </ModalComponent>
         </ModalForegroundComponent>
       ) : null}
     </AnimatePresence>

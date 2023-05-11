@@ -14,7 +14,7 @@ import {
 
 // COMPONENTS
 import TableProducts from "@src/components/Dashboard/Table";
-import ModalNewProduct from "@src/components/Dashboard/ModalProduct";
+import ModalNewProduct from "@src/components/Dashboard/ModalCreateProduct";
 import AccountButton from "@src/components/AccountLogout";
 import ModalCreateCategory from "@src/components/Dashboard/ModalCreateCategory";
 import ModalEditProduct from "@src/components/Dashboard/ModalEditProduct";

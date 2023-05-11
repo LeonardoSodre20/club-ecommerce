@@ -10,6 +10,7 @@ import { MdList } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { ImUsers } from "react-icons/im";
 import { GoGraph } from "react-icons/go";
+import { BiCategory } from "react-icons/bi";
 
 interface IPropsSideBar {
   width?: string;
@@ -22,7 +23,7 @@ export const ContainerSideBar = styled.div`
   height: 100vh;
   transition: all 0.7s;
   display: flex;
-  z-index: 900;
+  z-index: 10000;
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
@@ -35,7 +36,7 @@ export const ContainerSideBackground = styled.div`
   width: ${({ width }: IPropsSideBar) => width || "70px"};
   height: 100vh;
   transition: all 0.7s;
-  z-index: 800;
+  z-index: 8000;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -82,6 +83,20 @@ export const IconUsers = styled(ImUsers)`
   }
 `;
 
+export const IconCategories = styled(BiCategory)`
+  color: ${colors.white};
+  font-size: 2em;
+  cursor: pointer;
+  transition: all 0.7s;
+  padding: 0.2rem;
+
+  :hover {
+    background-color: ${colors.white};
+    color: ${colors.black};
+    transform: scale(1.2);
+  }
+`;
+
 export const IconProducts = styled(MdList)`
   color: ${colors.white};
   font-size: 2.5em;
@@ -99,7 +114,7 @@ export const IconProducts = styled(MdList)`
 export const ContainerLinks = styled.div`
   margin-top: 93px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   width: 100%;

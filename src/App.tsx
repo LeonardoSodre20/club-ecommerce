@@ -15,6 +15,8 @@ import ForgotPasswordStepsToSteps from "./pages/Login/ForgotPassword";
 import Dashboard from "./pages/Admin/Dashboard";
 import Users from "./pages/Admin/Users";
 import GraphicsData from "./pages/Admin/RelatoryManager";
+import Profile from "./pages/Admin/Profile";
+import Categories from "./pages/Admin/Categories";
 
 function App() {
   return (
@@ -33,6 +35,12 @@ function App() {
         </Route>
         <Route path="/graphics" element={<AuthenticatedRoutes />}>
           <Route path="/graphics" element={<GraphicsData />} />
+        </Route>
+        <Route path="/profile" element={<AuthenticatedRoutes />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+        <Route path="/categories" element={<AuthenticatedRoutes />}>
+          <Route path="/categories" element={<Categories />} />
         </Route>
       </Routes>
     </AuthProvider>

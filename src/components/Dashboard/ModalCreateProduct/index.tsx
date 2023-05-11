@@ -50,6 +50,7 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
     setValue,
     watch,
     reset,
+    clearErrors,
     formState: { errors, isSubmitting },
   } = useForm<IPropsProduct>({
     mode: "onChange",
@@ -65,14 +66,27 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
     setValue("price", formatCurrency(value));
   };
 
-  const handleClearValuesForms = () => {
-    reset({
+  const handleClearValuesAndErrorsForms = () => {
+    const clearValuesForms = reset({
       name: "",
       quantity: null,
       status: "",
       price: "",
       categoryName: "",
     });
+
+    const clearErrorsForms = clearErrors([
+      "name",
+      "quantity",
+      "status",
+      "price",
+      "categoryName",
+    ]);
+
+    return {
+      clearValuesForms,
+      clearErrorsForms,
+    };
   };
 
   const createNewProduct: any = useMutation({
@@ -88,7 +102,7 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
     onSuccess: () => {
       setOpen(false);
       queryClient.invalidateQueries({ queryKey: ["product"] });
-      handleClearValuesForms();
+      handleClearValuesAndErrorsForms();
     },
   });
 
@@ -107,7 +121,12 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
       </ButtonNewProduct>
       {open ? (
         <ModalBase isVisible={open}>
-          <BtnCloseModal onClick={() => setOpen(false)} />
+          <BtnCloseModal
+            onClick={() => {
+              setOpen(false);
+              handleClearValuesAndErrorsForms();
+            }}
+          />
           <FormControlGeneric onSubmit={handleSubmit(createNewProduct.mutate)}>
             <TitleDescriptionModal>Cadastro de Produtos</TitleDescriptionModal>
 

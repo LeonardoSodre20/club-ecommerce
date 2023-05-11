@@ -7,6 +7,19 @@ export const MainContainerCategories = styled.section`
   justify-content: center;
   min-height: 100vh;
   width: 100%;
+  gap: 1.5em;
+  flex-wrap: wrap;
+`;
+
+export const ContainerCards = styled.div`
+  margin-top: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  gap: 1.5em;
+  flex-wrap: wrap;
 `;
 
 export const ContainerCardCategory = styled.div`

@@ -14,6 +14,7 @@ export const ContainerAccountInfo = styled.div`
 export const Username = styled.div`
   color: ${colors.black};
   font-size: 0.9em;
+  cursor: pointer;
 `;
 
 export const Avatar = styled.div`

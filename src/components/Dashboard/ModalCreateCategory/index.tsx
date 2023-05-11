@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -48,10 +48,20 @@ const ModalCreateCategory = () => {
 
   const handleSubmitCategoryData: SubmitHandler<ICategory> = async (data) => {
     try {
-      const response = await api.post("/category", data);
-      ToastMessage(response.data.message, "success");
-      console.log(data);
-      return response.data;
+      const payload = {
+        name: data?.name,
+      };
+
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+
+      const response = await api.post("/category", payload, config);
+      ToastMessage(response?.data?.message, "success");
+      setOpen(false);
+      return response?.data;
     } catch (err: any) {
       ToastMessage(err.response.data.message, "error");
     }

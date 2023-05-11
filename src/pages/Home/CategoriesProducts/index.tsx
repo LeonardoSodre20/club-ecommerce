@@ -1,26 +1,22 @@
-import { useEffect, useState } from "react";
-import { parseISO, format } from "date-fns";
-import { ptBR } from "date-fns/locale";
-
 // COMPONENTS
 import Header from "@src/components/Header";
+import CardCategory from "@src/components/CardCategories";
 
 // STYLES
-import { MainContainerCategories } from "./styles";
-
-// SERVICES
+import { MainContainerCategories, ContainerCards } from "./styles";
+import { useEffect, useState } from "react";
 import { api } from "@src/services/api";
 
-// TYPES
-import { AxiosResponse } from "axios";
-import { ICategoryTypes } from "@src/types/CategoriesTypes";
-
 const CategoriesProducts = () => {
-  const [categories, setCategories] = useState<ICategoryTypes[]>([]);
+  const [allCategories, setAllCategories] = useState<any>([]);
 
   const handleGetAllCategories = async () => {
-    const response: AxiosResponse = await api.get("/category");
-    setCategories(response.data.allCategories);
+    try {
+      const response = await api.get("/category");
+      setAllCategories(response?.data?.allCategories);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -31,27 +27,13 @@ const CategoriesProducts = () => {
     <>
       <Header />
       <MainContainerCategories>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "15px",
-          }}
-        >
-          {categories.map((category) => {
+        <ContainerCards>
+          {allCategories?.map((cat: any) => {
             return (
-              <div>
-                <span>{category.name}</span>
-                <span>
-                  {format(parseISO(category.created_at), "dd/MM/yyyy", {
-                    locale: ptBR,
-                  })}
-                </span>
-              </div>
+              <CardCategory key={cat?.id} name={cat?.name} image={cat?.image} />
             );
           })}
-        </div>
+        </ContainerCards>
       </MainContainerCategories>
     </>
   );

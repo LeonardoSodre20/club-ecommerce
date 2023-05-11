@@ -1,12 +1,22 @@
 import { useState } from "react";
 
+// COMPONENTS
 import ModalBase from "../ModalBase";
+import FormControlGeneric from "../ModalBase/FormControl";
+import { TitleDescriptionModal } from "../ModalCreateProduct/styles";
 
 // STYLES
-import { IconEdit } from "./styles";
+import { BtnCloseModal, IconEdit } from "./styles";
 
 const ModalEditProduct = () => {
   const [open, setOpen] = useState<boolean>(false);
+
+  const handleSubmit = async () => {
+    try {
+    } catch (err: any) {
+      console.log(err);
+    }
+  };
 
   return (
     <>
@@ -14,7 +24,11 @@ const ModalEditProduct = () => {
 
       {open ? (
         <ModalBase isVisible={open}>
-          <h1>hello World</h1>
+          <BtnCloseModal onClick={() => setOpen(false)} />
+
+          <FormControlGeneric onSubmit={handleSubmit}>
+            <TitleDescriptionModal>Edição de Produtos</TitleDescriptionModal>
+          </FormControlGeneric>
         </ModalBase>
       ) : (
         false
