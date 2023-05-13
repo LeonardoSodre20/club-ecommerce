@@ -1,36 +1,31 @@
+import { useQuery } from "react-query";
+
+// TYPES
+import { ICategoryTypes } from "@src/types/CategoriesTypes";
+
 // COMPONENTS
 import Header from "@src/components/Header";
 import CardCategory from "@src/components/CardCategories";
 
 // STYLES
 import { MainContainerCategories, ContainerCards } from "./styles";
-import { useEffect, useState } from "react";
-import { api } from "@src/services/api";
+
+// PROVIDER
+import providerCategories from "@src/providers/Categories/provider.categories";
 
 const CategoriesProducts = () => {
-  const [allCategories, setAllCategories] = useState<any>([]);
-
-  const handleGetAllCategories = async () => {
-    try {
-      const response = await api.get("/category");
-      setAllCategories(response?.data?.allCategories);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    handleGetAllCategories();
-  }, []);
+  const { data } = useQuery<ICategoryTypes[]>(["categories"], () => {
+    return providerCategories.handleGetAllCategories();
+  });
 
   return (
     <>
       <Header />
       <MainContainerCategories>
         <ContainerCards>
-          {allCategories?.map((cat: any) => {
+          {data?.map((cat) => {
             return (
-              <CardCategory key={cat?.id} name={cat?.name} image={cat?.image} />
+              <CardCategory key={cat?.id} name={cat.name} image={cat?.image} />
             );
           })}
         </ContainerCards>

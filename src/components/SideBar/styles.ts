@@ -20,7 +20,7 @@ interface IPropsSideBar {
 export const ContainerSideBar = styled.div`
   background-color: ${colors.black};
   width: ${({ width }: IPropsSideBar) => width || "70px"};
-  height: 100vh;
+  height: 95%;
   transition: all 0.7s;
   display: flex;
   z-index: 10000;
@@ -28,13 +28,15 @@ export const ContainerSideBar = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   position: fixed;
-  left: 0;
+  top: 15px;
+  left: 12px;
+  border-radius: 25px;
 `;
 
 export const ContainerSideBackground = styled.div`
   background-color: rgba(0, 0, 0, 0.93);
   width: ${({ width }: IPropsSideBar) => width || "70px"};
-  height: 100vh;
+  height: 95%;
   transition: all 0.7s;
   z-index: 8000;
   display: flex;
@@ -43,7 +45,9 @@ export const ContainerSideBackground = styled.div`
   flex-direction: column;
   visibility: ${({ display }: IPropsSideBar) => display || "visible"};
   position: fixed;
-  left: 0;
+  left: 12px;
+  top: 15px;
+  border-radius: 25px;
 `;
 
 export const IconOpenSideBar = styled(IoMdMenu)`

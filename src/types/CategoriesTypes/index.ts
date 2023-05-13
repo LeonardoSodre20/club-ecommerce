@@ -1,5 +1,6 @@
 export interface ICategoryTypes {
   id?: string;
   name: string;
-  created_at?: string;
+  image: string;
+  created_at: string;
 }

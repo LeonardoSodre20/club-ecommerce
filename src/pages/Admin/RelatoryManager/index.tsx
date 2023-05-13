@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { api } from "@src/services/api";
+import { useQuery } from "react-query";
 
 // STYLES
 import { MainContainerAllGraphics } from "./styles";
@@ -7,40 +6,33 @@ import { MainContainerAllGraphics } from "./styles";
 // COMPONENTS
 import CardRelatory from "@src/components/Dashboard/CardRelatory";
 
+// TYPES
 import { IRelatoryTypes } from "@src/types/RelatoryTypes";
 
+// PROVIDER
+import providerRelatory from "@src/providers/Relatory/provider.relatory";
+
 const GraphicsData = () => {
-  const [dataRelatory, setRelatoryData] = useState<IRelatoryTypes | null>(null);
-
-  useEffect(() => {
-    handleGetAllInformationsRelatory();
-  }, []);
-
-  const handleGetAllInformationsRelatory = async () => {
-    try {
-      const response = await api.get("/relatory");
-      setRelatoryData(response?.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const { data } = useQuery<IRelatoryTypes>(["relatory"], () => {
+    return providerRelatory.handleGetAllInfoProducts();
+  });
 
   return (
     <MainContainerAllGraphics>
       <CardRelatory
-        data={dataRelatory?.total ?? 0}
+        data={data?.total ?? 0}
         description="Total de produtos cadastrados"
       />
       <CardRelatory
-        data={dataRelatory?.productsAvailable ?? 0}
+        data={data?.productsAvailable ?? 0}
         description="Produtos Disponíveis"
       />
       <CardRelatory
-        data={dataRelatory?.productsUnavailable ?? 0}
+        data={data?.productsUnavailable ?? 0}
         description="Produtos Indisponíveis"
       />
       <CardRelatory
-        data={dataRelatory?.usersActive ?? 0}
+        data={data?.usersActive ?? 0}
         description="Usuários Ativos"
       />
     </MainContainerAllGraphics>
