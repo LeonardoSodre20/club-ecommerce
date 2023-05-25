@@ -12,6 +12,8 @@ import { IRelatoryTypes } from "@src/types/RelatoryTypes";
 // PROVIDER
 import providerRelatory from "@src/providers/Relatory/provider.relatory";
 
+// CHARTS CONFIG
+
 const GraphicsData = () => {
   const { data } = useQuery<IRelatoryTypes>(["relatory"], () => {
     return providerRelatory.handleGetAllInfoProducts();

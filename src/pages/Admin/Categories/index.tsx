@@ -1,22 +1,30 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { formatDate } from "@src/formatters/dateFormatted";
 
 // COMPONENTS
 import TableCategories from "@src/components/Dashboard/TableCategories";
 
 // STYLES
-import { ImageCategory, MainContainer, PreviewImage, Td } from "./styles";
+import {
+  IconDelete,
+  ImageCategory,
+  MainContainer,
+  PreviewImage,
+  Td,
+} from "./styles";
 
 // PROVIDER
 import providerCategories from "@src/providers/Categories/provider.categories";
 
 // TYPES
-import { ICategoryTypes } from "@src/types/CategoriesTypes";
+import { ICategoryTypes, ICategoryTypesList } from "@src/types/CategoriesTypes";
+import ModalCreateCategory from "@src/components/Dashboard/ModalCreateCategory";
 
 const Categories = () => {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState<boolean>(false);
-  const { data } = useQuery<ICategoryTypes[]>(["categoriesAdmin"], () => {
+  const { data } = useQuery<ICategoryTypesList[]>(["categoriesAdmin"], () => {
     return providerCategories.handleGetAllCategories();
   });
 
@@ -24,8 +32,20 @@ const Categories = () => {
     setOpen(!open);
   };
 
+  const deleteCategory = useMutation(
+    (id: string) => {
+      return providerCategories.handleDeleteCategoryById(id);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["categoriesAdmin"] });
+      },
+    }
+  );
+
   return (
     <MainContainer>
+      <ModalCreateCategory />
       <TableCategories
         name="Nome"
         image="Imagem"
@@ -38,7 +58,12 @@ const Categories = () => {
               <tr key={category?.id}>
                 <Td>{category?.name}</Td>
                 <Td onClick={() => handleOpenPreviewImage()}>
-                  <ImageCategory src={category?.image} alt="image-category" />
+                  <ImageCategory
+                    src={category?.image}
+                    alt="image-category"
+                    decoding="auto"
+                    loading="lazy"
+                  />
                   {open ? (
                     <PreviewImage
                       url_image={category?.image}
@@ -51,7 +76,11 @@ const Categories = () => {
                   )}
                 </Td>
                 <Td>{formatDate(category.created_at)}</Td>
-                <Td>Teste</Td>
+                <Td>
+                  <IconDelete
+                    onClick={() => deleteCategory.mutate(category?.id)}
+                  />
+                </Td>
               </tr>
             );
           })}

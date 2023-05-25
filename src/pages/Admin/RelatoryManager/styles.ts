@@ -8,6 +8,7 @@ export const MainContainerAllGraphics = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 0.7rem;
   box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.2);
   position: absolute;

@@ -9,31 +9,36 @@ import {
   BtnCloseModal,
   TitleDescriptionCategory,
   ButtonSubmitCategory,
+  UploadButtonContainer,
+  InputButtonUpload,
+  UploadIcon,
 } from "./styles";
 
 // COMPONENTS
 import ModalBase from "../ModalBase";
 import InputBase from "@src/components/InputBase";
-import ToastMessage from "../ToastMessage";
 
 // TYPES
 import { ICategory } from "../Types/CategoryTypes";
 
-// SERVICES
-import { api } from "@src/services/api";
-
 // SCHEMA
 import schemaCreateCategory from "@src/validations/CreateCategoryValidation";
+import providerCategories from "@src/providers/Categories/provider.categories";
+import { useMutation, useQueryClient } from "react-query";
 
 const valuesDefault: ICategory = {
   name: "",
+  image: null,
 };
 
 const ModalCreateCategory = () => {
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState<boolean>(false);
+  const [file, setFile] = useState<File | null>(null);
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<ICategory>({
     defaultValues: valuesDefault,
@@ -42,31 +47,24 @@ const ModalCreateCategory = () => {
     resolver: yupResolver(schemaCreateCategory),
   });
 
+  const values = watch();
+
   const handleOpen = () => {
     setOpen(!open);
   };
 
-  const handleSubmitCategoryData: SubmitHandler<ICategory> = async (data) => {
-    try {
-      const payload = {
-        name: data?.name,
-      };
-
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-
-      const response = await api.post("/category", payload, config);
-      ToastMessage(response?.data?.message, "success");
+  const createCategory: any = useMutation({
+    mutationFn: () => {
+      return providerCategories.handleCreateNewCategory({
+        name: values.name,
+        image: file,
+      });
+    },
+    onSuccess: () => {
       setOpen(false);
-      return response?.data;
-    } catch (err: any) {
-      ToastMessage(err.response.data.message, "error");
-    }
-  };
-
+      queryClient.invalidateQueries({ queryKey: ["categoriesAdmin"] });
+    },
+  });
   return (
     <>
       <ButtonNewCategory onClick={() => handleOpen()}>
@@ -75,7 +73,7 @@ const ModalCreateCategory = () => {
       {open ? (
         <ModalBase isVisible={open}>
           <BtnCloseModal onClick={() => setOpen(false)} />
-          <FormControl onSubmit={handleSubmit(handleSubmitCategoryData)}>
+          <FormControl onSubmit={handleSubmit(createCategory.mutate)}>
             <TitleDescriptionCategory>
               Cadastro de Categoria
             </TitleDescriptionCategory>
@@ -86,6 +84,22 @@ const ModalCreateCategory = () => {
               placeholder="Digite o nome da categoria...."
               error={errors.name}
               {...register("name")}
+            />
+
+            <UploadButtonContainer htmlFor="upload-input">
+              <UploadIcon />
+              {file?.name ?? "Insira uma imagem"}
+            </UploadButtonContainer>
+            <InputButtonUpload
+              accept="image/*"
+              name="upload-input"
+              type="file"
+              id="upload-input"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                if (e.target.files) {
+                  setFile(e.target.files[0]);
+                }
+              }}
             />
 
             {isSubmitting ? (

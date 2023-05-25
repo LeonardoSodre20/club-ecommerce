@@ -70,23 +70,23 @@ const Dashboard = () => {
                     backgroundColor: "#f4f4f5",
                   }}
                 >
-                  <Td>{prod?.name}</Td>
-                  <Td>{prod.quantity}</Td>
-                  {prod?.status === "Disponível" ? (
+                  <Td>{prod["name"]}</Td>
+                  <Td>{prod["quantity"]}</Td>
+                  {prod["status"] === "Disponível" ? (
                     <Td color="#4BB543" weight="bolder">
-                      {prod.status}
+                      {prod["status"]}
                     </Td>
                   ) : (
                     <Td color="#f10000" weight="bolder">
-                      {prod.status}
+                      {prod["status"]}
                     </Td>
                   )}
-                  <Td>{formatCurrecyForBrl(parseFloat(prod.price))}</Td>
-                  <Td>{formatDate(prod.created_at)}</Td>
+                  <Td>{formatCurrecyForBrl(parseFloat(prod["price"]))}</Td>
+                  <Td>{formatDate(prod["created_at"])}</Td>
                   <Td>
                     <ModalEditProduct />
                     <IconDelete
-                      onClick={() => deleteProduct.mutate(prod?.id)}
+                      onClick={() => deleteProduct.mutate(prod["id"])}
                     />
                   </Td>
                 </tr>

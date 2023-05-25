@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 export interface IUser {
   name: string;
   lastname: string;
-  emailUser: string;
+  email: string;
   role: string;
   avatar?: string;
 }

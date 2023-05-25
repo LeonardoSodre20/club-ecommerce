@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 // ICONS
 import { IoMdClose } from "react-icons/io";
+import { ImUpload } from "react-icons/im";
+
 
 // VARIABLES
 import { colors } from "@src/styles/colors";
@@ -74,5 +76,30 @@ export const ButtonSubmitCategory = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
-  width: 250px;
 `;
+
+export const UploadButtonContainer = styled.label`
+  background-color: ${colors.black};
+  padding: 15px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  color: ${colors.white};
+  cursor: pointer;
+  font-weight: ${weightFonts.w700};
+  font-size: 12px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 10px;
+`;
+
+export const InputButtonUpload = styled.input`
+  display: none;
+`;
+
+export const UploadIcon = styled(ImUpload)`
+  color: ${colors.white};
+  font-size: 1.5em;
+`;
+

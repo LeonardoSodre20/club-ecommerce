@@ -25,6 +25,7 @@ import { useAuth } from "@src/hooks/useAuth";
 
 // TYPES
 import { IPropsFormsLogin } from "@src/types/Login";
+import { useEffect } from "react";
 
 const valuesDefault: IPropsFormsLogin = {
   email: "",

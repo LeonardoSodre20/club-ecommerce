@@ -1,6 +1,8 @@
 import { colors } from "@src/styles/colors";
 import styled from "styled-components";
 
+import { RiDeleteBin6Line } from "react-icons/ri";
+
 interface IPropsContainerPreview {
   url_image: string;
 }
@@ -53,5 +55,18 @@ export const PreviewImage = styled.div`
     100% {
       transform: scale(1);
     }
+  }
+`;
+
+export const IconDelete = styled(RiDeleteBin6Line)`
+  color: ${colors.black};
+  font-size: 2.5em;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 0.2rem;
+
+  :hover {
+    background-color: rgba(0, 0, 0, 0.2);
   }
 `;
