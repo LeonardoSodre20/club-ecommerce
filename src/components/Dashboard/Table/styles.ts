@@ -11,6 +11,8 @@ export const Table = styled.table`
   width: 85%;
   top: 145px;
   animation: fadeInTable 1s;
+  position: fixed;
+  z-index: -100;
 
   @keyframes fadeInTable {
     0% {

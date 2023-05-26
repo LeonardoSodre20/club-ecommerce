@@ -4,19 +4,12 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { IProducts } from "@src/pages/Admin/Dashboard/types";
 
 // STYLE
-import {
-  ContainerInputAndButtonNewProduct,
-  IconDelete,
-  InputSearch,
-  MainContainerDashboard,
-  Td,
-} from "./styles";
+import { IconDelete, MainContainerDashboard, Td } from "./styles";
 
 // COMPONENTS
 import TableProducts from "@src/components/Dashboard/Table";
-import ModalNewProduct from "@src/components/Dashboard/ModalCreateProduct";
-import AccountButton from "@src/components/AccountLogout";
 import ModalEditProduct from "@src/components/Dashboard/ModalEditProduct";
+import HeaderAdmin from "@src/components/Dashboard/Header";
 
 // FORMATTERS
 import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
@@ -31,7 +24,7 @@ const Dashboard = () => {
     return providerProducts.handleGetAllProducts();
   });
 
-  const deleteProduct = useMutation(
+  const handleDeleteProductById = useMutation(
     (id: string) => {
       return providerProducts.handleDeleteProductById(id);
     },
@@ -44,13 +37,12 @@ const Dashboard = () => {
 
   return (
     <MainContainerDashboard>
-      <AccountButton />
-      <ContainerInputAndButtonNewProduct>
-        <InputSearch type="search" placeholder="Buscar algum produto..." />
-        <ModalNewProduct textButton="Novo Produto" />
-      </ContainerInputAndButtonNewProduct>
+      <HeaderAdmin
+        title="Produtos"
+        placeholder="Pesquise por algum produto..."
+      />
 
-      <TableProducts
+      {/* <TableProducts
         name="Nome do Produto"
         amount="Qtd do produto"
         status="Status"
@@ -86,7 +78,7 @@ const Dashboard = () => {
                   <Td>
                     <ModalEditProduct />
                     <IconDelete
-                      onClick={() => deleteProduct.mutate(prod["id"])}
+                      onClick={() => handleDeleteProductById.mutate(prod["id"])}
                     />
                   </Td>
                 </tr>
@@ -94,7 +86,7 @@ const Dashboard = () => {
             })}
           </tbody>
         )}
-      </TableProducts>
+      </TableProducts> */}
     </MainContainerDashboard>
   );
 };

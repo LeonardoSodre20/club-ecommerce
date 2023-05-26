@@ -26,7 +26,7 @@ export const ButtonNewProduct = styled.button`
   background-color: ${colors.black};
   font-size: 1.1em;
   font-weight: ${weightFonts.w700};
-  padding: 0.8rem;
+  padding: 0.7rem;
   width: 170px;
   cursor: pointer;
 `;

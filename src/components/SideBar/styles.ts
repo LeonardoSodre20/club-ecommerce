@@ -1,26 +1,18 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
-import { weightFonts } from "../../styles/weight";
 
 // ICONS
-
-import { IoMdMenu } from "react-icons/io";
-import { AiFillCloseCircle } from "react-icons/ai";
 import { MdList } from "react-icons/md";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { ImUsers } from "react-icons/im";
 import { GoGraph } from "react-icons/go";
 import { BiCategory } from "react-icons/bi";
-
-interface IPropsSideBar {
-  width?: string;
-  display?: string;
-}
+import { weightFonts } from "@src/styles/weight";
 
 export const ContainerSideBar = styled.div`
   background-color: ${colors.black};
-  width: ${({ width }: IPropsSideBar) => width || "70px"};
-  height: 95%;
+  width: 250px;
+  height: 100%;
   transition: all 0.7s;
   display: flex;
   z-index: 10000;
@@ -28,46 +20,14 @@ export const ContainerSideBar = styled.div`
   justify-content: flex-start;
   flex-direction: column;
   position: fixed;
-  top: 15px;
-  left: 12px;
-  border-radius: 25px;
-`;
-
-export const ContainerSideBackground = styled.div`
-  background-color: rgba(0, 0, 0, 0.93);
-  width: ${({ width }: IPropsSideBar) => width || "70px"};
-  height: 95%;
-  transition: all 0.7s;
-  z-index: 8000;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-direction: column;
-  visibility: ${({ display }: IPropsSideBar) => display || "visible"};
-  position: fixed;
-  left: 12px;
-  top: 15px;
-  border-radius: 25px;
-`;
-
-export const IconOpenSideBar = styled(IoMdMenu)`
-  margin: 10px 0 25px 0;
-  cursor: pointer;
-  font-size: 2em;
-  color: #fff;
-`;
-
-export const IconCloseSideBar = styled(AiFillCloseCircle)`
-  margin: 10px 0 25px 0;
-  cursor: pointer;
-  font-size: 2em;
-  color: #fff;
+  top: 0;
+  left: 0;
 `;
 
 export const ContainerIconsAndLinks = styled.div`
-  margin-top: 20px;
+  margin: 20px 40px 0 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   flex-direction: column;
   gap: 0.8em;
@@ -79,12 +39,6 @@ export const IconUsers = styled(ImUsers)`
   cursor: pointer;
   transition: all 0.7s;
   padding: 0.2rem;
-
-  :hover {
-    background-color: ${colors.white};
-    color: ${colors.black};
-    transform: scale(1.2);
-  }
 `;
 
 export const IconCategories = styled(BiCategory)`
@@ -93,71 +47,63 @@ export const IconCategories = styled(BiCategory)`
   cursor: pointer;
   transition: all 0.7s;
   padding: 0.2rem;
-
-  :hover {
-    background-color: ${colors.white};
-    color: ${colors.black};
-    transform: scale(1.2);
-  }
 `;
 
 export const IconProducts = styled(MdList)`
   color: ${colors.white};
-  font-size: 2.5em;
+  font-size: 2em;
   cursor: pointer;
   transition: all 0.7s;
   padding: 0.2rem;
+`;
+
+export const IconGraphic = styled(GoGraph)`
+  color: ${colors.white};
+  font-size: 2em;
+  cursor: pointer;
+  transition: all 0.7s;
+  padding: 0.2rem;
+`;
+
+export const ContainerByLink = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  transition: all 0.5s;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  cursor: pointer;
 
   :hover {
-    background-color: ${colors.white};
-    color: ${colors.black};
+    background-color: rgba(255, 255, 255, 0.15);
     transform: scale(1.2);
   }
 `;
 
-export const ContainerLinks = styled.div`
-  margin-top: 93px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  gap: 1.1em;
-`;
-
-export const LinksNav = styled.span`
+export const DescriptionLink = styled.span`
   color: ${colors.white};
-  width: 100%;
-  text-align: center;
-  padding: 0.3rem;
   font-size: 0.9em;
   font-weight: ${weightFonts.w700};
-  cursor: pointer;
-  transition: all 0.5s;
+`;
 
-  :hover {
-    background-color: ${colors.white};
-    color: ${colors.black};
+export const ContainerLogout = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.5s;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  position: absolute;
+  bottom: 15px;
+  left: 20px;
+  cursopointerr :hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(1.2);
   }
 `;
 
 export const IconLogout = styled(RiLogoutCircleRLine)`
-  color: ${colors.white};
-  font-size: 2.2em;
-  cursor: pointer;
-  transition: all 0.7s;
-  padding: 0.2rem;
-  position: absolute;
-  bottom: 15px;
-
-  :hover {
-    background-color: ${colors.white};
-    color: ${colors.black};
-    transform: scale(1.2);
-  }
-`;
-
-export const IconGraphic = styled(GoGraph)`
   color: ${colors.white};
   font-size: 2.2em;
   cursor: pointer;

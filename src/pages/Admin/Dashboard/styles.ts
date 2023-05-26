@@ -27,6 +27,7 @@ export const ContainerInputAndButtonNewProduct = styled.div`
   align-items: center;
   justify-content: center;
   position: fixed;
+  z-index: -100;
   top: 80px;
   gap: 1em;
 `;
