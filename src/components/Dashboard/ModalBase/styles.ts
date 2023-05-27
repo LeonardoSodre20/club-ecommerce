@@ -6,12 +6,12 @@ export const ModalForegroundComponent = styled.div`
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100vw;
+  width: calc(100vw - 250px);
   background-color: rgba(0, 0, 0, 0.7);
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: 0;
-  z-index: 100000;
+  right: 0;
+  z-index: 10000000;
   transition: all 0.5s;
 `;
 

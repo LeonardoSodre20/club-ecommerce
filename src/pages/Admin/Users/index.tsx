@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { api } from "@src/services/api";
 
 // STYLES
-import { IconDelete } from "../Dashboard/styles";
+
 import { MainContainerUsers, Td } from "./styles";
 
 // COMPONENTS
@@ -74,9 +74,7 @@ const Users = () => {
                     locale: ptBR,
                   })}
                 </Td>
-                <Td>
-                  <IconDelete />
-                </Td>
+                <Td></Td>
               </tr>
             );
           })}

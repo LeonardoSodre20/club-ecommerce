@@ -9,10 +9,12 @@ export const HeaderContent = styled.div`
   align-items: center;
   position: absolute;
   width: calc(100% - 250px);
-  top: 10px;
+  top: 0;
   right: 0;
-  padding: 0.5rem;
+  padding: 0.7rem;
   gap: 15px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
 `;
 
 export const TitleBySession = styled.h1`

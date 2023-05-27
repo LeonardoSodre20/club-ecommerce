@@ -9,6 +9,8 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 interface IPropsTable {
   color?: string;
   weight?: string;
+  width?: string;
+  bgColor?: string;
 }
 
 export const MainContainerDashboard = styled.div`
@@ -57,48 +59,29 @@ export const InputSearch = styled.input`
 `;
 
 export const Table = styled.table`
-  border-collapse: collapse;
-  width: 100%;
-  position: absolute;
-  animation: fadeInTable 1s;
+  z-index: 1000;
+  position: fixed;
+  top: 150px;
+  width: calc(90% - 250px);
+  right: 80px;
 
-  @keyframes fadeInTable {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
 `;
 
+export const Tr = styled.tr``;
+
 export const Th = styled.th`
-  color: ${colors.white};
-  font-size: 1em;
-  text-align: center;
-  padding: 0.6rem;
-  width: 180px;
+  color: ${colors.black};
+  width: ${({ width }: IPropsTable) => width || "130px"};
+  font-weight: ${weightFonts.w700};
+  text-align: left;
 `;
 
 export const Td = styled.td`
-  color: ${({ color }: IPropsTable) => color || `${colors.black}`};
-  font-size: 0.8em;
-  text-align: center;
-  padding: 0.3rem;
-  width: 180px;
-  font-weight: ${({ weight }: IPropsTable) => weight || "200"};
-  border: 1px solid rgba(0, 0, 0, 0.2);
-`;
-
-export const IconDelete = styled(RiDeleteBin6Line)`
   color: ${colors.black};
-  font-size: 2.5em;
-  margin-left: 10px;
-  cursor: pointer;
-  transition: all 0.5s;
-  padding: 0.2rem;
-
-  :hover {
-    background-color: rgba(0, 0, 0, 0.2);
-  }
+  background-color: ${colors.white};
+  width: ${({ width }: IPropsTable) => width || "130px"};
+  font-weight: ${weightFonts.w500};
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
 `;

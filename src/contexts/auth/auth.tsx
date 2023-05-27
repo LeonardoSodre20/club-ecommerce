@@ -49,8 +49,13 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
       setIsLoading(!isLoading);
 
-      navigate("/dashboard");
-      ToastMessage(response?.data?.message, "success");
+      if (
+        response?.data?.checkUserExist?.role === "Admin" &&
+        response?.status === 200
+      ) {
+        navigate("/dashboard");
+        ToastMessage(response?.data?.message, "success");
+      }
     } catch (error: any) {
       console.log(error);
       ToastMessage(error.response.data.message, "error");
