@@ -4,7 +4,14 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { IProducts } from "@src/pages/Admin/Dashboard/types";
 
 // STYLE
-import { MainContainerDashboard, Table, Td, Th, Tr } from "./styles";
+import {
+  IconDelete,
+  MainContainerDashboard,
+  Table,
+  Td,
+  Th,
+  Tr,
+} from "./styles";
 
 // COMPONENTS
 import HeaderAdmin from "@src/components/Dashboard/Header";
@@ -55,9 +62,19 @@ const Dashboard = () => {
               <Tr key={prod["id"]}>
                 <Td width="280px">{prod["name"]}</Td>
                 <Td>{prod["quantity"]}</Td>
-                <Td>{prod["status"]}</Td>
-                <Td>{prod["price"]}</Td>
-                <Td>teste</Td>
+                <Td
+                  color={
+                    prod["status"] === "Disponível" ? "#4BB543" : "#f10000"
+                  }
+                >
+                  {prod["status"]}
+                </Td>
+                <Td>{formatCurrecyForBrl(parseFloat(prod["price"]))}</Td>
+                <Td>
+                  <IconDelete
+                    onClick={() => handleDeleteProductById.mutate(prod["id"])}
+                  />
+                </Td>
               </Tr>
             );
           })}

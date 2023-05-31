@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../../styles/colors";
 import { weightFonts } from "../../../styles/weight";
-
-// ICONS
-
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { RiDeleteBin5Line } from "react-icons/ri";
 
 interface IPropsTable {
   color?: string;
@@ -12,6 +9,18 @@ interface IPropsTable {
   width?: string;
   bgColor?: string;
 }
+
+export const IconDelete = styled(RiDeleteBin5Line)`
+  font-size: 2em;
+  color: ${colors.black};
+  cursor: pointer;
+  transition: all 0.5s;
+  padding: 0.15rem;
+
+  :hover {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+`;
 
 export const MainContainerDashboard = styled.div`
   display: flex;
@@ -59,12 +68,11 @@ export const InputSearch = styled.input`
 `;
 
 export const Table = styled.table`
-  z-index: 1000;
+  z-index: -100;
   position: fixed;
   top: 150px;
   width: calc(90% - 250px);
   right: 80px;
-
 `;
 
 export const Tr = styled.tr``;
@@ -77,10 +85,10 @@ export const Th = styled.th`
 `;
 
 export const Td = styled.td`
-  color: ${colors.black};
+  color: ${({ color }: IPropsTable) => color || `${colors.black}`};
   background-color: ${colors.white};
   width: ${({ width }: IPropsTable) => width || "130px"};
-  font-weight: ${weightFonts.w500};
+  font-weight: ${weightFonts.w400};
   padding: 0.5rem;
   border-radius: 0.5rem;
   box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
