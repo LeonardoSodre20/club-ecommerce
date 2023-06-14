@@ -8,10 +8,10 @@ export const ModalForegroundComponent = styled.div`
   height: 100vh;
   width: calc(100vw - 250px);
   background-color: rgba(0, 0, 0, 0.7);
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  z-index: 10000000;
+  z-index: 100000000;
   transition: all 0.5s;
 `;
 

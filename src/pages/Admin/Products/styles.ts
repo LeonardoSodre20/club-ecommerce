@@ -68,7 +68,7 @@ export const InputSearch = styled.input`
 `;
 
 export const Table = styled.table`
-  z-index: -100;
+  z-index: -99;
   position: fixed;
   top: 150px;
   width: calc(90% - 250px);

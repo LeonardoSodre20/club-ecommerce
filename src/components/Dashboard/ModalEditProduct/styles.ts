@@ -7,7 +7,7 @@ import { IoMdClose } from "react-icons/io";
 
 export const IconEdit = styled(FaEdit)`
   color: ${colors.black};
-  font-size: 2.5em;
+  font-size: 2em;
   cursor: pointer;
   transition: all 0.5s;
   padding: 0.2rem;

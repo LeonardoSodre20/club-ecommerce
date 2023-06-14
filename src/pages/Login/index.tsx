@@ -25,7 +25,7 @@ import { useAuth } from "@src/hooks/useAuth";
 
 // TYPES
 import { IPropsFormsLogin } from "@src/types/Login";
-import { useEffect } from "react";
+import { ChangeEvent, useEffect } from "react";
 
 const valuesDefault: IPropsFormsLogin = {
   email: "",
@@ -37,8 +37,9 @@ const Login = () => {
   const navigate = useNavigate();
 
   const {
-    register,
+    setValue,
     handleSubmit,
+    register,
     formState: { errors, isSubmitting },
   } = useForm<IPropsFormsLogin>({
     defaultValues: valuesDefault,
@@ -49,7 +50,6 @@ const Login = () => {
   const handleLoginSubmit: SubmitHandler<IPropsFormsLogin> = (data) => {
     const { email, password } = data;
     Login(email, password);
-    console.log(data);
   };
 
   return (
@@ -72,6 +72,9 @@ const Login = () => {
             placeholder="Digite seu e-mail..."
             error={errors.email}
             {...register("email")}
+            onPaste={(e) => {
+              setValue("email", e.clipboardData.getData("text/plain").trim());
+            }}
           />
           <InputBase
             type="password"
@@ -80,6 +83,12 @@ const Login = () => {
             placeholder="Digite sua senha..."
             error={errors.password}
             {...register("password")}
+            onPaste={(e) => {
+              setValue(
+                "password",
+                e.clipboardData.getData("text/plain").trim()
+              );
+            }}
           />
 
           <RedirectResetPasswordSteps>

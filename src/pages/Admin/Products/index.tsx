@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 
 // TYPES
-import { IProducts } from "@src/pages/Admin/Dashboard/types";
+import { IProducts } from "@src/pages/Admin/Products/types";
 
 // STYLE
 import {
@@ -18,12 +18,12 @@ import HeaderAdmin from "@src/components/Dashboard/Header";
 
 // FORMATTERS
 import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
-import { formatDate } from "@src/formatters/dateFormatted";
 
 // PROVIDER
 import providerProducts from "@src/providers/Products/provider.products";
+import ModalEditProduct from "@src/components/Dashboard/ModalEditProduct";
 
-const Dashboard = () => {
+const Products = () => {
   const queryClient = useQueryClient();
   const { data } = useQuery<IProducts[]>(["product"], () => {
     return providerProducts.handleGetAllProducts();
@@ -69,8 +69,14 @@ const Dashboard = () => {
                 >
                   {prod["status"]}
                 </Td>
-                <Td>{formatCurrecyForBrl(parseFloat(prod["price"]))}</Td>
                 <Td>
+                  {parseFloat(prod["price"]).toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </Td>
+                <Td>
+                  <ModalEditProduct />
                   <IconDelete
                     onClick={() => handleDeleteProductById.mutate(prod["id"])}
                   />
@@ -84,4 +90,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Products;

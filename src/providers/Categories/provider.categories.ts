@@ -11,7 +11,15 @@ export default {
       console.log(err?.response?.data?.message);
     }
   },
-  async handleDeleteCategoryById(categoryId: string) {
+  async handleProductsByCategory(categoryId: string | undefined) {
+    try {
+      const response = await api.get(`/category/${categoryId}`);
+      return response?.data?.category?.products;
+    } catch (err: any) {
+      console.log(err?.response?.data?.message);
+    }
+  },
+  async handleDeleteCategoryById(categoryId: string | undefined) {
     try {
       const response = await api.delete(`/category/${categoryId}`);
       ToastMessage(response?.data?.message, "success");

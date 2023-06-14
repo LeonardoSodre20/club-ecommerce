@@ -14,9 +14,13 @@ import { MainContainerCategories, ContainerCards } from "./styles";
 import providerCategories from "@src/providers/Categories/provider.categories";
 
 const CategoriesProducts = () => {
-  const { data } = useQuery<ICategoryTypes[]>(["categories"], () => {
+  const { data, isLoading } = useQuery<ICategoryTypes[]>(["categories"], () => {
     return providerCategories.handleGetAllCategories();
   });
+
+  if (isLoading) {
+    return <h1>Hello World</h1>;
+  }
 
   return (
     <>
@@ -25,7 +29,12 @@ const CategoriesProducts = () => {
         <ContainerCards>
           {data?.map((cat) => {
             return (
-              <CardCategory key={cat?.id} name={cat.name} image={cat?.image} />
+              <CardCategory
+                key={cat?.id}
+                name={cat.name}
+                image={cat?.image}
+                routeName={`/listProducts/${cat?.id}`}
+              />
             );
           })}
         </ContainerCards>

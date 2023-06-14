@@ -9,6 +9,7 @@ export const AuthenticatedRoutes = () => {
   return signed ? (
     <>
       <SideBar />
+
       <Outlet />
     </>
   ) : (
