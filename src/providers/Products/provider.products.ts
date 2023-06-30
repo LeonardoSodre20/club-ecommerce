@@ -26,8 +26,25 @@ export default {
 
   async handleCreateNewProduct(product: INewProduct) {
     try {
-      const response = await api.post("/product", product);
+      const formData = new FormData();
+
+      formData.append("name", product.name);
+      formData.append("quantity", product.quantity);
+      formData.append("status", product.status);
+      formData.append("price", product.price);
+      if (product.image instanceof File) {
+        formData.append("image", product.image);
+      }
+      formData.append("categoryName", product.categoryName);
+
+      const response = await api.post("/product", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       ToastMessage(response?.data?.message, "success");
+      return response?.data;
     } catch (err: any) {
       console.log(err?.response?.data?.message);
       ToastMessage(err?.response?.data?.message, "error");

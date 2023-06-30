@@ -1,37 +1,32 @@
-import {
-  DescriptionDefault,
-  MainContainerCard,
-  SubDescriptionDefault,
-  TitleProduct,
-} from "./styles";
+import * as S from "./styles";
 import { IProductsInfo } from "./types";
-import { formatCurrecyForBrl } from "../../../formatters/currencyFomatted";
+import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
 
 const CardProduct = ({ name, amount, price, status }: IProductsInfo) => {
   return (
-    <MainContainerCard>
-      <TitleProduct>Nome: {name}</TitleProduct>
-      <SubDescriptionDefault>Quantidade: {amount}</SubDescriptionDefault>
-      <DescriptionDefault>
+    <S.MainContainerCard>
+      <S.TitleProduct>Nome: {name}</S.TitleProduct>
+      <S.SubDescriptionDefault>Quantidade: {amount}</S.SubDescriptionDefault>
+      <S.DescriptionDefault>
         Preço
-        <SubDescriptionDefault weightStatus="bold">
+        <S.SubDescriptionDefault weightStatus="bold">
           {formatCurrecyForBrl(parseFloat(price))}
-        </SubDescriptionDefault>
-      </DescriptionDefault>
+        </S.SubDescriptionDefault>
+      </S.DescriptionDefault>
       {status === "Disponível" ? (
-        <DescriptionDefault>
+        <S.DescriptionDefault>
           Status:
-          <SubDescriptionDefault colorStatus="#4BB543" weightStatus="700">
+          <S.SubDescriptionDefault colorStatus="#4BB543" weightStatus="700">
             {status}
-          </SubDescriptionDefault>
-        </DescriptionDefault>
+          </S.SubDescriptionDefault>
+        </S.DescriptionDefault>
       ) : (
-        <DescriptionDefault>
+        <S.DescriptionDefault>
           Status:
-          <SubDescriptionDefault colorStatus="#f10000" weightStatus="700">
+          <S.SubDescriptionDefault colorStatus="#f10000" weightStatus="700">
             {status}
-          </SubDescriptionDefault>
-        </DescriptionDefault>
+          </S.SubDescriptionDefault>
+        </S.DescriptionDefault>
       )}
 
       <div
@@ -43,7 +38,7 @@ const CardProduct = ({ name, amount, price, status }: IProductsInfo) => {
         }}
       >
         <img
-          src={''}
+          src={""}
           alt="Camiseta"
           style={{
             width: "190px",
@@ -52,7 +47,7 @@ const CardProduct = ({ name, amount, price, status }: IProductsInfo) => {
           }}
         />
       </div>
-    </MainContainerCard>
+    </S.MainContainerCard>
   );
 };
 

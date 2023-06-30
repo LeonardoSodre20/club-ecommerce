@@ -1,33 +1,20 @@
-import { AxiosResponse } from "axios";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
-import { useEffect, useState } from "react";
-import { api } from "@src/services/api";
 
 // STYLES
-
-import { MainContainerUsers, Td } from "./styles";
+import * as S from "./styles";
 
 // COMPONENTS
 import TableUsers from "@src/components/Dashboard/TableUsers";
 
-// TYPES
-import { IUser } from "./types";
+// HOOKS
+import useUser from "@src/hooks/useUser";
 
 const Users = () => {
-  const [users, setUsers] = useState<IUser[]>([]);
-
-  useEffect(() => {
-    handleGetAllUsers();
-  }, []);
-
-  const handleGetAllUsers = async () => {
-    const { data }: AxiosResponse = await api.get("/users");
-    setUsers(data.users);
-  };
+  const { data } = useUser();
 
   return (
-    <MainContainerUsers>
+    <S.MainContainerUsers>
       <TableUsers
         name="Nome"
         lastname="Sobrenome"
@@ -37,7 +24,7 @@ const Users = () => {
         actions="Ações"
       >
         <tbody>
-          {users?.map((info) => {
+          {data?.map((info) => {
             return (
               <tr
                 key={info._id}
@@ -45,42 +32,24 @@ const Users = () => {
                   backgroundColor: "#f4f4f5",
                 }}
               >
-                <Td>{info.name}</Td>
-                <Td>{info.lastname}</Td>
-                <Td>{info.email}</Td>
-                <>
-                  {info.status === "Ativo" ? (
-                    <Td
-                      style={{
-                        color: "#4BB543",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {info.status}
-                    </Td>
-                  ) : (
-                    <Td
-                      style={{
-                        color: "#f10000",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {info.status}
-                    </Td>
-                  )}
-                </>
-                <Td>
+                <S.Td>{info.name}</S.Td>
+                <S.Td>{info.lastname}</S.Td>
+                <S.Td>{info.email}</S.Td>
+                <S.Td color={info.status === "Ativo" ? "#4BB543" : "#f10000"}>
+                  {info.status}
+                </S.Td>
+                <S.Td>
                   {format(new Date(info.created_at), "dd/MM/yyyy", {
                     locale: ptBR,
                   })}
-                </Td>
-                <Td></Td>
+                </S.Td>
+                <S.Td></S.Td>
               </tr>
             );
           })}
         </tbody>
       </TableUsers>
-    </MainContainerUsers>
+    </S.MainContainerUsers>
   );
 };
 

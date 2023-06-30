@@ -1,12 +1,9 @@
 import React from "react";
-import {
-  ArrowBack,
-  ArrowRight,
-  ButtonControlPage,
-  ContainerPagination,
-} from "./styles";
-// TYPES
 
+// STYLES
+import * as S from "./styles";
+
+// TYPES
 import { IPropsPagination } from "./types";
 
 const Pagination = ({
@@ -23,16 +20,16 @@ const Pagination = ({
   };
 
   return (
-    <ContainerPagination>
-      <ButtonControlPage
+    <S.ContainerPagination>
+      <S.ButtonControlPage
         onClick={() => handlePreviousPage()}
         disabled={currentPage < 1}
       >
-        <ArrowBack />
-      </ButtonControlPage>
+        <S.ArrowBack />
+      </S.ButtonControlPage>
       {Array.from({ length: pages }).map((_, index: number) => {
         return (
-          <ButtonControlPage
+          <S.ButtonControlPage
             bgColor={currentPage === index ? "#000" : ""}
             colorFont={currentPage === index ? "#fff" : ""}
             key={index}
@@ -43,16 +40,16 @@ const Pagination = ({
             }}
           >
             {index + 1}
-          </ButtonControlPage>
+          </S.ButtonControlPage>
         );
       })}
-      <ButtonControlPage
+      <S.ButtonControlPage
         onClick={() => handleNextPage()}
         disabled={currentPage + 1 === pages}
       >
-        <ArrowRight />
-      </ButtonControlPage>
-    </ContainerPagination>
+        <S.ArrowRight />
+      </S.ButtonControlPage>
+    </S.ContainerPagination>
   );
 };
 

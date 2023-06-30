@@ -1,32 +1,21 @@
-import { useQuery } from "react-query";
-
-// TYPES
-import { ICategoryTypes } from "@src/types/CategoriesTypes";
-
 // COMPONENTS
 import Header from "@src/components/Header";
 import CardCategory from "@src/components/CardCategories";
 
-// STYLES
-import { MainContainerCategories, ContainerCards } from "./styles";
+// HOOKS
+import useCategory from "@src/hooks/useCategory";
 
-// PROVIDER
-import providerCategories from "@src/providers/Categories/provider.categories";
+// STYLES
+import * as S from "./styles";
 
 const CategoriesProducts = () => {
-  const { data, isLoading } = useQuery<ICategoryTypes[]>(["categories"], () => {
-    return providerCategories.handleGetAllCategories();
-  });
-
-  if (isLoading) {
-    return <h1>Hello World</h1>;
-  }
+  const { data } = useCategory();
 
   return (
     <>
       <Header />
-      <MainContainerCategories>
-        <ContainerCards>
+      <S.MainContainerCategories>
+        <S.ContainerCards>
           {data?.map((cat) => {
             return (
               <CardCategory
@@ -37,8 +26,8 @@ const CategoriesProducts = () => {
               />
             );
           })}
-        </ContainerCards>
-      </MainContainerCategories>
+        </S.ContainerCards>
+      </S.MainContainerCategories>
     </>
   );
 };

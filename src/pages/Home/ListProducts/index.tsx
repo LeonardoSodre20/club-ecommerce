@@ -10,6 +10,7 @@ import { IProducts } from "@src/pages/Admin/Products/types";
 // COMPONENTS
 import Header from "@src/components/Header";
 import TheContentMain from "@src/components/Global/TheContent";
+import CardProduct from "@src/components/CardProducts";
 
 const ListProducts = () => {
   const { id } = useParams<{ id: string }>();
@@ -22,11 +23,15 @@ const ListProducts = () => {
     <>
       <Header />
       <TheContentMain>
-        <div>
-          {data?.map((prod) => {
-            return <h1 key={prod.id}>{prod.name}</h1>;
-          })}
-        </div>
+        {data?.map((product) => {
+          return (
+            <CardProduct
+              key={product.id}
+              name={product.name}
+              price={product.price}
+            />
+          );
+        })}
       </TheContentMain>
     </>
   );

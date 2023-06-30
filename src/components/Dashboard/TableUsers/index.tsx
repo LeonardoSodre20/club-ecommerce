@@ -1,5 +1,5 @@
 // STYLE
-import { Table, Th, THead, Tr } from "./styles";
+import * as S from "./styles";
 
 // TYPES
 import { IPropsTableUsers } from "./types";
@@ -15,19 +15,19 @@ const TableUsers = ({
 }: IPropsTableUsers) => {
   return (
     <>
-      <Table>
-        <THead>
-          <Tr>
-            <Th>{name}</Th>
-            <Th>{lastname}</Th>
-            <Th>{email}</Th>
-            <Th>{status}</Th>
-            <Th>{created_at}</Th>
-            <Th>{actions}</Th>
-          </Tr>
-        </THead>
+      <S.Table>
+        <S.THead>
+          <S.Tr>
+            <S.Th>{name}</S.Th>
+            <S.Th>{lastname}</S.Th>
+            <S.Th>{email}</S.Th>
+            <S.Th>{status}</S.Th>
+            <S.Th>{created_at}</S.Th>
+            <S.Th>{actions}</S.Th>
+          </S.Tr>
+        </S.THead>
         {children}
-      </Table>
+      </S.Table>
     </>
   );
 };

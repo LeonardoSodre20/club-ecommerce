@@ -1,5 +1,6 @@
 // STYLES
 import {
+  ContainerInicialLetter,
   ContainerProfile,
   HeaderContent,
   ImageProfile,
@@ -23,10 +24,23 @@ const HeaderAdmin = ({ title, placeholder }: IPropsHeaderAdmin) => {
       <InputSearch placeholder={placeholder} />
       <ModalNewProduct textButton="Novo Produto" />
 
-      <ContainerProfile>
-        <ImageProfile src={user?.avatar} alt="profile-picture" loading="lazy" />
-        <NameUser>{`${user?.name} ${user?.lastname}`}</NameUser>
-      </ContainerProfile>
+      {user?.avatar ? (
+        <ContainerProfile>
+          <ImageProfile
+            src={user?.avatar}
+            alt="profile-picture"
+            loading="lazy"
+          />
+          <NameUser>{`${user?.name} ${user?.lastname}`}</NameUser>
+        </ContainerProfile>
+      ) : (
+        <ContainerProfile>
+          <ContainerInicialLetter>
+            {user?.name.charAt(0)}
+          </ContainerInicialLetter>
+          <NameUser>{`${user?.name} ${user?.lastname}`}</NameUser>
+        </ContainerProfile>
+      )}
     </HeaderContent>
   );
 };

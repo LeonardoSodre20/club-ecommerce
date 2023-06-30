@@ -5,5 +5,5 @@ export const FormControl = styled.form`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 2.5em;
+  gap: 2.2em;
 `;

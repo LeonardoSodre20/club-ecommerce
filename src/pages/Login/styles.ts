@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { weightFonts } from "../../styles/weight";
 import { BsGoogle } from "react-icons/bs";
+import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 
 interface IPropsLoginStyles {
   bgColorButton?: string;
@@ -38,6 +39,10 @@ export const ContainerMainInfo = styled.div`
   gap: 1em;
 
   width: 550px;
+
+  @media (max-width: 600px) {
+    width: 350px;
+  }
 `;
 
 export const TitleMainLogin = styled.h1`
@@ -80,6 +85,10 @@ export const ButtonLogin = styled.button`
     border: 1px solid ${colors.black};
     color: ${colors.black};
   }
+
+  @media (max-width: 600px) {
+    width: 350px;
+  }
 `;
 
 export const SubDescriptionLogin = styled.p`
@@ -91,6 +100,10 @@ export const SubDescriptionLogin = styled.p`
   border-bottom: 1px solid ${colors.darkGrey};
   text-align: center;
   width: 90%;
+
+  @media (max-width: 600px) {
+    width: 350px;
+  }
 `;
 
 // Formulário
@@ -110,15 +123,35 @@ export const IconGoogle = styled(BsGoogle)`
   color: ${colors.white};
 `;
 
-export const RedirectResetPasswordSteps = styled.p`
+export const ContainerInfoHelp = styled.div`
   color: ${colors.black};
+  justify-content: space-evenly;
+  display: flex;
+  position: absolute;
+  top: 140px;
+  width: 100%;
   font-weight: ${weightFonts.w600};
   font-size: 0.8em;
-  position: absolute;
-  top: 143px;
+  cursor: pointer;
 
   > strong {
     margin-left: 7px;
     cursor: pointer;
   }
+`;
+
+export const IconEyeInvisible = styled(AiFillEyeInvisible)`
+  color: ${colors.darkGrey};
+  font-size: 1.8em;
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+`;
+
+export const IconEyeVisible = styled(AiFillEye)`
+  color: ${colors.darkGrey};
+  font-size: 1.8em;
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
 `;

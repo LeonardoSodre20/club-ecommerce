@@ -1,17 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
-
-// TYPES
-import { IProducts } from "@src/pages/Admin/Products/types";
-
 // STYLE
-import {
-  IconDelete,
-  MainContainerDashboard,
-  Table,
-  Td,
-  Th,
-  Tr,
-} from "./styles";
+import * as S from "./styles";
 
 // COMPONENTS
 import HeaderAdmin from "@src/components/Dashboard/Header";
@@ -19,74 +7,57 @@ import HeaderAdmin from "@src/components/Dashboard/Header";
 // FORMATTERS
 import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
 
-// PROVIDER
-import providerProducts from "@src/providers/Products/provider.products";
+// COMPONENTS
 import ModalEditProduct from "@src/components/Dashboard/ModalEditProduct";
 
-const Products = () => {
-  const queryClient = useQueryClient();
-  const { data } = useQuery<IProducts[]>(["product"], () => {
-    return providerProducts.handleGetAllProducts();
-  });
+// HOOKS
+import useProduct from "@src/hooks/useProduct";
 
-  const handleDeleteProductById = useMutation(
-    (id: string) => {
-      return providerProducts.handleDeleteProductById(id);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["product"] });
-      },
-    }
-  );
+const Products = () => {
+  const { data, handleDeleteProductById } = useProduct();
 
   return (
-    <MainContainerDashboard>
+    <S.MainContainerDashboard>
       <HeaderAdmin
         title="Produtos"
         placeholder="Pesquise por algum produto..."
       />
-      <Table>
+      <S.Table>
         <thead>
-          <Tr>
-            <Th width="280px">Nome do Produto</Th>
-            <Th>Quantidade</Th>
-            <Th>Status</Th>
-            <Th>Preço</Th>
-            <Th>Acões</Th>
-          </Tr>
+          <S.Tr>
+            <S.Th width="280px">Nome do Produto</S.Th>
+            <S.Th>Quantidade</S.Th>
+            <S.Th>Status</S.Th>
+            <S.Th>Preço</S.Th>
+            <S.Th>Acões</S.Th>
+          </S.Tr>
         </thead>
         <tbody>
           {data?.map((prod) => {
             return (
-              <Tr key={prod["id"]}>
-                <Td width="280px">{prod["name"]}</Td>
-                <Td>{prod["quantity"]}</Td>
-                <Td
+              <S.Tr key={prod["id"]}>
+                <S.Td width="280px">{prod["name"]}</S.Td>
+                <S.Td>{prod["quantity"]}</S.Td>
+                <S.Td
                   color={
                     prod["status"] === "Disponível" ? "#4BB543" : "#f10000"
                   }
                 >
                   {prod["status"]}
-                </Td>
-                <Td>
-                  {parseFloat(prod["price"]).toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </Td>
-                <Td>
+                </S.Td>
+                <S.Td>{formatCurrecyForBrl(Number(prod["price"]))}</S.Td>
+                <S.Td>
                   <ModalEditProduct />
-                  <IconDelete
+                  <S.IconDelete
                     onClick={() => handleDeleteProductById.mutate(prod["id"])}
                   />
-                </Td>
-              </Tr>
+                </S.Td>
+              </S.Tr>
             );
           })}
         </tbody>
-      </Table>
-    </MainContainerDashboard>
+      </S.Table>
+    </S.MainContainerDashboard>
   );
 };
 

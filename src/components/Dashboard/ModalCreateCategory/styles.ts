@@ -4,7 +4,6 @@ import styled from "styled-components";
 import { IoMdClose } from "react-icons/io";
 import { ImUpload } from "react-icons/im";
 
-
 // VARIABLES
 import { colors } from "@src/styles/colors";
 import { weightFonts } from "@src/styles/weight";
@@ -44,6 +43,7 @@ export const ButtonNewCategory = styled.button`
   padding: 0.8rem;
   width: 170px;
   cursor: pointer;
+  position: relative;
 `;
 
 export const TitleDescriptionCategory = styled.h1`
@@ -102,4 +102,3 @@ export const UploadIcon = styled(ImUpload)`
   color: ${colors.white};
   font-size: 1.5em;
 `;
-

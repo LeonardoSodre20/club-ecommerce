@@ -1,27 +1,17 @@
-import { ChangeEvent, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { ChangeEvent } from "react";
 
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import schemaProduct from "@src/validations/Products";
+// HOOKS
+import useProduct from "@src/hooks/useProduct";
+import useCategory from "@src/hooks/useCategory";
 
 // FORMATTERS
 import { formatCurrency } from "@src/utils/currencyMask";
 
 // STYLES
-import {
-  BtnCloseModal,
-  ButtonNewProduct,
-  ButtonSubmitProducts,
-  ContainerSelect,
-  LabelSelect,
-  SelectProducts,
-  TitleDescriptionModal,
-} from "./styles";
+import * as S from "./styles";
 
 // TYPES
-import { IPropsModalComponent, IPropsProduct } from "./types";
-import { ICategoryTypes } from "@src/types/CategoriesTypes";
+import { IPropsModalComponent } from "./types";
 
 // COMPONENTS
 import InputBase from "@src/components/InputBase";
@@ -29,106 +19,50 @@ import ModalBase from "../ModalBase";
 import TooltipError from "@src/components/Tooltips/ErrorTooltip";
 import FormControlGeneric from "../ModalBase/FormControl";
 
-// PROVIDER
-import providerProducts from "@src/providers/Products/provider.products";
-import providerCategories from "@src/providers/Categories/provider.categories";
-
-const defaultValues: IPropsProduct = {
-  name: "",
-  quantity: null,
-  status: "",
-  price: "",
-  categoryName: "",
-};
-
 const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
-  const queryClient = useQueryClient();
-  const [open, setOpen] = useState<boolean>(false);
   const {
-    register,
-    handleSubmit,
     setValue,
-    watch,
-    reset,
-    clearErrors,
-    formState: { errors, isSubmitting },
-  } = useForm<IPropsProduct>({
-    mode: "onChange",
-    defaultValues: defaultValues,
-    shouldFocusError: true,
-    resolver: yupResolver(schemaProduct),
-  });
+    handleSubmit,
+    errors,
+    setOpen,
+    open,
+    handleClearValuesAndErrorsForms,
+    register,
+    handleCreateProduct,
+    setImage,
+    isSubmitting,
+  } = useProduct();
 
-  const values = watch();
+  const { data } = useCategory();
 
   const handleFormatCurrency = (ev: ChangeEvent<HTMLInputElement>) => {
     const value = ev.target.value;
     setValue("price", formatCurrency(value));
   };
 
-  const handleClearValuesAndErrorsForms = () => {
-    const clearValuesForms = reset({
-      name: "",
-      quantity: null,
-      status: "",
-      price: "",
-      categoryName: "",
-    });
-
-    const clearErrorsForms = clearErrors([
-      "name",
-      "quantity",
-      "status",
-      "price",
-      "categoryName",
-    ]);
-
-    return {
-      clearValuesForms,
-      clearErrorsForms,
-    };
-  };
-
-  const createNewProduct: any = useMutation({
-    mutationFn: () => {
-      return providerProducts.handleCreateNewProduct({
-        name: values.name,
-        quantity: Number(values.quantity),
-        status: values.status,
-        price: values.price,
-        categoryName: values.categoryName,
-      });
-    },
-    onSuccess: () => {
-      setOpen(false);
-      queryClient.invalidateQueries({ queryKey: ["product"] });
-      handleClearValuesAndErrorsForms();
-    },
-  });
-
-  const { data } = useQuery<ICategoryTypes[]>(["categories"], () => {
-    return providerCategories.handleGetAllCategories();
-  });
-
   return (
     <>
-      <ButtonNewProduct
+      <S.ButtonNewProduct
         onClick={() => {
           setOpen(!open);
         }}
       >
         {textButton}
-      </ButtonNewProduct>
+      </S.ButtonNewProduct>
       {open ? (
         <ModalBase isVisible={open}>
-          <BtnCloseModal
+          <S.BtnCloseModal
             onClick={() => {
               setOpen(false);
               handleClearValuesAndErrorsForms();
             }}
           />
-          <FormControlGeneric onSubmit={handleSubmit(createNewProduct.mutate)}>
-            <TitleDescriptionModal>Cadastro de Produtos</TitleDescriptionModal>
+          <FormControlGeneric
+            onSubmit={handleSubmit(handleCreateProduct.mutate)}
+          >
+            <S.TitleDescriptionModal>
+              Cadastro de Produtos
+            </S.TitleDescriptionModal>
 
             <InputBase
               width="600px"
@@ -138,7 +72,6 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
               error={errors.name}
             />
             <InputBase
-              type="number"
               width="600px"
               label="Quantidade do Produto"
               placeholder="Digite o peso do produto..."
@@ -146,21 +79,21 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
               {...register("quantity")}
             />
 
-            <ContainerSelect>
-              <LabelSelect>Status do Produto</LabelSelect>
-              <SelectProducts
+            <S.ContainerSelect>
+              <S.LabelSelect>Status do Produto</S.LabelSelect>
+              <S.SelectProducts
                 {...register("status")}
                 placeholder="Selecione..."
               >
                 <option value="">Selecione...</option>
                 <option value="Disponível">Disponível</option>
                 <option value="Indisponível">Indisponível</option>
-              </SelectProducts>
+              </S.SelectProducts>
 
               {errors?.status && (
                 <TooltipError>{errors?.status?.message}</TooltipError>
               )}
-            </ContainerSelect>
+            </S.ContainerSelect>
             <InputBase
               type="text"
               width="600px"
@@ -171,9 +104,9 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
               onChange={(ev) => handleFormatCurrency(ev)}
             />
 
-            <ContainerSelect>
-              <LabelSelect>Categoria do Produto</LabelSelect>
-              <SelectProducts
+            <S.ContainerSelect>
+              <S.LabelSelect>Categoria do Produto</S.LabelSelect>
+              <S.SelectProducts
                 {...register("categoryName")}
                 placeholder="Selecione..."
               >
@@ -185,21 +118,36 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
                     </option>
                   );
                 })}
-              </SelectProducts>
+              </S.SelectProducts>
 
               {errors?.status && (
                 <TooltipError>{errors?.categoryName?.message}</TooltipError>
               )}
-            </ContainerSelect>
+            </S.ContainerSelect>
+
+            <S.InputUploadPicture
+              htmlFor="inputImage"
+              placeholder="Insira a imagem aqui"
+            />
+            <S.InputContainer
+              type="file"
+              id="inputImage"
+              name="inputImage"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                if (e.target && e.target.files) {
+                  setImage(e.target.files[0]);
+                }
+              }}
+            />
 
             {isSubmitting ? (
-              <ButtonSubmitProducts type="submit" bgColor="#4BB543">
+              <S.ButtonSubmitProducts type="submit" bgColor="#4BB543">
                 Cadastrando...
-              </ButtonSubmitProducts>
+              </S.ButtonSubmitProducts>
             ) : (
-              <ButtonSubmitProducts type="submit">
+              <S.ButtonSubmitProducts type="submit">
                 Cadastrar
-              </ButtonSubmitProducts>
+              </S.ButtonSubmitProducts>
             )}
           </FormControlGeneric>
         </ModalBase>

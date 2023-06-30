@@ -1,0 +1,17 @@
+// TYPES
+import { IUser } from "@src/pages/Admin/Users/types";
+
+import providerUsers from "@src/providers/Users/provider.users";
+import { useQuery } from "react-query";
+
+const useUser = () => {
+  const { data } = useQuery<IUser[]>(["users"], () => {
+    return providerUsers.handleGetAllUsers();
+  });
+
+  return {
+    data,
+  };
+};
+
+export default useUser;

@@ -52,6 +52,19 @@ export const ImageProfile = styled.img`
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0, 0.15);
 `;
 
+export const ContainerInicialLetter = styled.div`
+  background-color: ${colors.black};
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 3px;
+  color: ${colors.white};
+  font-weight: ${weightFonts.w700};
+  font-size: 1.2em;
+`;
+
 export const NameUser = styled.h1`
   color: ${colors.black};
   font-size: 0.8em;

@@ -4,9 +4,10 @@ export interface IPropsModalComponent {
 
 export interface IPropsProduct {
   name: string;
-  quantity: number | null;
+  quantity: any;
   status: string;
   price: string;
+  image: File | null;
   categoryName: string;
 }
 

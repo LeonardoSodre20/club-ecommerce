@@ -4,6 +4,10 @@ import { colors } from "../../../styles/colors";
 // TYPES
 import { IPropsTableDefault } from "../../../components/Dashboard/Types/TablesTypes";
 
+type PropsTable = {
+  color?: string;
+};
+
 export const MainContainerUsers = styled.div`
   display: flex;
   align-items: center;
@@ -13,7 +17,7 @@ export const MainContainerUsers = styled.div`
 `;
 
 export const Td = styled.td`
-  color: ${colors.black};
+  color: ${({ color }: PropsTable) => color || `${colors.black}`};
   font-size: 0.8em;
   text-align: center;
   padding: 0.6rem;

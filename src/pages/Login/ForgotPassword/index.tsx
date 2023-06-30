@@ -12,19 +12,10 @@ import NavBarSteps from "@src/components/Login/NavBarSteps";
 import PinInput from "react-pin-input";
 
 // STYLES
-import {
-  ArrowLeftPreviousStep,
-  ButtonNextStep,
-  ContainerInfoReset,
-  ContainerTitle,
-  FormControl,
-  MainContainerStepsResetPassword,
-  TextDescriptionReset,
-  TitleMain,
-} from "./styles";
+import * as S from "./styles";
 
 // TYPES
-import { IPropsReset } from "@src/interfaces/ResetPassword";
+import { IPropsReset } from "./types";
 
 // SERVICES
 import { api } from "@src/services/api";
@@ -117,19 +108,19 @@ const ForgotPasswordStepsToSteps = () => {
     <>
       <Header />
 
-      <MainContainerStepsResetPassword>
+      <S.MainContainerStepsResetPassword>
         <NavBarSteps nextStepsCount={pagesCount} />
         {pagesCount === 0 ? (
           <>
-            <FormControl
+            <S.FormControl
               onSubmit={handleSubmit(handleSubmitEmail)}
               as={motion.form}
               initial={{ opacity: 0, x: 35 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ ease: "linear", duration: 0.7 }}
             >
-              <ContainerInfoReset>
-                <ContainerTitle>
+              <S.ContainerInfoReset>
+                <S.ContainerTitle>
                   <button
                     style={{
                       outline: "none",
@@ -139,14 +130,14 @@ const ForgotPasswordStepsToSteps = () => {
                     onClick={() => handlePreviousStep()}
                     disabled={pagesCount <= 0}
                   >
-                    <ArrowLeftPreviousStep />
+                    <S.ArrowLeftPreviousStep />
                   </button>
-                  <TitleMain>Recuperação de senha</TitleMain>
-                </ContainerTitle>
-                <TextDescriptionReset>
+                  <S.TitleMain>Recuperação de senha</S.TitleMain>
+                </S.ContainerTitle>
+                <S.TextDescriptionReset>
                   Para avançar para as próximas etapas , precisamos do e-mail de
                   cadastro da conta
-                </TextDescriptionReset>
+                </S.TextDescriptionReset>
                 <InputBase
                   type="email"
                   label="E-mail"
@@ -155,23 +146,23 @@ const ForgotPasswordStepsToSteps = () => {
                   error={errors.email}
                   {...register("email")}
                 />
-              </ContainerInfoReset>
-              <ButtonNextStep type="submit">Enviar</ButtonNextStep>
-            </FormControl>
+              </S.ContainerInfoReset>
+              <S.ButtonNextStep type="submit">Enviar</S.ButtonNextStep>
+            </S.FormControl>
           </>
         ) : (
           <>
             {pagesCount === 1 ? (
               <>
-                <FormControl
+                <S.FormControl
                   onSubmit={handleSubmit(handleVerifyToken)}
                   as={motion.form}
                   initial={{ opacity: 0, x: 35 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ ease: "linear", duration: 0.7 }}
                 >
-                  <TitleMain>Recuperação de senha</TitleMain>
-                  <ContainerInfoReset>
+                  <S.TitleMain>Recuperação de senha</S.TitleMain>
+                  <S.ContainerInfoReset>
                     <PinInput
                       secret
                       type="custom"
@@ -185,24 +176,24 @@ const ForgotPasswordStepsToSteps = () => {
                         setValue("token", e);
                       }}
                     />
-                  </ContainerInfoReset>
+                  </S.ContainerInfoReset>
 
-                  <ButtonNextStep type="submit">Enviar</ButtonNextStep>
-                </FormControl>
+                  <S.ButtonNextStep type="submit">Enviar</S.ButtonNextStep>
+                </S.FormControl>
               </>
             ) : (
               <>
                 {pagesCount === 2 ? (
                   <>
-                    <FormControl
+                    <S.FormControl
                       onSubmit={handleSubmit(handleSubmitPassword)}
                       as={motion.form}
                       initial={{ opacity: 0, x: 35 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ ease: "linear", duration: 0.7 }}
                     >
-                      <TitleMain>Recuperação de senha</TitleMain>
-                      <ContainerInfoReset>
+                      <S.TitleMain>Recuperação de senha</S.TitleMain>
+                      <S.ContainerInfoReset>
                         <InputBase
                           type="password"
                           label="Nova senha"
@@ -216,23 +207,25 @@ const ForgotPasswordStepsToSteps = () => {
                           width="500px"
                           placeholder="Confirme sua nova senha..."
                         />
-                      </ContainerInfoReset>
+                      </S.ContainerInfoReset>
 
                       {isSubmitting ? (
-                        <ButtonNextStep type="submit" bgColor="#4bb543">
+                        <S.ButtonNextStep type="submit" bgColor="#4bb543">
                           Cadastrando
-                        </ButtonNextStep>
+                        </S.ButtonNextStep>
                       ) : (
-                        <ButtonNextStep type="submit">Cadastrar</ButtonNextStep>
+                        <S.ButtonNextStep type="submit">
+                          Cadastrar
+                        </S.ButtonNextStep>
                       )}
-                    </FormControl>
+                    </S.FormControl>
                   </>
                 ) : null}
               </>
             )}
           </>
         )}
-      </MainContainerStepsResetPassword>
+      </S.MainContainerStepsResetPassword>
     </>
   );
 };

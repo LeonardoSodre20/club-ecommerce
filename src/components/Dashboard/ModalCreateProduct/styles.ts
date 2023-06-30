@@ -98,9 +98,18 @@ export const ButtonSubmitProducts = styled.button`
   width: 250px;
 `;
 
-export const InputUploadPicture = styled.div`
-  background-color: ${colors.ligthGray};
+export const InputUploadPicture = styled.label`
+  background-color: ${colors.black};
   padding: 10px;
   border-radius: 15px;
+  cursor: pointer;
   width: 250px;
+  color: ${colors.white};
+`;
+
+export const InputContainer = styled.input`
+  display: none;
+  ::placeholder {
+    color: ${colors.white};
+  }
 `;

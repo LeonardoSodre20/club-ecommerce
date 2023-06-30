@@ -1,42 +1,27 @@
-import { forwardRef, ForwardRefRenderFunction, useState } from "react";
+import { forwardRef, ForwardRefRenderFunction } from "react";
+
+// COMPONENTS
 import TooltipError from "../Tooltips/ErrorTooltip";
 
-import {
-  ContainerInput,
-  ContainerInputWithType,
-  IconEyeInvisible,
-  IconEyeVisible,
-  Input,
-  Label,
-} from "./styles";
+// STYLES
+import * as S from "./styles";
 
 // TYPES
 import { IPropsInput } from "./types";
 
 const InputBase: ForwardRefRenderFunction<HTMLInputElement, IPropsInput> = (
-  { error, label, type, width, ...rest },
+  { error, label, type = "text", width, iconRight, ...rest },
   ref
 ) => {
-  const [typeInput, setTypeInput] = useState<string>("password");
   return (
-    <ContainerInput>
-      <Label>{label}</Label>
-      {type === "password" ? (
-        <ContainerInputWithType>
-          <Input type={typeInput} {...rest} width={width} ref={ref} />
-          {typeInput === "password" ? (
-            <IconEyeInvisible onClick={() => setTypeInput("text")} />
-          ) : (
-            <IconEyeVisible onClick={() => setTypeInput("password")} />
-          )}
-        </ContainerInputWithType>
-      ) : (
-        <Input type={type} {...rest} width={width} ref={ref} />
-      )}
+    <S.ContainerInput>
+      <S.Label>{label}</S.Label>
+      <S.Input type={type} width={width} ref={ref} {...rest} />
+      <>{iconRight && iconRight()}</>
       {error && error.message ? (
         <TooltipError>{error.message}</TooltipError>
       ) : null}
-    </ContainerInput>
+    </S.ContainerInput>
   );
 };
 

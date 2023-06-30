@@ -5,13 +5,7 @@ import { useNavigate } from "react-router-dom";
 import schemaCreateAccount from "@src/validations/CreateUserValidation";
 
 // STYLES
-import {
-  ButtonCreateAccount,
-  ContainerInputsForms,
-  ContainerMainAccount,
-  FormControl,
-  TitleFormMain,
-} from "./styles";
+import * as S from "./styles";
 
 // COMPONENTS
 import ToastMessage from "@src/components/Dashboard/ToastMessage";
@@ -40,17 +34,6 @@ const CreateAccount = () => {
     redirect ? navigate("/login") : false;
   }, 2500);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<IPropsInputsCreateAccount>({
-    mode: "onChange",
-    defaultValues: valuesDefault,
-    resolver: yupResolver(schemaCreateAccount),
-    shouldFocusError: true,
-  });
-
   const handleSubmitCreateAccount: SubmitHandler<
     IPropsInputsCreateAccount
   > = async (data) => {
@@ -63,14 +46,25 @@ const CreateAccount = () => {
     }
   };
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<IPropsInputsCreateAccount>({
+    mode: "onChange",
+    defaultValues: valuesDefault,
+    resolver: yupResolver(schemaCreateAccount),
+    shouldFocusError: true,
+  });
+
   return (
     <>
       <Header />
-      <ContainerMainAccount>
-        <FormControl onSubmit={handleSubmit(handleSubmitCreateAccount)}>
-          <TitleFormMain>Crie sua conta</TitleFormMain>
+      <S.ContainerMainAccount>
+        <S.FormControl onSubmit={handleSubmit(handleSubmitCreateAccount)}>
+          <S.TitleFormMain>Crie sua conta</S.TitleFormMain>
 
-          <ContainerInputsForms>
+          <S.ContainerInputsForms>
             <InputBase
               label="Nome"
               width="500px"
@@ -112,17 +106,19 @@ const CreateAccount = () => {
               error={errors.confirmPassword}
               {...register("confirmPassword")}
             />
-          </ContainerInputsForms>
+          </S.ContainerInputsForms>
 
           {isSubmitting ? (
-            <ButtonCreateAccount type="submit" bgColor="#4bb543">
+            <S.ButtonCreateAccount type="submit" bgColor="#4bb543">
               Criando...
-            </ButtonCreateAccount>
+            </S.ButtonCreateAccount>
           ) : (
-            <ButtonCreateAccount type="submit">Criar conta</ButtonCreateAccount>
+            <S.ButtonCreateAccount type="submit">
+              Criar conta
+            </S.ButtonCreateAccount>
           )}
-        </FormControl>
-      </ContainerMainAccount>
+        </S.FormControl>
+      </S.ContainerMainAccount>
     </>
   );
 };

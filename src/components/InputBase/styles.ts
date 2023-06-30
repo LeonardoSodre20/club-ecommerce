@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { weightFonts } from "../../styles/weight";
-import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
+
 
 interface IPropsInput {
   width?: string;
@@ -34,6 +34,10 @@ export const Input = styled.input`
   :focus {
     background-color: ${colors.focusColor};
   }
+
+  @media (max-width: 600px) {
+    width: 350px;
+  }
 `;
 
 export const Label = styled.label`
@@ -57,20 +61,4 @@ export const ContainerInputWithType = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-`;
-
-export const IconEyeInvisible = styled(AiFillEyeInvisible)`
-  color: ${colors.darkGrey};
-  font-size: 1.8em;
-  position: absolute;
-  right: 20px;
-  cursor: pointer;
-`;
-
-export const IconEyeVisible = styled(AiFillEye)`
-  color: ${colors.darkGrey};
-  font-size: 1.8em;
-  position: absolute;
-  right: 20px;
-  cursor: pointer;
 `;

@@ -1,6 +1,4 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-import schema from "@src/validations/LoginValidation";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // COMPONENTS
@@ -8,64 +6,40 @@ import Header from "@src/components/Header";
 import InputBase from "@src/components/InputBase";
 
 // STYLES
-import {
-  ButtonLogin,
-  ContainerMainInfo,
-  ContainerMainLogin,
-  FormControlLogin,
-  IconGoogle,
-  RedirectResetPasswordSteps,
-  SubDescriptionLogin,
-  TextButton,
-  TitleMainLogin,
-} from "./styles";
+import * as S from "./styles";
 
 // HOOKS
-import { useAuth } from "@src/hooks/useAuth";
-
-// TYPES
-import { IPropsFormsLogin } from "@src/types/Login";
-import { ChangeEvent, useEffect } from "react";
-
-const valuesDefault: IPropsFormsLogin = {
-  email: "",
-  password: "",
-};
+import useForm from "@src/hooks/useForm";
 
 const Login = () => {
-  const { Login } = useAuth();
   const navigate = useNavigate();
+  const [typeInput, setTypeInput] = useState<string>("password");
 
   const {
-    setValue,
     handleSubmit,
+    handleLoginSubmit,
     register,
-    formState: { errors, isSubmitting },
-  } = useForm<IPropsFormsLogin>({
-    defaultValues: valuesDefault,
-    mode: "onSubmit",
-    shouldFocusError: true,
-    resolver: yupResolver(schema),
-  });
-  const handleLoginSubmit: SubmitHandler<IPropsFormsLogin> = (data) => {
-    const { email, password } = data;
-    Login(email, password);
-  };
+    setValue,
+    errors,
+    isSubmitting,
+  } = useForm();
 
   return (
     <>
       <Header />
-      <ContainerMainLogin>
-        <ContainerMainInfo>
-          <TitleMainLogin>Entre com sua conta</TitleMainLogin>
-          <ButtonLogin>
-            <IconGoogle />
-            <TextButton>Entre com o google</TextButton>
-          </ButtonLogin>
-          <SubDescriptionLogin>ou entre com o seu e-mail</SubDescriptionLogin>
-        </ContainerMainInfo>
+      <S.ContainerMainLogin>
+        <S.ContainerMainInfo>
+          <S.TitleMainLogin>Entre com sua conta</S.TitleMainLogin>
+          <S.ButtonLogin>
+            <S.IconGoogle />
+            <S.TextButton>Entre com o google</S.TextButton>
+          </S.ButtonLogin>
+          <S.SubDescriptionLogin>
+            ou entre com o seu e-mail
+          </S.SubDescriptionLogin>
+        </S.ContainerMainInfo>
 
-        <FormControlLogin onSubmit={handleSubmit(handleLoginSubmit)}>
+        <S.FormControlLogin onSubmit={handleSubmit(handleLoginSubmit)}>
           <InputBase
             label="E-mail"
             width="500px"
@@ -77,12 +51,19 @@ const Login = () => {
             }}
           />
           <InputBase
-            type="password"
+            type={typeInput}
             label="Senha"
             width="500px"
             placeholder="Digite sua senha..."
             error={errors.password}
             {...register("password")}
+            iconRight={() =>
+              typeInput.includes("password") ? (
+                <S.IconEyeInvisible onClick={() => setTypeInput("text")} />
+              ) : (
+                <S.IconEyeVisible onClick={() => setTypeInput("password")} />
+              )
+            }
             onPaste={(e) => {
               setValue(
                 "password",
@@ -91,22 +72,21 @@ const Login = () => {
             }}
           />
 
-          <RedirectResetPasswordSteps>
-            Esqueceu sua senha ?
-            <strong onClick={() => navigate("/resetPassword")}>
-              Clique aqui.
-            </strong>
-          </RedirectResetPasswordSteps>
+          <S.ContainerInfoHelp>
+            <p onClick={() => navigate("/resetPassword")}>
+              Esqueceu sua senha ? Clique aqui !
+            </p>
+          </S.ContainerInfoHelp>
 
           {isSubmitting ? (
-            <ButtonLogin type="submit" bgColorButton="#4bb543">
+            <S.ButtonLogin type="submit" bgColorButton="#4bb543">
               Entrando...
-            </ButtonLogin>
+            </S.ButtonLogin>
           ) : (
-            <ButtonLogin type="submit">Entrar</ButtonLogin>
+            <S.ButtonLogin type="submit">Entrar</S.ButtonLogin>
           )}
-        </FormControlLogin>
-      </ContainerMainLogin>
+        </S.FormControlLogin>
+      </S.ContainerMainLogin>
     </>
   );
 };
