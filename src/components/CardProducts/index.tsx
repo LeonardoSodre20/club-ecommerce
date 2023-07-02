@@ -2,14 +2,18 @@
 import { IProductsProps } from "./types";
 
 // STYLES
-import { Container, PriceProduct, TitleProduct } from "./styles";
+import * as S from "./styles";
 
-const CardProduct = ({ name, price }: IProductsProps) => {
+// FORMATTERS
+import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
+
+const CardProduct = ({ name, price, image }: IProductsProps) => {
   return (
-    <Container>
-      <TitleProduct>{name}</TitleProduct>
-      <PriceProduct>{price}</PriceProduct>
-    </Container>
+    <S.Container>
+      <S.TitleProduct>{name}</S.TitleProduct>
+      <S.PriceProduct>{formatCurrecyForBrl(price)}</S.PriceProduct>
+      <S.ImageProduct src={image} alt="image-product" />
+    </S.Container>
   );
 };
 

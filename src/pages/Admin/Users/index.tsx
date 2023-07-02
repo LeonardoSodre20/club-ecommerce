@@ -8,10 +8,10 @@ import * as S from "./styles";
 import TableUsers from "@src/components/Dashboard/TableUsers";
 
 // HOOKS
-import useUser from "@src/hooks/useUser";
+import useClient from "@src/hooks/useClient";
 
 const Users = () => {
-  const { data } = useUser();
+  const { data } = useClient();
 
   return (
     <S.MainContainerUsers>

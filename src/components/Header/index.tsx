@@ -2,18 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // STYLES
-import {
-  ButtonOpenMenuMobile,
-  ContainerHeader,
-  ContainerLinksHeader,
-  ContainerLinksResponsive,
-  ContainerShop,
-  CounterShop,
-  IconCart,
-  LinkItem,
-  LogoDescription,
-  SubContainerLinksResponsive,
-} from "./styles";
+import * as S from "./styles";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -26,38 +15,38 @@ const Header = () => {
 
   return (
     <>
-      <ContainerHeader>
-        <LogoDescription>CLUB CLOTHING</LogoDescription>
-        <ContainerLinksHeader>
-          <LinkItem onClick={() => navigate("/")}>Explorar</LinkItem>
-          <LinkItem onClick={() => navigate("/login")}>Login</LinkItem>
-          <LinkItem onClick={() => navigate("/createAccount")}>
+      <S.ContainerHeader>
+        <S.LogoDescription>CLUB CLOTHING</S.LogoDescription>
+        <S.ContainerLinksHeader>
+          <S.LinkItem onClick={() => navigate("/")}>Explorar</S.LinkItem>
+          <S.LinkItem onClick={() => navigate("/login")}>Login</S.LinkItem>
+          <S.LinkItem onClick={() => navigate("/createAccount")}>
             Criar Conta
-          </LinkItem>
-          <ContainerShop onClick={() => setShowSideBar(!showSideBar)}>
-            <IconCart />
-            <CounterShop>0</CounterShop>
-          </ContainerShop>
-        </ContainerLinksHeader>
+          </S.LinkItem>
+          <S.ContainerShop onClick={() => setShowSideBar(!showSideBar)}>
+            <S.IconCart />
+            <S.CounterShop>0</S.CounterShop>
+          </S.ContainerShop>
+        </S.ContainerLinksHeader>
 
-        <ButtonOpenMenuMobile onClick={() => handleOpenMenuMobile()} />
+        <S.ButtonOpenMenuMobile onClick={() => handleOpenMenuMobile()} />
 
         {openMenuMobile && (
-          <ContainerLinksResponsive>
-            <SubContainerLinksResponsive>
-              <LinkItem onClick={() => navigate("/")}>Explorar</LinkItem>
-              <LinkItem onClick={() => navigate("/login")}>Login</LinkItem>
-              <LinkItem onClick={() => navigate("/createAccount")}>
+          <S.ContainerLinksResponsive>
+            <S.SubContainerLinksResponsive>
+              <S.LinkItem onClick={() => navigate("/")}>Explorar</S.LinkItem>
+              <S.LinkItem onClick={() => navigate("/login")}>Login</S.LinkItem>
+              <S.LinkItem onClick={() => navigate("/createAccount")}>
                 Criar Conta
-              </LinkItem>
-              <ContainerShop onClick={() => setShowSideBar(!showSideBar)}>
-                <IconCart />
-                <CounterShop>0</CounterShop>
-              </ContainerShop>
-            </SubContainerLinksResponsive>
-          </ContainerLinksResponsive>
+              </S.LinkItem>
+              <S.ContainerShop onClick={() => setShowSideBar(!showSideBar)}>
+                <S.IconCart />
+                <S.CounterShop>0</S.CounterShop>
+              </S.ContainerShop>
+            </S.SubContainerLinksResponsive>
+          </S.ContainerLinksResponsive>
         )}
-      </ContainerHeader>
+      </S.ContainerHeader>
     </>
   );
 };

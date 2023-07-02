@@ -18,7 +18,11 @@ export const Container = styled.div`
   cursor: pointer;
 `;
 
-export const ImageProduct = styled.img``;
+export const ImageProduct = styled.img`
+  height: 250px;
+  width: 90%;
+  object-fit: contain;
+`;
 
 export const TitleProduct = styled.h1`
   color: ${colors.black};

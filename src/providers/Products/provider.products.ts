@@ -1,11 +1,15 @@
 import { api } from "@src/services/api";
+
 import ToastMessage from "@src/components/Dashboard/ToastMessage";
+
+// TYPES
 import { INewProduct } from "@src/types/NewProduct";
+import { ProductsRows } from "./types";
 
 export default {
   async handleGetAllProducts() {
     try {
-      const response = await api.get("/product", {
+      const response = await api.get<ProductsRows>("/product", {
         params: { pages: 0, limit: 10, search: "" },
       });
       return response?.data?.products;
@@ -18,6 +22,7 @@ export default {
     try {
       const response = await api.delete(`/product/${id}`);
       ToastMessage(response?.data?.message, "success");
+      return response?.data;
     } catch (err: any) {
       console.log(err?.response?.data?.message);
       ToastMessage(err?.response?.data?.message, "error");

@@ -43,21 +43,6 @@ const useProduct = () => {
 
   const values = watch();
 
-  const { data } = useQuery<IProducts[]>(["product"], () => {
-    return providerProducts.handleGetAllProducts();
-  });
-
-  const handleDeleteProductById = useMutation(
-    (id: string) => {
-      return providerProducts.handleDeleteProductById(id);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ["product"] });
-      },
-    }
-  );
-
   const handleClearValuesAndErrorsForms = () => {
     const clearValuesForms = reset({
       name: "",
@@ -80,6 +65,21 @@ const useProduct = () => {
       clearErrorsForms,
     };
   };
+
+  const { data } = useQuery(["product"], () => {
+    return providerProducts.handleGetAllProducts();
+  });
+
+  const handleDeleteProductById = useMutation(
+    (id: string) => {
+      return providerProducts.handleDeleteProductById(id);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries({ queryKey: ["product"] });
+      },
+    }
+  );
 
   const handleCreateProduct: any = useMutation<IPropsProduct>({
     mutationFn: () => {

@@ -4,5 +4,6 @@ export interface IProducts {
   quantity: number;
   status: string;
   price: string;
+  image?: string;
   created_at: string;
 }

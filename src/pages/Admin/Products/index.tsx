@@ -45,7 +45,7 @@ const Products = () => {
                 >
                   {prod["status"]}
                 </S.Td>
-                <S.Td>{formatCurrecyForBrl(Number(prod["price"]))}</S.Td>
+                <S.Td>{formatCurrecyForBrl(prod["price"])}</S.Td>
                 <S.Td>
                   <ModalEditProduct />
                   <S.IconDelete
