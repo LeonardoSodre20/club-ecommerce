@@ -20,35 +20,15 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  async function verifyTokenJWT() {
-    try {
-      const token = localStorage.getItem("@App:token");
-      const response = await api.post(`/auth/verifyToken/${token}`);
-      ToastMessage(response?.data?.message, "success");
-    } catch (err: any) {
-      if (err?.response?.data?.auth === false) {
-        ToastMessage(`${err?.response?.data?.message}`, "success");
-        navigate("/login");
-        localStorage.removeItem("@App:_user");
-        localStorage.removeItem("@App:token");
-      }
-    }
-  }
-
-  useEffect(() => {
-    verifyTokenJWT();
-  }, []);
-
   useEffect(() => {
     const storagedUser = localStorage.getItem("@App:_user");
     const storagedToken = localStorage.getItem("@App:token");
 
     if (storagedToken && storagedUser) {
       const activeUser = JSON.parse(storagedUser);
-
+      api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
       setUser(activeUser);
       navigate("/dashboard");
-      api.defaults.headers.common.Authorization = `Bearer ${storagedToken}`;
     }
   }, []);
 
@@ -59,19 +39,13 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
         password: password,
       });
 
-      localStorage.setItem(
-        "@App:_user",
-        JSON.stringify(response.data.checkUserExist)
-      );
+      localStorage.setItem("@App:_user", JSON.stringify(response.data));
       localStorage.setItem("@App:token", response.data.token);
-      setUser(response.data.checkUserExist);
       api.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
+      setUser(response.data);
       setIsLoading(!isLoading);
 
-      if (
-        response?.data?.checkUserExist?.role === "Admin" &&
-        response?.status === 200
-      ) {
+      if (response?.data?.role === "Admin" && response?.status === 200) {
         navigate("/dashboard");
         ToastMessage(response?.data?.message, "success");
       }
@@ -86,7 +60,6 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     ToastMessage("Logout efetuado com sucesso !", "success");
     localStorage.removeItem("@App:_user");
     localStorage.removeItem("@App:token");
-    setIsLoading(false);
     console.log(isLoading);
   }
 

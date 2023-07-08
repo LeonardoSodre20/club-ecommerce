@@ -9,7 +9,6 @@ import schemaProduct from "@src/validations/Products";
 import providerProducts from "@src/providers/Products/provider.products";
 
 // TYPES
-import { IProducts } from "@src/pages/Admin/Products/types";
 import { IPropsProduct } from "@src/components/Dashboard/ModalCreateProduct/types";
 
 const defaultValues: IPropsProduct = {
@@ -43,6 +42,10 @@ const useProduct = () => {
 
   const values = watch();
 
+  const { data } = useQuery(["product"], () => {
+    return providerProducts.handleGetAllProducts("asc");
+  });
+
   const handleClearValuesAndErrorsForms = () => {
     const clearValuesForms = reset({
       name: "",
@@ -65,10 +68,6 @@ const useProduct = () => {
       clearErrorsForms,
     };
   };
-
-  const { data } = useQuery(["product"], () => {
-    return providerProducts.handleGetAllProducts();
-  });
 
   const handleDeleteProductById = useMutation(
     (id: string) => {

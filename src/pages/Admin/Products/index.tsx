@@ -14,7 +14,7 @@ import ModalEditProduct from "@src/components/Dashboard/ModalEditProduct";
 import useProduct from "@src/hooks/useProduct";
 
 const Products = () => {
-  const { data, handleDeleteProductById } = useProduct();
+  const { data } = useProduct();
 
   return (
     <S.MainContainerDashboard>
@@ -48,9 +48,7 @@ const Products = () => {
                 <S.Td>{formatCurrecyForBrl(prod["price"])}</S.Td>
                 <S.Td>
                   <ModalEditProduct />
-                  <S.IconDelete
-                    onClick={() => handleDeleteProductById.mutate(prod["id"])}
-                  />
+                  <S.IconDelete />
                 </S.Td>
               </S.Tr>
             );

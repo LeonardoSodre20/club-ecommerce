@@ -19,9 +19,9 @@ export const Container = styled.div`
 `;
 
 export const ImageProduct = styled.img`
-  height: 250px;
-  width: 90%;
-  object-fit: contain;
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
 `;
 
 export const TitleProduct = styled.h1`

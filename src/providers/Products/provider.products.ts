@@ -7,12 +7,13 @@ import { INewProduct } from "@src/types/NewProduct";
 import { ProductsRows } from "./types";
 
 export default {
-  async handleGetAllProducts() {
+  async handleGetAllProducts(orderBy: string) {
     try {
       const response = await api.get<ProductsRows>("/product", {
-        params: { pages: 0, limit: 10, search: "" },
+        params: { pages: 0, limit: 10, search: "", order: orderBy },
       });
-      return response?.data?.products;
+
+      return response?.data?.sortedList;
     } catch (err: any) {
       console.log(err?.response?.data?.message);
     }
