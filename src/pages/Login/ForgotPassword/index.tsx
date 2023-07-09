@@ -1,108 +1,31 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 // COMPONENTS
 import Header from "@src/components/Header";
 import InputBase from "@src/components/InputBase";
-import ToastMessage from "@src/components/Dashboard/ToastMessage";
+
 import NavBarSteps from "@src/components/Login/NavBarSteps";
 import PinInput from "react-pin-input";
 
 // STYLES
 import * as S from "./styles";
 
-// TYPES
-import { IPropsReset } from "./types";
-
-// SERVICES
-import { api } from "@src/services/api";
-
-// SCHEMA
-import schemaResetPassword from "@src/validations/ResetPasswordValidation";
-
-const initialValues: IPropsReset = {
-  email: "",
-  token: "",
-  password: "",
-};
+// HOOKS
+import useRecoverPassword from "@src/hooks/useRecoverPassword";
 
 const ForgotPasswordStepsToSteps = () => {
-  const [pagesCount, setPagesCount] = useState<number>(0);
-  const navigate = useNavigate();
-
   const {
-    register,
+    pagesCount,
     handleSubmit,
-    getValues,
+    handleSubmitEmail,
+    handlePreviousStep,
+    handleVerifyToken,
+    handleSubmitPassword,
+    errors,
+    register,
     setValue,
-    formState: { errors, isSubmitting },
-  } = useForm<IPropsReset>({
-    defaultValues: initialValues,
-    mode: "onSubmit",
-    shouldFocusError: true,
-    resolver: yupResolver(schemaResetPassword),
-  });
-
-  const handleRedirectUserForLoginPage = () => {
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
-  };
-
-  const handlePreviousStep = () => {
-    setPagesCount((prev) => prev - 1);
-  };
-
-  const handleSubmitEmail: SubmitHandler<IPropsReset> = async (data) => {
-    try {
-      const { email } = data;
-      const response = await api.post("/auth/forgot", {
-        email: email,
-      });
-      ToastMessage(response.data.message, "success");
-      setPagesCount(pagesCount + 1);
-      return response;
-    } catch (err: any) {
-      ToastMessage(err.response.data.message, "error");
-    }
-  };
-
-  const handleVerifyToken: SubmitHandler<IPropsReset> = async (data) => {
-    const { token } = data;
-    const email = getValues("email");
-
-    try {
-      const response = await api.post("/auth/token", {
-        email,
-        token,
-      });
-      ToastMessage(response.data.message, "success");
-      setPagesCount(pagesCount + 1);
-      return response;
-    } catch (err: any) {
-      ToastMessage(err.response.data.message, "error");
-    }
-  };
-
-  const handleSubmitPassword: SubmitHandler<IPropsReset> = async (data) => {
-    const email = getValues("email");
-    const { password } = data;
-
-    try {
-      const response = await api.post("/auth/reset", {
-        email: email,
-        password: password,
-      });
-      ToastMessage(response.data.message, "success");
-      handleRedirectUserForLoginPage();
-      return response.data;
-    } catch (err: any) {
-      return ToastMessage(err.response.data.message, "error");
-    }
-  };
+    isSubmitting,
+  } = useRecoverPassword();
 
   return (
     <>
