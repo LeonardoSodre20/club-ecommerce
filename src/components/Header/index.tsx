@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 // STYLES
 import * as S from "./styles";
 
+// HOOKS
+import useNotification from "@src/hooks/useNotification";
+
 const Header = () => {
+  const { handleEnableNotification } = useNotification();
   const navigate = useNavigate();
   const [showSideBar, setShowSideBar] = useState<boolean>(false);
   const [openMenuMobile, setOpenMobile] = useState<boolean>(false);
@@ -27,6 +31,7 @@ const Header = () => {
             <S.IconCart />
             <S.CounterShop>0</S.CounterShop>
           </S.ContainerShop>
+          <S.IconNotification onClick={() => handleEnableNotification()} />
         </S.ContainerLinksHeader>
 
         <S.ButtonOpenMenuMobile onClick={() => handleOpenMenuMobile()} />

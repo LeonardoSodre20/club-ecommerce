@@ -5,6 +5,7 @@ import { weightFonts } from "../../styles/weight";
 // ICONS
 import { FaCartArrowDown } from "react-icons/fa";
 import { IoMdMenu } from "react-icons/io";
+import { IoIosNotifications } from "react-icons/io";
 
 export const ContainerHeader = styled.section`
   display: flex;
@@ -78,6 +79,12 @@ export const CounterShop = styled.span`
   font-weight: ${weightFonts.w600};
   font-size: 1.2em;
   color: ${colors.white};
+`;
+
+export const IconNotification = styled(IoIosNotifications)`
+  color: ${colors.white};
+  font-size: 1.2em;
+  cursor: pointer;
 `;
 
 // RESPONSIVE
