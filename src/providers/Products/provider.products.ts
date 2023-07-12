@@ -4,16 +4,20 @@ import ToastMessage from "@src/components/Dashboard/ToastMessage";
 
 // TYPES
 import { INewProduct } from "@src/types/NewProduct";
-import { ProductsRows } from "./types";
 
 export default {
-  async handleGetAllProducts(orderBy: string) {
+  async handleGetAllProducts(
+    pages: number,
+    pageSize: number,
+    search: string,
+    order: string
+  ) {
     try {
-      const response = await api.get<ProductsRows>("/product", {
-        params: { pages: 0, limit: 10, search: "", order: orderBy },
+      const response = await api.get("/product", {
+        params: { pages: pages, limit: pageSize, search: search, order: order },
       });
 
-      return response?.data?.sortedList;
+      return response?.data?.products?.rows;
     } catch (err: any) {
       console.log(err?.response?.data?.message);
     }

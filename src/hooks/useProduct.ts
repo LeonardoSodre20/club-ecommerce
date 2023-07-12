@@ -10,6 +10,7 @@ import providerProducts from "@src/providers/Products/provider.products";
 
 // TYPES
 import { IPropsProduct } from "@src/components/Dashboard/ModalCreateProduct/types";
+import { IProducts } from "@src/pages/Admin/Products/types";
 
 const defaultValues: IPropsProduct = {
   name: "",
@@ -21,6 +22,10 @@ const defaultValues: IPropsProduct = {
 };
 
 const useProduct = () => {
+  const [pages, setPages] = useState<number>(0);
+  const [pageSize, setPageSize] = useState<number>(10);
+  const [search, setSearch] = useState<string>("");
+
   const queryClient = useQueryClient();
   const [open, setOpen] = useState<boolean>(false);
   const [image, setImage] = useState<File | null>(null);
@@ -41,10 +46,6 @@ const useProduct = () => {
   });
 
   const values = watch();
-
-  const { data } = useQuery(["product"], () => {
-    return providerProducts.handleGetAllProducts("asc");
-  });
 
   const handleClearValuesAndErrorsForms = () => {
     const clearValuesForms = reset({
@@ -68,6 +69,15 @@ const useProduct = () => {
       clearErrorsForms,
     };
   };
+
+  const { data } = useQuery<IProducts[]>(["product"], () => {
+    return providerProducts.handleGetAllProducts(
+      pages,
+      pageSize,
+      search,
+      "asc"
+    );
+  });
 
   const handleDeleteProductById = useMutation(
     (id: string) => {

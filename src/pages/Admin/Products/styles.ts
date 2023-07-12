@@ -77,17 +77,17 @@ export const Table = styled.table`
 
 export const Tr = styled.tr``;
 
-export const Th = styled.th`
+export const Th = styled.th<IPropsTable>`
   color: ${colors.black};
-  width: ${({ width }: IPropsTable) => width || "130px"};
+  width: ${({ width }) => width || "130px"};
   font-weight: ${weightFonts.w700};
   text-align: left;
 `;
 
-export const Td = styled.td`
-  color: ${({ color }: IPropsTable) => color || `${colors.black}`};
+export const Td = styled.td<IPropsTable>`
+  color: ${({ color }) => color || `${colors.black}`};
   background-color: ${colors.white};
-  width: ${({ width }: IPropsTable) => width || "130px"};
+  width: ${({ width }) => width || "130px"};
   font-weight: ${weightFonts.w400};
   padding: 0.5rem;
   border-radius: 0.5rem;
