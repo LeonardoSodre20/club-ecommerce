@@ -128,7 +128,9 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
             <S.InputUploadPicture
               htmlFor="inputImage"
               placeholder="Insira a imagem aqui"
-            />
+            >
+              Insira uma imagem...
+            </S.InputUploadPicture>
             <S.InputContainer
               type="file"
               id="inputImage"
@@ -140,15 +142,12 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
               }}
             />
 
-            {isSubmitting ? (
-              <S.ButtonSubmitProducts type="submit" bgColor="#4BB543">
-                Cadastrando...
-              </S.ButtonSubmitProducts>
-            ) : (
-              <S.ButtonSubmitProducts type="submit">
-                Cadastrar
-              </S.ButtonSubmitProducts>
-            )}
+            <S.ButtonNewProduct
+              type="submit"
+              color={isSubmitting ? "#4BB543" : ""}
+            >
+              {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+            </S.ButtonNewProduct>
           </FormControlGeneric>
         </ModalBase>
       ) : (

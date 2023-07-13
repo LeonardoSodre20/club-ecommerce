@@ -105,6 +105,7 @@ export const InputUploadPicture = styled.label`
   cursor: pointer;
   width: 250px;
   color: ${colors.white};
+  text-align: center;
 `;
 
 export const InputContainer = styled.input`

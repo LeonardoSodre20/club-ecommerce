@@ -16,7 +16,7 @@ export const ModalForegroundComponent = styled.div`
 `;
 
 export const ModalComponent = styled.div`
-  height: 95vh;
+  height: 90vh;
   width: 800px;
   background-color: ${colors.white} !important;
   border-radius: 1rem;
