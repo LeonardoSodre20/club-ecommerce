@@ -16,12 +16,12 @@ export const MainContainerUsers = styled.div`
   width: 100%;
 `;
 
-export const Td = styled.td`
+export const Td = styled.td<IPropsTableDefault>`
   color: ${({ color }: PropsTable) => color || `${colors.black}`};
   font-size: 0.8em;
   text-align: center;
   padding: 0.6rem;
   width: 180px;
-  font-weight: ${({ weight }: IPropsTableDefault) => weight || "200"};
+  font-weight: ${({ weight }) => weight || "200"};
   border: 1px solid rgba(0, 0, 0, 0.2);
 `;
