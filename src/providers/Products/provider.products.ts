@@ -16,7 +16,6 @@ export default {
       const response = await api.get("/product", {
         params: { pages: pages, limit: pageSize, search: search, order: order },
       });
-
       return response?.data?.products?.rows;
     } catch (err: any) {
       console.log(err?.response?.data?.message);

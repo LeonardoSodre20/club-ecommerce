@@ -58,7 +58,7 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
             }}
           />
           <FormControlGeneric
-            onSubmit={handleSubmit(handleCreateProduct.mutate)}
+            onSubmit={handleSubmit(handleCreateProduct)}
           >
             <S.TitleDescriptionModal>
               Cadastro de Produtos

@@ -7,7 +7,7 @@ export default {
     try {
       const response: AxiosResponse = await api.get("/users");
       ToastMessage(`${response?.data?.message}`, "success");
-      return response?.data.users;
+      return response?.data?.users?.rows;
     } catch (err: any) {
       console.log(err);
     }

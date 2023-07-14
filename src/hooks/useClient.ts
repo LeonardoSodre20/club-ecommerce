@@ -5,7 +5,7 @@ import providerUsers from "@src/providers/Users/provider.users";
 import { useQuery } from "react-query";
 
 const useClient = () => {
-  const { data } = useQuery<IUser[] | null>(["users"], () => {
+  const { data } = useQuery<IUser[]>(["users"], () => {
     return providerUsers.handleGetAllUsers();
   });
 

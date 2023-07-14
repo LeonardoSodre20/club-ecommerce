@@ -9,12 +9,13 @@ import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
 
 // COMPONENTS
 import ModalEditProduct from "@src/components/Dashboard/ModalEditProduct";
+import Pagination from "@src/components/Dashboard/Pagination";
 
 // HOOKS
 import useProduct from "@src/hooks/useProduct";
 
 const Products = () => {
-  const { data } = useProduct();
+  const { data, pages, pageSize, setPages } = useProduct();
 
   return (
     <S.MainContainerDashboard>
@@ -55,6 +56,7 @@ const Products = () => {
           })}
         </tbody>
       </S.Table>
+      <Pagination page={pages} setPage={setPages} pageSize={pageSize} />
     </S.MainContainerDashboard>
   );
 };
