@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import schemaProduct from "@src/validations/Products";
 
 // PROVIDER
-import providerProducts from "@src/providers/Products/provider.products";
+import providerProducts from "@src/services/providers/Products/provider.products";
 
 // TYPES
 import { IPropsProduct } from "@src/components/Dashboard/ModalCreateProduct/types";

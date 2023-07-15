@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { ICategoryTypes } from "@src/types/CategoriesTypes";
 
 // PROVIDER
-import providerCategories from "@src/providers/Categories/provider.categories";
+import providerCategories from "@src/services/providers/Categories/provider.categories";
 
 const useCategory = () => {
   const queryClient = useQueryClient();

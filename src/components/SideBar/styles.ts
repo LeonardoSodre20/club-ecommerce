@@ -97,7 +97,9 @@ export const ContainerLogout = styled.div`
   position: absolute;
   bottom: 15px;
   left: 20px;
-  cursopointerr :hover {
+  cursor: pointer;
+
+  :hover {
     background-color: rgba(255, 255, 255, 0.15);
     transform: scale(1.2);
   }
@@ -109,10 +111,4 @@ export const IconLogout = styled(RiLogoutCircleRLine)`
   cursor: pointer;
   transition: all 0.7s;
   padding: 0.2rem;
-
-  :hover {
-    background-color: ${colors.white};
-    color: ${colors.black};
-    transform: scale(1.2);
-  }
 `;

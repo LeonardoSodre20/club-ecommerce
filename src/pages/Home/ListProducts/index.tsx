@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 
 // PROVIDER
-import providerCategories from "@src/providers/Categories/provider.categories";
+import providerCategories from "@src/services/providers/Categories/provider.categories";
 
 // TYPES
 import { IProducts } from "@src/pages/Admin/Products/types";

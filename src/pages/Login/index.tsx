@@ -13,7 +13,7 @@ import useForm from "@src/hooks/useForm";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [typeInput, setTypeInput] = useState<string>("password");
+  const [typeInput, setTypeInput] = useState<"text" | "password">("password");
 
   const {
     handleSubmit,

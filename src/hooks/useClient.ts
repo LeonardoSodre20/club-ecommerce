@@ -1,7 +1,7 @@
 // TYPES
 import { IUser } from "@src/pages/Admin/Users/types";
 
-import providerUsers from "@src/providers/Users/provider.users";
+import providerUsers from "@src/services/providers/Users/provider.users";
 import { useQuery } from "react-query";
 
 const useClient = () => {

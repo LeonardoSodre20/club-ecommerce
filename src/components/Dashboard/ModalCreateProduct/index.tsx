@@ -5,7 +5,7 @@ import useProduct from "@src/hooks/useProduct";
 import useCategory from "@src/hooks/useCategory";
 
 // FORMATTERS
-import { formatCurrency } from "@src/utils/currencyMask";
+import { formatCurrency } from "@src/utils/masks";
 
 // STYLES
 import * as S from "./styles";
@@ -57,9 +57,7 @@ const ModalNewProduct = ({ textButton }: IPropsModalComponent) => {
               handleClearValuesAndErrorsForms();
             }}
           />
-          <FormControlGeneric
-            onSubmit={handleSubmit(handleCreateProduct)}
-          >
+          <FormControlGeneric onSubmit={handleSubmit(handleCreateProduct)}>
             <S.TitleDescriptionModal>
               Cadastro de Produtos
             </S.TitleDescriptionModal>

@@ -1,6 +1,3 @@
-import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
-
 // STYLES
 import * as S from "./styles";
 
@@ -9,6 +6,7 @@ import TableUsers from "@src/components/Dashboard/TableUsers";
 
 // HOOKS
 import useClient from "@src/hooks/useClient";
+import { formatDate } from "@src/utils/formatters";
 
 const Users = () => {
   const { data } = useClient();
@@ -38,11 +36,7 @@ const Users = () => {
                 <S.Td color={info.status === "Ativo" ? "#4BB543" : "#f10000"}>
                   {info.status}
                 </S.Td>
-                <S.Td>
-                  {format(new Date(info.created_at), "dd/MM/yyyy", {
-                    locale: ptBR,
-                  })}
-                </S.Td>
+                <S.Td>{formatDate(info.created_at)}</S.Td>
                 <S.Td></S.Td>
               </tr>
             );

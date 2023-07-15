@@ -5,7 +5,7 @@ import * as S from "./styles";
 import HeaderAdmin from "@src/components/Dashboard/Header";
 
 // FORMATTERS
-import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
+import { formatCurrecyForBrl } from "@src/utils/formatters";
 
 // COMPONENTS
 import ModalEditProduct from "@src/components/Dashboard/ModalEditProduct";

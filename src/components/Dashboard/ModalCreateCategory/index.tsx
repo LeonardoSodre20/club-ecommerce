@@ -23,7 +23,7 @@ import { ICategory } from "../Types/CategoryTypes";
 
 // SCHEMA
 import schemaCreateCategory from "@src/validations/CreateCategoryValidation";
-import providerCategories from "@src/providers/Categories/provider.categories";
+import providerCategories from "@src/services/providers/Categories/provider.categories";
 import { useMutation, useQueryClient } from "react-query";
 
 const valuesDefault: ICategory = {
