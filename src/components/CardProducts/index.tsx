@@ -5,7 +5,7 @@ import { IProductsProps } from "./types";
 import * as S from "./styles";
 
 // FORMATTERS
-import { formatCurrecyForBrl } from "@src/formatters/currencyFomatted";
+import { formatCurrecyForBrl } from "@src/utils/formatters";
 
 const CardProduct = ({ name, price, image }: IProductsProps) => {
   return (

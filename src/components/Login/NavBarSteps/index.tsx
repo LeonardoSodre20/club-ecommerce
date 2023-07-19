@@ -1,27 +1,27 @@
 // STYLES
-import { ContainerNavBarSteps, ContainerStep, StepDescription } from "./styles";
+import * as S from "./styles";
 
 const NavBarSteps = ({ nextStepsCount }: { nextStepsCount: number }) => {
   return (
-    <ContainerNavBarSteps>
-      <ContainerStep>
-        <StepDescription borderColor={nextStepsCount === 0 ? "#4bb543" : ""}>
+    <S.ContainerNavBarSteps>
+      <S.ContainerStep>
+        <S.StepDescription borderColor={nextStepsCount === 0 ? "#4bb543" : ""}>
           Encaminhamento de E-mail
-        </StepDescription>
-      </ContainerStep>
+        </S.StepDescription>
+      </S.ContainerStep>
 
-      <ContainerStep>
-        <StepDescription borderColor={nextStepsCount === 1 ? "#4bb543" : ""}>
+      <S.ContainerStep>
+        <S.StepDescription borderColor={nextStepsCount === 1 ? "#4bb543" : ""}>
           Encaminhamento de Token
-        </StepDescription>
-      </ContainerStep>
+        </S.StepDescription>
+      </S.ContainerStep>
 
-      <ContainerStep>
-        <StepDescription borderColor={nextStepsCount === 2 ? "#4bb543" : ""}>
+      <S.ContainerStep>
+        <S.StepDescription borderColor={nextStepsCount === 2 ? "#4bb543" : ""}>
           Cadastro de Nova senha
-        </StepDescription>
-      </ContainerStep>
-    </ContainerNavBarSteps>
+        </S.StepDescription>
+      </S.ContainerStep>
+    </S.ContainerNavBarSteps>
   );
 };
 

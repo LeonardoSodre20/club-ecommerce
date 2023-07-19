@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
+
 import { yupResolver } from "@hookform/resolvers/yup";
 import schemaProduct from "@src/validations/Products";
 
@@ -12,6 +13,7 @@ import providerProducts from "@src/services/providers/Products/provider.products
 import { IPropsProduct } from "@src/components/Dashboard/ModalCreateProduct/types";
 import { IProducts } from "@src/pages/Admin/Products/types";
 import { INewProduct } from "@src/types/NewProduct";
+import providerCategories from "@src/services/providers/Categories/provider.categories";
 
 const defaultValues: IPropsProduct = {
   name: "",
@@ -23,6 +25,7 @@ const defaultValues: IPropsProduct = {
 };
 
 const useProduct = () => {
+  
   const [pages, setPages] = useState<number>(0);
   const [pageSize, setPageSize] = useState<number>(1);
   const [search, setSearch] = useState<string>("");
@@ -35,7 +38,6 @@ const useProduct = () => {
     register,
     handleSubmit,
     setValue,
-    watch,
     reset,
     clearErrors,
     formState: { errors, isSubmitting },
@@ -69,7 +71,7 @@ const useProduct = () => {
     };
   };
 
-  const { data } = useQuery<IProducts[]>(["product"], () => {
+  const { data: dataAllProducts } = useQuery<IProducts[]>(["product"], () => {
     return providerProducts.handleGetAllProducts(
       pages,
       pageSize,
@@ -77,6 +79,8 @@ const useProduct = () => {
       "asc"
     );
   });
+
+
 
   const handleDeleteProductById = useMutation(
     (id: string) => {
@@ -107,7 +111,7 @@ const useProduct = () => {
   };
 
   return {
-    data,
+    dataAllProducts,
     handleDeleteProductById,
     handleSubmit,
     clearErrors,

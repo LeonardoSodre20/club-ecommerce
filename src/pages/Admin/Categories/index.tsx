@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // FORMATTERS
-import { formatDate } from "@src/formatters/dateFormatted";
+import { formatDate } from "@src/utils/formatters";
 
 // COMPONENTS
 import TableCategories from "@src/components/Dashboard/TableCategories";

@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 // PROVIDER
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./contexts/auth/auth";
 
 import { AuthenticatedRoutes } from "./routes/Authenticated.routes";
@@ -16,6 +16,7 @@ const ForgotPasswordStepsToSteps = lazy(
   () => import("./pages/Login/ForgotPassword")
 );
 const ListProducts = lazy(() => import("./pages/Home/ListProducts"));
+const Notfound = lazy(() => import("./pages/404NotFound"));
 
 // ADMIN
 const Products = lazy(() => import("./pages/Admin/Products"));
@@ -29,6 +30,8 @@ function App() {
     <AuthProvider>
       <Suspense>
         <Routes>
+          <Route path="*" element={<Notfound />} />
+          <Route path="/404" element={<Navigate to={"/404"} />} />
           <Route path="/" index element={<CategoriesProducts />} />
           <Route path="/products" element={<Home />} />
           <Route path="/login" element={<Login />} />

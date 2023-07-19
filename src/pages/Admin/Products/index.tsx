@@ -15,7 +15,7 @@ import Pagination from "@src/components/Dashboard/Pagination";
 import useProduct from "@src/hooks/useProduct";
 
 const Products = () => {
-  const { data, pages, pageSize, setPages } = useProduct();
+  const { dataAllProducts, pages, pageSize, setPages } = useProduct();
 
   return (
     <S.MainContainerDashboard>
@@ -34,7 +34,7 @@ const Products = () => {
           </S.Tr>
         </thead>
         <tbody>
-          {data?.map((prod) => {
+          {dataAllProducts?.map((prod) => {
             return (
               <S.Tr key={prod["id"]}>
                 <S.Td width="280px">{prod["name"]}</S.Td>
