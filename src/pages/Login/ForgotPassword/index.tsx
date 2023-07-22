@@ -79,8 +79,10 @@ const ForgotPasswordStepsToSteps = () => {
           <S.TitleMain>Recuperação de senha</S.TitleMain>
           <S.ContainerInfoReset>
             <PinInput
-              secret
               type="custom"
+              inputFocusStyle={{
+                backgroundColor: "rgba(0,0,0,0.15)",
+              }}
               length={8}
               inputStyle={{
                 boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -28,18 +27,13 @@ const valuesDefault: IPropsInputsCreateAccount = {
 
 const CreateAccount = () => {
   const navigate = useNavigate();
-  const [redirect, setRedirect] = useState<boolean>(false);
-
-  setTimeout(() => {
-    redirect ? navigate("/login") : false;
-  }, 2500);
 
   const handleSubmitCreateAccount: SubmitHandler<
     IPropsInputsCreateAccount
   > = async (data) => {
     try {
       const response = await api.post("/users", data);
-      setRedirect(!redirect);
+      navigate("/login");
       ToastMessage(response.data.message, "success");
     } catch (err: any) {
       ToastMessage(err.response.data.message, "error");

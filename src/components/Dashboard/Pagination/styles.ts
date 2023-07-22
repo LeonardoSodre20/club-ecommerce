@@ -24,6 +24,7 @@ export const ContainerDataPagination = styled.div`
   display: flex;
   align-items: center;
   gap: 50px;
+  z-index: 100;
 `;
 
 export const Page = styled.span`

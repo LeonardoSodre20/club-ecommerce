@@ -16,6 +16,8 @@ export const Container = styled.div`
   height: 350px;
   width: 350px;
   cursor: pointer;
+  transition: all 0.5s;
+  transform-origin: center;
 `;
 
 export const ImageProduct = styled.img`
