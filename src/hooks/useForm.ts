@@ -9,7 +9,6 @@ import { useAuth } from "./useAuth";
 
 // TYPES
 import { IPropsFormsLogin } from "@src/types/Login";
-import { IPropsInputsCreateAccount } from "@src/pages/CreateAccount/types";
 
 const valuesDefault: IPropsFormsLogin = {
   email: "",

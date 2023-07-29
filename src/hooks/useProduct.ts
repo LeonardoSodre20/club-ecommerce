@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import schemaProduct from "@src/validations/Products";
 
 // PROVIDER
-import providerProducts from "@src/services/providers/Products/provider.products";
+import productsService from "@src/services/Products/products.service";
 
 // TYPES
 import { IPropsProduct } from "@src/components/Dashboard/ModalCreateProduct/types";
@@ -71,7 +71,7 @@ const useProduct = () => {
   const { data: dataAllProducts } = useQuery<IProducts[]>(
     ["product", pages],
     () => {
-      return providerProducts.handleGetAllProducts(
+      return productsService.handleGetAllProducts(
         pages,
         pageSize,
         search,
@@ -85,7 +85,7 @@ const useProduct = () => {
 
   const handleDeleteProductById = useMutation(
     (id: string) => {
-      return providerProducts.handleDeleteProductById(id);
+      return productsService.handleDeleteProductById(id);
     },
     {
       onSuccess: () => {
@@ -96,7 +96,7 @@ const useProduct = () => {
 
   const handleCreateProduct: SubmitHandler<INewProduct> = async (data) => {
     try {
-      await providerProducts.handleCreateNewProduct({
+      await productsService.handleCreateNewProduct({
         name: data.name,
         quantity: data.quantity,
         status: data.status,

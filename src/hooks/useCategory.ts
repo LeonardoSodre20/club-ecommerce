@@ -4,18 +4,18 @@ import { useMutation, useQuery, useQueryClient } from "react-query";
 import { ICategoryTypes } from "@src/types/CategoriesTypes";
 
 // PROVIDER
-import providerCategories from "@src/services/providers/Categories/provider.categories";
+import categoriesService from "@src/services/Categories/categories.service";
 
 const useCategory = () => {
   const queryClient = useQueryClient();
 
-  const { data } = useQuery<ICategoryTypes[]>(["categories"], () => {
-    return providerCategories.handleGetAllCategories();
+  const { data, isLoading } = useQuery<ICategoryTypes[]>(["categories"], () => {
+    return categoriesService.handleGetAllCategories();
   });
 
   const deleteCategory = useMutation(
     (id: string) => {
-      return providerCategories.handleDeleteCategoryById(id);
+      return categoriesService.handleDeleteCategoryById(id);
     },
     {
       onSuccess: () => {
@@ -27,6 +27,7 @@ const useCategory = () => {
   return {
     data,
     deleteCategory,
+    isLoading,
   };
 };
 

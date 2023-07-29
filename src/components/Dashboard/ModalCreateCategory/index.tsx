@@ -23,7 +23,7 @@ import { ICategory } from "../Types/CategoryTypes";
 
 // SCHEMA
 import schemaCreateCategory from "@src/validations/CreateCategoryValidation";
-import providerCategories from "@src/services/providers/Categories/provider.categories";
+import categoriesService from "@src/services/Categories/categories.service";
 import { useMutation, useQueryClient } from "react-query";
 
 const valuesDefault: ICategory = {
@@ -55,7 +55,7 @@ const ModalCreateCategory = () => {
 
   const createCategory: any = useMutation({
     mutationFn: () => {
-      return providerCategories.handleCreateNewCategory({
+      return categoriesService.handleCreateNewCategory({
         name: values.name,
         image: file,
       });

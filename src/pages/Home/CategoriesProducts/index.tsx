@@ -9,7 +9,9 @@ import useCategory from "@src/hooks/useCategory";
 import * as S from "./styles";
 
 const CategoriesProducts = () => {
-  const { data } = useCategory();
+  const { data, isLoading } = useCategory();
+
+  if (isLoading) return <h1>Hello World</h1>;
 
   return (
     <>

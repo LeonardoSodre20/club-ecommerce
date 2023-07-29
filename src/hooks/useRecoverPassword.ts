@@ -14,6 +14,9 @@ import schemaResetPassword from "@src/validations/ResetPasswordValidation";
 // TYPES
 import { IPropsReset } from "@src/pages/Login/ForgotPassword/types";
 
+// SERVICE
+import recoverService from "@src/services/RecoverPassword/recover.service";
+
 const initialValues: IPropsReset = {
   email: "",
   token: "",
@@ -50,14 +53,13 @@ const useRecoverPassword = () => {
   const handleSubmitEmail: SubmitHandler<IPropsReset> = async (data) => {
     try {
       const { email } = data;
-      const response = await api.post("/auth/forgot", {
-        email: email,
-      });
-      ToastMessage(response.data.message, "success");
+
+      const response = await recoverService.submitEmail(email);
+
+      ToastMessage(response?.message, "success");
       setPagesCount(pagesCount + 1);
-      return response;
     } catch (err: any) {
-      ToastMessage(err.response.data.message, "error");
+      ToastMessage(err.response?.message, "error");
     }
   };
 
@@ -66,15 +68,12 @@ const useRecoverPassword = () => {
     const email = getValues("email");
 
     try {
-      const response = await api.post("/auth/token", {
-        email,
-        token,
-      });
-      ToastMessage(response.data.message, "success");
+      const response = await recoverService.validateToken(email, token);
+
+      ToastMessage(response.message, "success");
       setPagesCount(pagesCount + 1);
-      return response;
     } catch (err: any) {
-      ToastMessage(err.response.data.message, "error");
+      ToastMessage(err.response.message, "error");
     }
   };
 
@@ -83,15 +82,11 @@ const useRecoverPassword = () => {
     const { password } = data;
 
     try {
-      const response = await api.post("/auth/reset", {
-        email: email,
-        password: password,
-      });
-      ToastMessage(response.data.message, "success");
+      const response = await recoverService.submitNewPassword(email, password);
+      ToastMessage(response.message, "success");
       handleRedirectUserForLoginPage();
-      return response.data;
     } catch (err: any) {
-      return ToastMessage(err.response.data.message, "error");
+      ToastMessage(err.response.message, "error");
     }
   };
 

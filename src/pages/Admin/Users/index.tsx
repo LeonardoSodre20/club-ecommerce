@@ -25,7 +25,7 @@ const Users = () => {
           {data?.map((info) => {
             return (
               <tr
-                key={info._id}
+                key={info.id}
                 style={{
                   backgroundColor: "#f4f4f5",
                 }}

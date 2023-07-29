@@ -6,7 +6,7 @@ import Header from "@src/components/Header";
 import TheContentMain from "@src/components/Global/TheContent";
 import CardProduct from "@src/components/CardProducts";
 
-import providerCategories from "@src/services/providers/Categories/provider.categories";
+import categoriesService from "@src/services/Categories/categories.service";
 
 // TYPES
 import { IProducts } from "@src/pages/Admin/Products/types";
@@ -14,7 +14,7 @@ import { IProducts } from "@src/pages/Admin/Products/types";
 const ListProducts = () => {
   const { id } = useParams<{ id: string }>();
   const { data: dataById } = useQuery<IProducts[]>(["categories"], () => {
-    return providerCategories.handleProductsByCategory(id);
+    return categoriesService.handleProductsByCategory(id);
   });
 
   return (

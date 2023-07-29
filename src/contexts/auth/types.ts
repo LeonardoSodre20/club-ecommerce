@@ -1,11 +1,14 @@
 import { ReactNode } from "react";
 
 export interface IUser {
+  id?: string;
   name: string;
   lastname: string;
   email: string;
   role: string;
+  status?: string;
   avatar?: string;
+  created_at: string;
 }
 
 export interface IAuthProvider {

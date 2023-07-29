@@ -10,7 +10,7 @@ import CardRelatory from "@src/components/Dashboard/CardRelatory";
 import { IRelatoryTypes } from "@src/types/RelatoryTypes";
 
 // PROVIDER
-import providerRelatory from "@src/services/providers/Relatory/provider.relatory";
+import providerRelatory from "@src/services/Relatory/provider.relatory";
 
 // CHARTS CONFIG
 import { VictoryChart, VictoryBar } from "victory";

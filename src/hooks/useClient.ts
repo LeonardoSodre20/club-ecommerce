@@ -1,12 +1,9 @@
-// TYPES
-import { IUser } from "@src/pages/Admin/Users/types";
-
-import providerUsers from "@src/services/providers/Users/provider.users";
+import usersService from "@src/services/Users/users.service";
 import { useQuery } from "react-query";
 
 const useClient = () => {
-  const { data } = useQuery<IUser[]>(["users"], () => {
-    return providerUsers.handleGetAllUsers();
+  const { data } = useQuery(["users"], () => {
+    return usersService.handleGetAllUsers();
   });
 
   return {

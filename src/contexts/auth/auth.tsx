@@ -35,8 +35,8 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
   async function Login(email: string, password: string): Promise<void> {
     try {
       const response: AxiosResponse = await api.post("/auth/login", {
-        email: email,
-        password: password,
+        email,
+        password,
       });
 
       localStorage.setItem("@App:_user", JSON.stringify(response.data));

@@ -16,7 +16,7 @@ export const ContainerNavBarSteps = styled.div`
   justify-content: center;
   gap: 1em;
   position: absolute;
-  top: 100px;
+  top: 200px;
 `;
 
 export const ContainerStep = styled.div`
