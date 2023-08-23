@@ -49,7 +49,7 @@ Com o VSCode aberto:
 
 ## Desenvolvedor/Contribuinte :octocat:
 
-[<img src="https://avatars.githubusercontent.com/u/56728024?v=4" width=115><br><sub>Leonardo Sodré</sub>](https://github.com/LeonardoSodre20)
+[<img src="https://avatars.githubusercontent.com/u/81453031?v=4" width=115><br><sub>Leonardo Sodré</sub>](https://github.com/LeonardoSodre20)
 
 ## Licença
 
