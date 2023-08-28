@@ -4,4 +4,5 @@ export interface IPropsPagination {
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
   pageSize: number;
+  count: number;
 }

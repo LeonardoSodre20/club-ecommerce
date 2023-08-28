@@ -7,3 +7,10 @@ export interface IProducts {
   image?: string;
   created_at: string;
 }
+
+export interface RowsProducts {
+  products: {
+    rows: IProducts[];
+    count: number;
+  };
+}

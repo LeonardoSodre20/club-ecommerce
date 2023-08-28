@@ -78,13 +78,13 @@ const Login = () => {
             </p>
           </S.ContainerInfoHelp>
 
-          {isSubmitting ? (
-            <S.ButtonLogin type="submit" bgColorButton="#4bb543">
-              Entrando...
-            </S.ButtonLogin>
-          ) : (
-            <S.ButtonLogin type="submit">Entrar</S.ButtonLogin>
-          )}
+          <S.ButtonLogin
+            type="submit"
+            aria-label="Entrar"
+            bgColorButton={isSubmitting ? "#4bb543" : ""}
+          >
+            {isSubmitting ? "Entrando..." : "Entrar"}
+          </S.ButtonLogin>
         </S.FormControlLogin>
       </S.ContainerMainLogin>
     </>

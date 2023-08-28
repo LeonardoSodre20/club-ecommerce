@@ -18,6 +18,7 @@ export const MainContainerPagination = styled.section`
   width: calc(100% - 250px);
   position: absolute;
   bottom: 20px;
+  z-index: -100;
 `;
 
 export const ContainerDataPagination = styled.div`

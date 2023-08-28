@@ -4,6 +4,7 @@ import ToastMessage from "@src/components/Dashboard/ToastMessage";
 
 // TYPES
 import { INewProduct } from "@src/types/NewProduct";
+import { RowsProducts } from "@src/pages/Admin/Products/types";
 
 export default {
   async handleGetAllProducts(
@@ -13,10 +14,13 @@ export default {
     order: string
   ) {
     try {
-      const response = await api.get("/product", {
+      const response = await api.get<RowsProducts>("/product", {
         params: { pages: pages, limit: pageSize, search: search, order: order },
       });
-      return response?.data?.products?.rows;
+      return {
+        rows: response?.data?.products?.rows,
+        count: response?.data?.products.count,
+      };
     } catch (err: any) {
       console.log(err?.response?.data?.message);
     }

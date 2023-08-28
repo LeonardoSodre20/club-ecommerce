@@ -13,6 +13,9 @@ import { IPropsProduct } from "@src/components/Dashboard/ModalCreateProduct/type
 import { IProducts } from "@src/pages/Admin/Products/types";
 import { INewProduct } from "@src/types/NewProduct";
 
+// HOOKS
+import { usePagination } from "./usePagination";
+
 const defaultValues: IPropsProduct = {
   name: "",
   quantity: null,
@@ -23,9 +26,7 @@ const defaultValues: IPropsProduct = {
 };
 
 const useProduct = () => {
-  const [pages, setPages] = useState<number>(0);
-  const [pageSize, setPageSize] = useState<number>(3);
-  const [search, setSearch] = useState<string>("");
+  const { pages, pageSize, search, setPages } = usePagination();
 
   const queryClient = useQueryClient();
   const [open, setOpen] = useState<boolean>(false);
@@ -68,8 +69,8 @@ const useProduct = () => {
     };
   };
 
-  const { data: dataAllProducts } = useQuery<IProducts[]>(
-    ["product", pages],
+  const { data: dataAllProducts } = useQuery(
+    ["product", pages, search],
     () => {
       return productsService.handleGetAllProducts(
         pages,
@@ -126,8 +127,8 @@ const useProduct = () => {
     handleCreateProduct,
     handleClearValuesAndErrorsForms,
     pages,
-    setPages,
     pageSize,
+    setPages,
   };
 };
 

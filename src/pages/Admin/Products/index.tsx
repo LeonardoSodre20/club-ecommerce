@@ -34,7 +34,7 @@ const Products = () => {
           </S.Tr>
         </thead>
         <tbody>
-          {dataAllProducts?.map((prod) => {
+          {dataAllProducts?.rows.map((prod) => {
             return (
               <S.Tr key={prod["id"]}>
                 <S.Td width="280px">{prod["name"]}</S.Td>
@@ -56,7 +56,12 @@ const Products = () => {
           })}
         </tbody>
       </S.Table>
-      <Pagination page={pages} setPage={setPages} pageSize={pageSize} />
+      <Pagination
+        page={pages}
+        setPage={setPages}
+        pageSize={pageSize}
+        count={Number(dataAllProducts?.count)}
+      />
     </S.MainContainerDashboard>
   );
 };

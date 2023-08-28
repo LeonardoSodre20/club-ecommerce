@@ -2,9 +2,9 @@ import styled from "styled-components";
 import { colors } from "../../styles/colors";
 import { weightFonts } from "../../styles/weight";
 
-
 interface IPropsInput {
   width?: string;
+  border?: string;
 }
 
 export const ContainerInput = styled.div`
@@ -13,13 +13,15 @@ export const ContainerInput = styled.div`
   position: relative;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<IPropsInput>`
   background-color: ${colors.ligthGray};
+  color: ${colors.black};
   padding: 12px 8px;
+  font-weight: ${weightFonts.w600};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  border: none;
-  width: ${({ width }: IPropsInput) => width};
+  border: ${({ border }) => border ?? "none"};
+  width: ${({ width }) => width};
   transition: all 0.5s;
 
   font-size: 1em;

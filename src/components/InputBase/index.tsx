@@ -16,7 +16,14 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IPropsInput> = (
   return (
     <S.ContainerInput>
       <S.Label>{label}</S.Label>
-      <S.Input type={type} width={width} ref={ref} {...rest} />
+      <S.Input
+        type={type}
+        width={width}
+        ref={ref}
+        autoComplete="off"
+        border={error?.message ? "2px solid #f10000" : "none"}
+        {...rest}
+      />
       <>{iconRight && iconRight()}</>
       {error && error.message ? (
         <TooltipError>{error.message}</TooltipError>
