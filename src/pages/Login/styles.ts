@@ -128,7 +128,7 @@ export const ContainerInfoHelp = styled.div`
   justify-content: space-evenly;
   display: flex;
   position: absolute;
-  top: 140px;
+  top: 150px;
   width: 100%;
   font-weight: ${weightFonts.w600};
   font-size: 0.8em;

@@ -21,7 +21,7 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement, IPropsInput> = (
         width={width}
         ref={ref}
         autoComplete="off"
-        border={error?.message ? "2px solid #f10000" : "none"}
+        border={error?.message && "2px solid #f10000"}
         {...rest}
       />
       <>{iconRight && iconRight()}</>

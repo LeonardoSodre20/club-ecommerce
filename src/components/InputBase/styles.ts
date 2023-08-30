@@ -20,7 +20,7 @@ export const Input = styled.input<IPropsInput>`
   font-weight: ${weightFonts.w600};
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
-  border: ${({ border }) => border ?? "none"};
+  border: ${({ border }) => border ?? "2px solid transparent"};
   width: ${({ width }) => width};
   transition: all 0.5s;
 
