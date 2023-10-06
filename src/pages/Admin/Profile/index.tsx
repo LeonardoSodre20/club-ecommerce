@@ -1,5 +1,5 @@
 // STYLES
-import { MainContainerProfile } from "./styles";
+import * as S from "./styles";
 
 // USER
 import { useAuth } from "@src/hooks/useAuth";
@@ -8,7 +8,7 @@ const Profile = () => {
   const { user } = useAuth();
 
   return (
-    <MainContainerProfile>
+    <S.MainContainerProfile>
       <img
         style={{
           border: "1px solid #000",
@@ -37,7 +37,7 @@ const Profile = () => {
         <h1>{`${user?.name} ${user?.lastname}`}</h1>
         <p>{user?.email}</p>
       </div>
-    </MainContainerProfile>
+    </S.MainContainerProfile>
   );
 };
 

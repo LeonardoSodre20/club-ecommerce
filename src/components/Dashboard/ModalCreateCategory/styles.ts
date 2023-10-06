@@ -43,7 +43,9 @@ export const ButtonNewCategory = styled.button`
   padding: 0.8rem;
   width: 170px;
   cursor: pointer;
-  position: relative;
+  position: absolute;
+  top: 30px;
+  right: 60px;
 `;
 
 export const TitleDescriptionCategory = styled.h1`

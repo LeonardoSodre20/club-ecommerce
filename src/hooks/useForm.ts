@@ -25,7 +25,7 @@ const userForm = () => {
     formState: { errors, isSubmitting },
   } = useForm<IPropsFormsLogin>({
     defaultValues: valuesDefault,
-    mode: "onSubmit",
+    mode: "all",
     shouldFocusError: true,
     resolver: yupResolver(schema),
   });

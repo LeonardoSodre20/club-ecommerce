@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FaShareAlt } from "react-icons/fa";
 
 // VARIABLES
 import { colors } from "@src/styles/colors";
@@ -13,7 +14,7 @@ export const HeaderContent = styled.div`
   top: 0;
   right: 0;
   padding: 0.7rem;
-  gap:35px;
+  gap: 35px;
   background-color: #f9f9f9;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
 `;
@@ -70,4 +71,23 @@ export const NameUser = styled.h1`
   color: ${colors.black};
   font-size: 0.8em;
   font-weight: ${weightFonts.w500};
+`;
+
+export const ContainerIconShare = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: 0.5s;
+  padding: 0.5rem;
+
+  :hover {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+`;
+
+export const IconShare = styled(FaShareAlt)`
+  font-size: 1.5em;
 `;

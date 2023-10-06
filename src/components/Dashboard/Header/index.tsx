@@ -1,8 +1,10 @@
 // STYLES
 import {
+  ContainerIconShare,
   ContainerInicialLetter,
   ContainerProfile,
   HeaderContent,
+  IconShare,
   ImageProfile,
   InputSearch,
   NameUser,
@@ -17,6 +19,8 @@ import { useAuth } from "@src/hooks/useAuth";
 
 const HeaderAdmin = ({ title, placeholder }: IPropsHeaderAdmin) => {
   const { user } = useAuth();
+
+
 
   return (
     <HeaderContent>
@@ -41,6 +45,10 @@ const HeaderAdmin = ({ title, placeholder }: IPropsHeaderAdmin) => {
           <NameUser>{`${user?.name} ${user?.lastname}`}</NameUser>
         </ContainerProfile>
       )}
+
+      <ContainerIconShare>
+        <IconShare />
+      </ContainerIconShare>
     </HeaderContent>
   );
 };

@@ -2,9 +2,17 @@ import { colors } from "@src/styles/colors";
 import styled from "styled-components";
 
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { weightFonts } from "@src/styles/weight";
 
 interface IPropsContainerPreview {
   url_image: string;
+}
+
+interface IPropsTable {
+  color?: string;
+  weight?: string;
+  width?: string;
+  bgColor?: string;
 }
 
 export const MainContainer = styled.div`
@@ -15,23 +23,13 @@ export const MainContainer = styled.div`
   width: 100%;
 `;
 
-export const Td = styled.td`
-  color: ${colors.black};
-  font-size: 0.8em;
-  text-align: center;
-  padding: 0.1rem;
-  width: 180px;
-  font-weight: 200;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  position: relative;
-`;
-
 export const ImageCategory = styled.img`
   cursor: pointer;
-  height: 50px;
-  width: 50px;
+  height: 30px;
+  width: 30px;
   object-fit: cover;
   border-radius: 15px;
+  cursor: pointer;
 `;
 
 export const PreviewImage = styled.div`
@@ -69,4 +67,16 @@ export const IconDelete = styled(RiDeleteBin6Line)`
   :hover {
     background-color: rgba(0, 0, 0, 0.2);
   }
+`;
+
+export const Tr = styled.tr``;
+
+export const Td = styled.td<IPropsTable>`
+  color: ${({ color }) => color || `${colors.black}`};
+  background-color: ${colors.white};
+  width: ${({ width }) => width || "130px"};
+  font-weight: ${weightFonts.w400};
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
 `;

@@ -27,7 +27,7 @@ const Header = () => {
           <S.LinkItem onClick={() => navigate("/createAccount")}>
             Criar Conta
           </S.LinkItem>
-          <S.ContainerShop onClick={() => setShowSideBar(!showSideBar)}>
+          <S.ContainerShop onClick={() => navigate("/checkout")}>
             <S.IconCart />
             <S.CounterShop>0</S.CounterShop>
           </S.ContainerShop>

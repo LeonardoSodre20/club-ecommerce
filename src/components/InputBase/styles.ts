@@ -5,6 +5,7 @@ import { weightFonts } from "../../styles/weight";
 interface IPropsInput {
   width?: string;
   border?: string;
+  bgColor?: string;
 }
 
 export const ContainerInput = styled.div`
@@ -14,7 +15,7 @@ export const ContainerInput = styled.div`
 `;
 
 export const Input = styled.input<IPropsInput>`
-  background-color: ${colors.ligthGray};
+  background-color: ${({ bgColor }) => bgColor ?? `${colors.ligthGray}`};
   color: ${colors.black};
   padding: 12px 8px;
   font-weight: ${weightFonts.w600};

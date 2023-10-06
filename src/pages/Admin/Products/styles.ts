@@ -75,14 +75,13 @@ export const Table = styled.table`
   right: 80px;
 `;
 
-export const Tr = styled.tr``;
-
 export const Th = styled.th<IPropsTable>`
   color: ${colors.black};
   width: ${({ width }) => width || "130px"};
   font-weight: ${weightFonts.w700};
   text-align: left;
 `;
+export const Tr = styled.tr``;
 
 export const Td = styled.td<IPropsTable>`
   color: ${({ color }) => color || `${colors.black}`};
